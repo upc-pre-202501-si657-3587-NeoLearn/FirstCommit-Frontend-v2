@@ -5,8 +5,7 @@ import {MainLayout} from './firstcommit/layout/main-layout/main-layout';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, MainLayout],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './app.html'
 })
 export class App {
   protected title = 'firstcommit';
