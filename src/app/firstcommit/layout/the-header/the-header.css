@@ -1,35 +1,46 @@
-header {
+.main-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 0 2rem;
+  height: 60px;
+  background-color: black;
+  color: #fff;
+  border-bottom: 1px solid white;
 }
 
-header img {
-  flex-shrink: 0;
-}
-
-.sidebar {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  padding: 0;
+.logo h3 {
   margin: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
-nav ul li a {
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 18px;
-  color: #3a3a3a;
+.sidebar nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
 }
-nav ul li a:hover {
-  text-decoration: underline;
-  color: #8c53d3;
+
+.sidebar nav ul li {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.notification-icon {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.getBotton {
+  background: #b3b2b2;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
 }
