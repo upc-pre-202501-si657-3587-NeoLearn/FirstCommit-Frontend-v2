@@ -1,18 +1,21 @@
 <header class="main-header">
-  <div class="logo">
-    <h3>FirstCommit</h3>
-  </div>
-  <aside class="sidebar">
+    <div class="logo">FirstCommit</div>
     <nav>
       <ul>
-        <li><a routerLink="/">Curses</a></li>
-        <li><a routerLink="/">Roadmaps</a></li>
-        <li><a routerLink="/">Projects</a></li>
-        <li><a class="getBotton" routerLink="/">Get premium</a></li>
-        <li>
-          <span class="notification-icon">🔔</span>
-        </li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Roadmaps</a></li>
+        <li><a href="#" class="active">Projects</a></li>
       </ul>
     </nav>
-  </aside>
-</header>
+    <div class="user-actions">
+      <div class="search-bar">
+        <mat-icon aria-hidden="false" aria-label="search icon" fontIcon="search" id="search-icon"></mat-icon>
+        <input type="search" placeholder="Search" />
+      </div>
+      <button class="premium-btn" routerLink="/plans">Get Premium</button>
+      <div class="icons">
+        <mat-icon aria-hidden="false" aria-label="notifications icon" fontIcon="notifications"></mat-icon>
+        <mat-icon aria-hidden="false" aria-label="user profile icon" fontIcon="person"></mat-icon>
+      </div>
+    </div>
+  </header>

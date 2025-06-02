@@ -1,0 +1,75 @@
+<div class="page-container">
+  <div class="pricing-header">
+    <h1>Pricing</h1>
+    <p>Choose the plan that works for you</p>
+  </div>
+
+  <div class="toggle-container">
+    <button class="toggle-button active">MONTHLY</button>
+    <button class="toggle-button">YEARLY <span class="save-badge">(SAVE 20%)</span></button>
+  </div>
+
+  <div class="plans-container">
+    <mat-card class="plan-card hobby-plan">
+      <mat-card-header>
+        <mat-card-title>Hobby</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price-section">
+          <span class="price-main">Free</span>
+        </div>
+        <p class="includes-text">Includes</p>
+        <ul class="features-list">
+          <li><mat-icon class="check-icon">check</mat-icon> Pro two-week trial</li>
+          <li><mat-icon class="check-icon">check</mat-icon> 200 completions per month</li>
+          <li><mat-icon class="check-icon">check</mat-icon> 50 requests per month</li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions class="plan-actions hobby-actions">
+        <button mat-stroked-button class="button-download">Current plan</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="plan-card pro-plan">
+      <mat-card-header>
+        <mat-card-title>Pro</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price-section">
+          <span class="price-main">$20</span><span class="price-per-month">/month</span>
+        </div>
+        <p class="includes-text">Everything in Hobby, plus</p>
+        <ul class="features-list">
+          <li><mat-icon class="check-icon">check</mat-icon> Unlimited completions</li>
+          <li><mat-icon class="check-icon">check</mat-icon> 500 requests per month</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Unlimited slow requests <mat-icon class="info-icon">help_outline</mat-icon></li>
+          <li><mat-icon class="check-icon">check</mat-icon> Max mode <mat-icon class="info-icon">help_outline</mat-icon></li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions class="plan-actions">
+        <button mat-flat-button class="button-get-started pro-button">Get Started</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="plan-card business-plan">
+      <mat-card-header>
+        <mat-card-title>Business</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price-section">
+          <span class="price-main">$40</span><span class="price-per-month">/user/month</span>
+        </div>
+        <p class="includes-text">Everything in Pro, plus</p>
+        <ul class="features-list">
+          <li><mat-icon class="check-icon">check</mat-icon> Enforce privacy mode org-wide</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Centralized team billing</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Admin dashboard with usage stats</li>
+          <li><mat-icon class="check-icon">check</mat-icon> SAML/OIDC SSO</li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions class="plan-actions">
+        <button mat-stroked-button class="button-get-started business-button-gs">Get Started</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

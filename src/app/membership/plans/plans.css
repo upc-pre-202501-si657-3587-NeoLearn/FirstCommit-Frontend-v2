@@ -1,0 +1,217 @@
+.pricing-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pricing-header h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #FFFFFF;
+}
+
+.pricing-header p {
+  font-size: 1.1em; 
+  color: #A0A0A0;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  background-color: #1A1A1A;
+  border-radius: 8px;
+  padding: 5px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggle-button {
+  background-color: transparent;
+  color: #A0A0A0;
+  border: none;
+  padding: 8px 18px;
+  font-size: 0.85em; 
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.toggle-button.active {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+.toggle-button:not(.active):hover {
+  color: #FFFFFF;
+}
+
+
+.plans-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.plan-card {
+  background-color: #1A1A1A;
+  color: #E0E0E0;
+  border-radius: 12px;
+  border: 1px solid #2A2A2A;
+  width: 100%;
+  max-width: 330px; 
+  padding: 25px;
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.plan-card .mat-mdc-card-header {
+  padding: 0 0 20px 0;
+  justify-content: flex-start; 
+}
+
+.plan-card .mat-mdc-card-title {
+  font-size: 1.25em; 
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+.plan-card .mat-mdc-card-content {
+  padding: 0;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.price-section {
+  margin-bottom: 25px;
+}
+
+.price-main {
+  font-size: 2.8em;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.price-per-month {
+  font-size: 1em;
+  color: #A0A0A0;
+  margin-left: 5px;
+}
+
+.includes-text {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-bottom: 15px;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 25px 0;
+}
+
+.features-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.9em;
+  color: #B0B0B0;
+}
+
+.features-list .check-icon {
+  color: #4CAF50;
+  margin-right: 10px;
+  font-size: 1.3em; 
+}
+
+.features-list .info-icon {
+  color: #707070;
+  margin-left: 8px;
+  font-size: 1.1em;
+  vertical-align: middle;
+  cursor: help;
+}
+
+.plan-actions {
+  display: flex;
+  padding: 0;
+  margin-top: auto; 
+}
+
+.plan-actions button {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95em;
+  box-sizing: border-box;
+  text-transform: none; 
+  width: 100%; 
+}
+
+.hobby-actions {
+  gap: 10px;
+}
+.hobby-plan .button-download,
+.hobby-plan .button-others {
+  flex-grow: 1;
+}
+
+.hobby-plan .button-download {
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #FFFFFF;
+}
+.hobby-plan .button-download:hover {
+  background-color: #F0F0F0;
+}
+
+.hobby-plan .button-others {
+  background-color: #2C2C2C;
+  color: #FFFFFF;
+  border: 1px solid #2C2C2C;
+}
+
+.hobby-plan .button-others:hover {
+  background-color: #383838;
+}
+
+.pro-plan {
+  position: relative;
+  overflow: hidden; 
+}
+
+.pro-plan .pro-button {
+  background: linear-gradient(90deg, #C039D9, #FE6AA0);
+  color: #FFFFFF;
+  border: none;
+}
+
+.pro-plan .pro-button:hover {
+  opacity: 0.8; 
+}
+
+.business-plan .business-button-gs {
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #FFFFFF;
+}
+.business-plan .business-button-gs:hover {
+  background-color: #F0F0F0;
+}
+
+.mat-icon {
+    vertical-align: middle;
+}
