@@ -1,0 +1,38 @@
+{
+  "modulos": [
+    {
+      "id": 1,
+      "imagen": "https://example.com/img/modulo1.png",
+      "nombre": "Frontend Básico",
+      "descripcion": "Aprende los fundamentos del desarrollo web.",
+      "course_ids": [1, 2]
+    },
+    {
+      "id": 2,
+      "imagen": "https://example.com/img/modulo2.png",
+      "nombre": "Backend Inicial",
+      "descripcion": "Introducción al desarrollo del lado del servidor.",
+      "course_ids": [3]
+    }
+  ],
+  "cursos": [
+    {
+      "id": 1,
+      "nombre": "HTML y CSS",
+      "imagen": "https://example.com/img/htmlcss.png",
+      "descripcion": "Curso completo de HTML y CSS desde cero."
+    },
+    {
+      "id": 2,
+      "nombre": "JavaScript Básico",
+      "imagen": "https://example.com/img/js.png",
+      "descripcion": "Aprende lógica de programación con JavaScript."
+    },
+    {
+      "id": 3,
+      "nombre": "Node.js para principiantes",
+      "imagen": "https://example.com/img/node.png",
+      "descripcion": "Primeros pasos con Node.js y Express."
+    }
+  ]
+}
