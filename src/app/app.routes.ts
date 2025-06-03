@@ -7,17 +7,15 @@ import { NotfoundComponent } from './firstcommit/public/notfound.component/notfo
 
 export const routes: Routes = [
   {
-    path: '', component: MainLayout,
-    children: [
-      { path: 'roadmap', component: Components },
-      { path: '**', component: NotfoundComponent }
-    ]
-  }
-
+    path: 'home',
+    loadComponent: () => import('./membership/home/home').then(m => m.default),
+  },
+  {
+    path: 'plans',
+    loadComponent: () => import('./membership/plans/plans').then(m => m.default),
+  },
+  // {
+  //   path: 'payment',
+  //   loadComponent: () => import('./membership/payment/payment').then(m => m.default)
+  // }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

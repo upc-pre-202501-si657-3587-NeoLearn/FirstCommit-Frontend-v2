@@ -1,12 +1,89 @@
 .main-header {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 4rem;
-  height: 60px;
-  background-color: #353434;
+  padding: 15px 50px;
+  border-bottom: 1px solid #333; 
+}
+
+.main-header .logo {
+  font-size: 1.5em;
+  font-weight: bold;
   color: #fff;
-  border-bottom: 1px solid white;
+}
+
+.main-header nav{
+  margin-left: 50px;
+}
+.main-header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+.main-header nav ul li a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.main-header nav ul li a.active,
+.main-header nav ul li a:hover {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.search-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #B2A3B0;
+  background-color: #362B33;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+#search-icon{
+  color: #B2A3B0;
+  padding: 0 5px;
+  font-size: 1.5rem;
+}
+
+.user-actions input[type="search"] {
+  background-color: #362B33;
+  border: none;
+  color: #B2A3B0;
+}
+
+input[type="search"]::placeholder {
+  color: #B2A3B0;
+}
+
+input[type="search"]:focus{
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.premium-btn {
+  background-color: #D487BF;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); 
+  border: none;
+  font-weight: 800;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .logo h3 {
@@ -15,39 +92,30 @@
   font-size: 1.5rem;
 }
 
-.sidebar nav ul {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-}
-
-.sidebar nav ul li {
-  display: flex;
-  align-items: center;
-}
-
-.sidebar nav ul li a {
-  text-decoration: none;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.sidebar nav ul li a:hover {
-  background-color: gray;
-  color: black;
-}
-
 .notification-icon {
   font-size: 1.4rem;
   cursor: pointer;
 }
 
-.getBotton {
-  background: #b3b2b2;
-  padding: 0.7rem 1rem;
-  border-radius: 12px;
+
+.icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+mat-icon{
+  color: #fff;
+  font-size: 1.5rem;
+  background-color: #362B33;
+  padding: 8px; 
+  border-radius: 50%; 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  width: 24px; 
+  height: 24px; 
+  box-sizing: content-box; 
+  cursor: pointer;
 }
