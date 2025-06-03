@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {TheFooter} from "../the-footer/the-footer";
 import {TheHeader} from "../the-header/the-header";
 import {RouterOutlet} from '@angular/router';
 
