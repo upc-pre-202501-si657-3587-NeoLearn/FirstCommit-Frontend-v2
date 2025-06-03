@@ -1,75 +1,117 @@
 <div class="page-container">
   <div class="pricing-header">
-    <h1>Pricing</h1>
-    <p>Choose the plan that works for you</p>
-  </div>
-
-  <div class="toggle-container">
-    <button class="toggle-button active">MONTHLY</button>
-    <button class="toggle-button">YEARLY <span class="save-badge">(SAVE 20%)</span></button>
+    <h1>Planes de Membresía</h1>
+    <p>Elige el plan que mejor se adapte a tus necesidades de aprendizaje</p>
   </div>
 
   <div class="plans-container">
-    <mat-card class="plan-card hobby-plan">
+    <!-- Plan Esencial -->
+    <mat-card class="plan-card essential-plan">
       <mat-card-header>
-        <mat-card-title>Hobby</mat-card-title>
+        <mat-card-title>Plan Esencial</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="price-section">
-          <span class="price-main">Free</span>
+          <span class="price-main">Gratuito</span>
         </div>
-        <p class="includes-text">Includes</p>
+        <p class="includes-text">Ideal para explorar la plataforma</p>
         <ul class="features-list">
-          <li><mat-icon class="check-icon">check</mat-icon> Pro two-week trial</li>
-          <li><mat-icon class="check-icon">check</mat-icon> 200 completions per month</li>
-          <li><mat-icon class="check-icon">check</mat-icon> 50 requests per month</li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions class="plan-actions hobby-actions">
-        <button mat-stroked-button class="button-download">Current plan</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="plan-card pro-plan">
-      <mat-card-header>
-        <mat-card-title>Pro</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="price-section">
-          <span class="price-main">$20</span><span class="price-per-month">/month</span>
-        </div>
-        <p class="includes-text">Everything in Hobby, plus</p>
-        <ul class="features-list">
-          <li><mat-icon class="check-icon">check</mat-icon> Unlimited completions</li>
-          <li><mat-icon class="check-icon">check</mat-icon> 500 requests per month</li>
-          <li><mat-icon class="check-icon">check</mat-icon> Unlimited slow requests <mat-icon class="info-icon">help_outline</mat-icon></li>
-          <li><mat-icon class="check-icon">check</mat-icon> Max mode <mat-icon class="info-icon">help_outline</mat-icon></li>
+          <li><mat-icon class="check-icon">check</mat-icon> Acceso limitado a cursos</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Foro comunitario básico</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Roadmaps básicos</li>
         </ul>
       </mat-card-content>
       <mat-card-actions class="plan-actions">
-        <button mat-flat-button class="button-get-started pro-button">Get Started</button>
+        <button mat-stroked-button class="button-get-started button-free">Plan Actual</button>
       </mat-card-actions>
     </mat-card>
 
-    <mat-card class="plan-card business-plan">
+    <!-- Plan Profesional -->
+    <mat-card class="plan-card professional-plan">
       <mat-card-header>
-        <mat-card-title>Business</mat-card-title>
+        <mat-card-title>Plan Profesional</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="price-section">
-          <span class="price-main">$40</span><span class="price-per-month">/user/month</span>
+          <span class="price-main">$9.99</span><span class="price-per-month">/mes</span>
         </div>
-        <p class="includes-text">Everything in Pro, plus</p>
+        <p class="includes-text">Todo el Plan Esencial, más:</p>
         <ul class="features-list">
-          <li><mat-icon class="check-icon">check</mat-icon> Enforce privacy mode org-wide</li>
-          <li><mat-icon class="check-icon">check</mat-icon> Centralized team billing</li>
-          <li><mat-icon class="check-icon">check</mat-icon> Admin dashboard with usage stats</li>
-          <li><mat-icon class="check-icon">check</mat-icon> SAML/OIDC SSO</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Cursos de fundamentos ilimitados</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Foro completo</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Proyectos grupales iniciales</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Soporte estándar</li>
         </ul>
       </mat-card-content>
       <mat-card-actions class="plan-actions">
-        <button mat-stroked-button class="button-get-started business-button-gs">Get Started</button>
+        <button mat-stroked-button class="button-get-started pro-button" routerLink="/payment">Elegir este plan</button>
       </mat-card-actions>
     </mat-card>
+
+    <!-- Plan Premium -->
+    <mat-card class="plan-card premium-plan">
+      <mat-card-header>
+        <mat-card-title>Plan Premium</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price-section">
+          <span class="price-main">$19.99</span><span class="price-per-month">/mes</span>
+        </div>
+        <p class="includes-text">Todo el Plan Profesional, más:</p>
+        <ul class="features-list">
+          <li><mat-icon class="check-icon">check</mat-icon> Todos los cursos sin restricciones</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Acceso prioritario a nuevos cursos</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Proyectos grupales ilimitados</li>
+          <li><mat-icon class="check-icon">check</mat-icon> Soporte prioritario</li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions class="plan-actions">
+        <button mat-stroked-button class="button-get-started premium-button" routerLink="/payment">Elegir Premium</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Sección de Detalles -->
+  <div class="details-container">
+    <div class="plan-details">
+      <h2>Detalles de los Planes</h2>
+      
+      <div class="detail-section">
+        <h3>Plan Esencial (Gratuito)</h3>
+        <p>Este plan te da un primer vistazo a nuestra plataforma, ideal para explorar y entender lo que podemos ofrecerte.</p>
+        <ul>
+          <li><strong>Acceso limitado a cursos:</strong> Explora las primeras lecciones o módulos de nuestros cursos introductorios para familiarizarte con los temas.</li>
+          <li><strong>Acceso limitado al foro:</strong> Podrás ver y participar en discusiones generales para conectarte con la comunidad.</li>
+          <li><strong>Visualización de roadmaps básicos:</strong> Conoce la estructura de nuestros caminos de aprendizaje, aunque el acceso a los cursos completos enlazados será limitado.</li>
+          <li><strong>Sin acceso a proyectos grupales.</strong></li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h3>Plan Profesional</h3>
+        <p>Diseñado para estudiantes que inician su camino en la universidad, profesionales que buscan una base sólida o quienes necesitan consolidar sus conocimientos.</p>
+        <p><strong>Todo lo incluido en el Plan Esencial, más:</strong></p>
+        <ul>
+          <li><strong>Acceso ilimitado a todos los cursos de fundamentos:</strong> Sumérgete en temas clave como lógica de programación, bases del desarrollo web (HTML, CSS, JavaScript básico) y bases de datos.</li>
+          <li><strong>Acceso completo al foro:</strong> Participa activamente en todas las discusiones, comparte tus dudas y colabora con otros.</li>
+          <li><strong>Acceso a proyectos grupales iniciales:</strong> Únete a proyectos predefinidos por la plataforma con pautas claras, perfectos para aplicar tus primeros conocimientos.</li>
+          <li><strong>Soporte estándar:</strong> Recibe ayuda por correo electrónico o chat para tus consultas.</li>
+          <li><strong>Certificados de finalización</strong> de cursos de fundamentos: Valida tu aprendizaje en las bases de la ingeniería de software.</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h3>Plan Premium</h3>
+        <p>Para aquellos que buscan una inmersión total, desean cambiar de rol laboral, acelerar su carrera o necesitan un acompañamiento personalizado para dominar la ingeniería de software.</p>
+        <p><strong>Todo lo incluido en el Plan Profesional, más:</strong></p>
+        <ul>
+          <li><strong>Acceso ilimitado a todos los cursos de la plataforma:</strong> Desde fundamentos hasta temas avanzados como frameworks específicos, arquitecturas de software, desarrollo backend/frontend avanzado y DevOps.</li>
+          <li><strong>Acceso prioritario a nuevos cursos y actualizaciones:</strong> Sé de los primeros en explorar el contenido más reciente.</li>
+          <li><strong>Acceso ilimitado a todos los roadmaps:</strong> Conecta cada punto de tu camino de aprendizaje con el curso adecuado dentro de nuestra plataforma.</li>
+          <li><strong>Acceso completo a todos los proyectos grupales:</strong> No solo podrás unirte a proyectos, sino también crear y proponer tus propios proyectos dentro de la plataforma (sujeto a las reglas de la comunidad).</li>
+          <li><strong>Soporte prioritario:</strong> Recibe respuestas más rápidas y personalizadas a tus consultas técnicas.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
