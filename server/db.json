@@ -2,14 +2,14 @@
   "modulos": [
     {
       "id": 1,
-      "imagen": "https://example.com/img/modulo1.png",
+      "imagen": "https://i.ibb.co/dJ6cLF7X/front.png",
       "nombre": "Frontend Básico",
       "descripcion": "Aprende los fundamentos del desarrollo web.",
       "course_ids": [1, 2]
     },
     {
       "id": 2,
-      "imagen": "https://example.com/img/modulo2.png",
+      "imagen": "https://i.ibb.co/Q30GdK2G/datasc.jpg",
       "nombre": "Backend Inicial",
       "descripcion": "Introducción al desarrollo del lado del servidor.",
       "course_ids": [3]

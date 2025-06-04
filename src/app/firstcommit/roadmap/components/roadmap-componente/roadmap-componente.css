@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-direction: column; /* Una tarjeta por fila */
+  align-items: center;
+  gap: 24px;
+  padding: 16px;
+}
+
+.modulo-card {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 8px;
+  overflow: hidden;
+  gap: 24px;
+}
+.btn {
+  background-color: #8c53d3;
+  color: #1c1c1c;
+  border-radius: 12px 2px 2px 12px;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+}
+.btn:hover {
+  background-color: #716f6f;
+  color: #ffffff;
+}
+
+.horizontal-card {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Columna 1: Imagen */
+.modulo-img {
+  width: 30%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Columna 2: Nombre y descripción */
+.modulo-content {
+  width: 50%;
+}
+
+/* Columna 3: Botón */
+.modulo-button {
+  width: 20%;
+  display: flex;
+  justify-content: center;  /* Centra horizontalmente */
+  align-items: center;      /* Centra verticalmente */
+  height: 100%;
+}
+
+@media (max-width: 600px) {
+  .modulo-card {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .modulo-img,
+  .modulo-content,
+  .modulo-button {
+    width: 100%;
+  }
+
+  .modulo-button {
+    margin-top: 12px;
+  }
+}
+
+
+.cursos-container {
+  margin-top: 32px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.curso-card {
+  display: flex;
+  margin-bottom: 16px;
+  gap: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.curso-img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}

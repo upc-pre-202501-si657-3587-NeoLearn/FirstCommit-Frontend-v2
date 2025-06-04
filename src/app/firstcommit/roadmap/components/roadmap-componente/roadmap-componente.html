@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-card *ngFor="let modulo of modulos" class="modulo-card horizontal-card">
+    <img mat-card-image [src]="modulo.imagen" alt="{{ modulo.nombre }}" class="modulo-img" />
+
+    <mat-card-content class="modulo-content">
+      <h2>{{ modulo.nombre }}</h2>
+      <p>{{ modulo.descripcion }}</p>
+    </mat-card-content>
+
+    <div class="modulo-button">
+      <button class="btn" (click)="selectModulo(modulo.id)">View Roadmap</button>
+    </div>
+  </mat-card>
+
+  <!-- Mostrar cursos solo si hay un módulo seleccionado -->
+  <div *ngIf="selectedModuloId" class="cursos-container">
+    <h3>Cursos del módulo seleccionado:</h3>
+    <mat-card *ngFor="let curso of getCursosDelModulo()" class="curso-card">
+      <img mat-card-image [src]="curso.imagen" alt="{{ curso.nombre }}" class="curso-img" />
+      <mat-card-content>
+        <h4>{{ curso.nombre }}</h4>
+        <p>{{ curso.descripcion }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
