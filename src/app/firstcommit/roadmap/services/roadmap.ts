@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environments';
-import { Modulo, Curso } from '../model/roadmap.entity';
+import { ModuloEntity } from '../model/modulo.entity';
+import { CursoEntity } from '../model/curso.entity';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Roadmap {
 
-  private apiUrl = environment.apiBaseUrl;
+  private baseUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
-  mostrarModulos() {
-    return this.http.get<Modulo[]>(`${this.apiUrl}/modulos`);
+  mostrarModulos(): Observable<ModuloEntity[]> {
+    return this.http.get<ModuloEntity[]>(`${this.baseUrl}/modulos`);
   }
 
-  mostrarCursos() {
-    return this.http.get<Curso[]>(`${this.apiUrl}/cursos`);
+  mostrarCursos(): Observable<CursoEntity[]> {
+    return this.http.get<CursoEntity[]>(`${this.baseUrl}/cursos`);
   }
 }

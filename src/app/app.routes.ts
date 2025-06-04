@@ -1,11 +1,11 @@
 import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
-
-import { MainLayout } from './firstcommit/layout/main-layout/main-layout';
-import { Components } from './firstcommit/roadmap/components/components'
-import { NotfoundComponent } from './firstcommit/public/notfound.component/notfound.component';
+import {RoadmapComponente} from './firstcommit/roadmap/components/roadmap-componente/roadmap-componente';
 
 export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./membership/home/home').then(m => m.default),
+  },
   {
     path: 'home',
     loadComponent: () => import('./membership/home/home').then(m => m.default),
@@ -14,8 +14,8 @@ export const routes: Routes = [
     path: 'plans',
     loadComponent: () => import('./membership/plans/plans').then(m => m.default),
   },
-  // {
-  //   path: 'payment',
-  //   loadComponent: () => import('./membership/payment/payment').then(m => m.default)
-  // }
+  {
+    path: 'roadmap',
+    loadComponent: () => import('./firstcommit/roadmap/components/roadmap-componente/roadmap-componente').then(m => m.RoadmapComponente),
+  }
 ];
