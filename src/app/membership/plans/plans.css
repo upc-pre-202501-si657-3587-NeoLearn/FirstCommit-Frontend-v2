@@ -24,7 +24,7 @@
 .plans-container {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
   flex-wrap: wrap;
   margin-bottom: 60px;
 }
@@ -35,8 +35,8 @@
   border-radius: 12px;
   border: 1px solid #2A2A2A;
   width: 100%;
-  max-width: 350px;
-  padding: 30px 25px;
+  max-width: 300px;
+  padding: 20px 18px;
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
   display: flex;
@@ -80,7 +80,7 @@
 }
 
 .plan-card .mat-mdc-card-title {
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-weight: 700;
   color: #FFFFFF;
   margin: 0;
@@ -100,7 +100,7 @@
 }
 
 .price-main {
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 800;
   color: #FFFFFF;
   line-height: 1;
@@ -152,7 +152,7 @@
 }
 
 .plan-actions button {
-  padding: 14px 20px;
+  padding: 10px 16px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1em;
@@ -183,7 +183,7 @@
 .details-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px 60px;
+  padding: 0 20px 0;
 }
 
 .plan-details h2 {
@@ -259,7 +259,6 @@
   font-weight: 600;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .plans-container {
     gap: 20px;

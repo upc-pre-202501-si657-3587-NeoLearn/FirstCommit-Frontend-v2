@@ -1,0 +1,161 @@
+<div class="payment-container">
+  <div class="payment-header">
+    <h1>Método de pago</h1>
+    <p>Selecciona tu método de pago preferido</p>
+  </div>
+
+  <div class="payment-content">
+    <!-- Left Column: Payment Methods -->
+    <div class="payment-methods">
+      <mat-accordion displayMode="flat" class="payment-accordion">
+        <!-- Tarjeta de Crédito/Débito -->
+        <mat-expansion-panel #cardPanel (opened)="selectPaymentMethod('card')" class="payment-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>credit_card</mat-icon>
+              <span>Tarjeta de crédito/débito</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="payment-form">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Número de tarjeta</mat-label>
+              <input matInput placeholder="1234 5678 9012 3456" formControlName="cardNumber" maxlength="16">
+              <mat-icon matSuffix>credit_card</mat-icon>
+            </mat-form-field>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="half-width">
+                <mat-label>Mes de vencimiento</mat-label>
+                <mat-select formControlName="expiryMonth">
+                  <mat-option *ngFor="let month of months" [value]="month">
+                    {{month.toString().padStart(2, '0')}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="half-width">
+                <mat-label>Año de vencimiento</mat-label>
+                <mat-select formControlName="expiryYear">
+                  <mat-option *ngFor="let year of years" [value]="year">
+                    {{year}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>CVV</mat-label>
+              <input matInput placeholder="123" type="password" formControlName="cvv" maxlength="4">
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nombre del titular</mat-label>
+              <input matInput placeholder="Como aparece en la tarjeta" formControlName="cardholderName">
+              <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput type="email" placeholder="tucorreo@ejemplo.com" formControlName="email">
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-checkbox formControlName="saveCard">Guardar esta tarjeta para futuros pagos</mat-checkbox>
+
+            <button mat-raised-button class="submit-button" type="submit" [disabled]="!cardForm.valid">
+              Pagar con tarjeta
+            </button>
+          </form>
+        </mat-expansion-panel>
+
+        <!-- Yape -->
+        <mat-expansion-panel #yapePanel (opened)="selectPaymentMethod('yape')" class="payment-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <img src="assets/imagen/logo-yape_positive.png" alt="Yape" class="payment-logo">
+              <span>Yape</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <form [formGroup]="yapeForm" (ngSubmit)="onSubmit()" class="payment-form">
+            <div class="payment-instructions">
+              <p>1. Abre la aplicación de Yape en tu celular</p>
+              <p>2. Escanea el código QR que aparecerá después de confirmar</p>
+              <p>3. Confirma el pago en tu aplicación</p>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Número de teléfono</mat-label>
+              <input matInput placeholder="912345678" formControlName="phoneNumber" maxlength="9">
+              <span matPrefix>+51 &nbsp;</span>
+              <mat-icon matSuffix>phone_android</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput type="email" placeholder="tucorreo@ejemplo.com" formControlName="email">
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <button mat-raised-button class="submit-button yape-button" type="submit" [disabled]="!yapeForm.valid">
+              Pagar con Yape
+            </button>
+          </form>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <!-- Right Column: Order Summary -->
+    <div class="order-summary">
+      <mat-card class="summary-card">
+        <h2>Resumen de la orden</h2>
+        
+        <div class="plan-info">
+          <div class="plan-name">Plan Profesional</div>
+          <div class="plan-price">$9.99/mes</div>
+        </div>
+
+        <div class="plan-details">
+          <div class="detail-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>Acceso ilimitado a cursos de fundamentos</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>Foro completo de la comunidad</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>Proyectos grupales iniciales</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>Soporte estándar</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="total">
+          <span>Total a pagar</span>
+          <span class="total-amount">$9.99</span>
+        </div>
+
+        <div class="security-info">
+          <mat-icon>lock</mat-icon>
+          <span>Pago seguro y encriptado</span>
+        </div>
+        
+        <button mat-raised-button 
+                class="confirm-button" 
+                [disabled]="!selectedPaymentMethod"
+                (click)="onSubmit()">
+          Confirmar pago
+        </button>
+      </mat-card>
+    </div>
+  </div>
+</div>
