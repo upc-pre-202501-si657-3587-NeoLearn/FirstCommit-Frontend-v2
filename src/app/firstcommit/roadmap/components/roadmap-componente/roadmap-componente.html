@@ -12,7 +12,8 @@
     </div>
   </mat-card>
 
-  <!-- Mostrar cursos solo si hay un módulo seleccionado -->
+  <hr class="separator" />
+
   <div *ngIf="selectedModuloId" class="cursos-container">
     <h3>Cursos del módulo seleccionado:</h3>
     <mat-card *ngFor="let curso of getCursosDelModulo()" class="curso-card">
