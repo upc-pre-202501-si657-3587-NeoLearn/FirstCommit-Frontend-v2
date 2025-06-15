@@ -1,5 +1,4 @@
 import {RouterModule, Routes} from '@angular/router';
-import {RoadmapComponente} from './firstcommit/roadmap/components/roadmap-componente/roadmap-componente';
 
 export const routes: Routes = [
   {
@@ -16,6 +15,6 @@ export const routes: Routes = [
   },
   {
     path: 'roadmap',
-    loadComponent: () => import('./firstcommit/roadmap/components/roadmap-componente/roadmap-componente').then(m => m.RoadmapComponente),
+    loadComponent: () => import('./roadmap/components/roadmap-componente/roadmap-componente').then(m => m.RoadmapComponente),
   }
 ];
