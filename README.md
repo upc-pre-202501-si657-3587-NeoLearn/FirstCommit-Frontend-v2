@@ -1,4 +1,2 @@
 # FirstCommit
 
-kakka active mq
-
