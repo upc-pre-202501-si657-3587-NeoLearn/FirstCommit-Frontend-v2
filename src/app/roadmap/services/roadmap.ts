@@ -13,11 +13,11 @@ export class Roadmap {
 
   constructor(private http: HttpClient) { }
 
-  mostrarModulos(): Observable<ModuloEntity[]> {
+  getModules(): Observable<ModuloEntity[]> {
     return this.http.get<ModuloEntity[]>(`${this.baseUrl}/modulos`);
   }
 
-  mostrarCursos(): Observable<CursoEntity[]> {
+  getCources(): Observable<CursoEntity[]> {
     return this.http.get<CursoEntity[]>(`${this.baseUrl}/cursos`);
   }
 }

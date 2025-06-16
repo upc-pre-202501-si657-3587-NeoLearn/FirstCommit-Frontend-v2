@@ -15,6 +15,10 @@ export const routes: Routes = [
   },
   {
     path: 'roadmap',
-    loadComponent: () => import('./roadmap/components/roadmap-componente/roadmap-componente').then(m => m.RoadmapComponente),
+    loadComponent: () => import('./roadmap/components/roadmaps/roadmaps').then(m => m.Roadmaps)
+  },
+  {
+    path: 'courses',
+    loadComponent: () => import('./roadmap/components/courses/courses').then(m => m.Courses)
   }
 ];
