@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class Roadmap {
 
-  private baseUrl = 'https://my-json-server.typicode.com/VelardeSoft/firstcommit';
+  private baseUrl = 'https://semana13-git-main-velardesofts-projects.vercel.app';
 
   constructor(private http: HttpClient) { }
 

@@ -39,4 +39,16 @@ export class Courses implements OnInit {
     if (!modulo) return [];
     return this.cursos.filter(curso => modulo.course_ids.includes(curso.id));
   }
+
+  // courses.component.ts
+  getYoutubeThumbnail(url: string): string {
+    const match = url.match(/v=([^&]+)/);
+    return match
+      ? `https://img.youtube.com/vi/${match[1]}/0.jpg`
+      : 'ruta.img';
+  }
+
+  abrirVideo(url: string): void {
+    window.open(url, '_blank');
+  }
 }
