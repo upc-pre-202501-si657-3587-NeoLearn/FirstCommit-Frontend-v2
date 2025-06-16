@@ -1,0 +1,35 @@
+.projects-container {
+  padding: 20px 40px;
+}
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.projects-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+}
+.empty-message {
+  color: #888;
+  font-size: 1.2rem;
+  text-align: center;
+  grid-column: 1 / -1;
+  margin-top: 50px;
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+}

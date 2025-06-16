@@ -1,16 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import { environment } from './environment.prod';
 
-import { EnvironmentProd } from './environment.prod';
-
-describe('EnvironmentProd', () => {
-  let service: EnvironmentProd;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(EnvironmentProd);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+describe('Production Environment', () => {
+  it('should have production flag set to true', () => {
+    expect(environment.production).toBe(true);
   });
 });

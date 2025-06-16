@@ -1,16 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { environment } from './environments';
 
-import { Environments } from './environments';
-
-describe('Environments', () => {
-  let service: Environments;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Environments);
+describe('Development Environment', () => {
+  it('should have production flag set to false', () => {
+    expect(environment.production).toBe(false);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should have a defined apiBaseUrl', () => {
+    expect(environment.apiBaseUrl).toBeDefined();
   });
 });

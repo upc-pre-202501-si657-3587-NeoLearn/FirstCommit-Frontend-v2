@@ -1,35 +1,75 @@
 {
+  "projects": [
+    {
+      "id": "1",
+      "name": "Proyecto Colaborativo Kukulcan",
+      "description": "Desarrollo de la plataforma de aprendizaje NeoLearn, enfocado en la gamificación y el seguimiento de progreso.",
+      "projectType": "GROUP",
+      "ownerUserId": 101,
+      "license": null,
+      "sendbirdChannelId": "neolearn_project_channel_1_mock",
+      "createdAt": "2025-06-15T10:00:00Z",
+      "updatedAt": "2025-06-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Utilidades NeoLearn Core",
+      "description": "Librería open source con funciones comunes y helpers para ser utilizada en todos los microservicios.",
+      "projectType": "OPEN_SOURCE",
+      "ownerUserId": 102,
+      "license": "MIT",
+      "sendbirdChannelId": "neolearn_project_channel_2_mock",
+      "createdAt": "2025-06-14T11:00:00Z",
+      "updatedAt": "2025-06-14T11:00:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Rediseño de Landing Page",
+      "description": "Proyecto grupal para rediseñar la página de inicio de FirstCommit, mejorando la experiencia de usuario.",
+      "projectType": "GROUP",
+      "ownerUserId": 101,
+      "license": null,
+      "sendbirdChannelId": "neolearn_project_channel_3_mock",
+      "createdAt": "2025-06-13T12:00:00Z",
+      "updatedAt": "2025-06-13T12:00:00Z"
+    }
+  ],
   "modulos": [
     {
-      "id": 1,
+      "id": "1",
       "imagen": "https://example.com/img/modulo1.png",
       "nombre": "Frontend Básico",
       "descripcion": "Aprende los fundamentos del desarrollo web.",
-      "course_ids": [1, 2]
+      "course_ids": [
+        1,
+        2
+      ]
     },
     {
-      "id": 2,
+      "id": "2",
       "imagen": "https://example.com/img/modulo2.png",
       "nombre": "Backend Inicial",
       "descripcion": "Introducción al desarrollo del lado del servidor.",
-      "course_ids": [3]
+      "course_ids": [
+        3
+      ]
     }
   ],
   "cursos": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "HTML y CSS",
       "imagen": "https://example.com/img/htmlcss.png",
       "descripcion": "Curso completo de HTML y CSS desde cero."
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "JavaScript Básico",
       "imagen": "https://example.com/img/js.png",
       "descripcion": "Aprende lógica de programación con JavaScript."
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Node.js para principiantes",
       "imagen": "https://example.com/img/node.png",
       "descripcion": "Primeros pasos con Node.js y Express."

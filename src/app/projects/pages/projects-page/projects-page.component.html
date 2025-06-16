@@ -1,0 +1,20 @@
+<div class="projects-container">
+  <header class="projects-header">
+    <h1>Explora Proyectos</h1>
+    <button mat-flat-button color="primary" (click)="openCreateProjectDialog()">
+      <mat-icon>add</mat-icon>
+      Crear Nuevo Proyecto
+    </button>
+  </header>
+
+  <div class="projects-grid" *ngIf="(projects$ | async) as projects; else loading">
+    <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
+    <p *ngIf="projects.length === 0" class="empty-message">No hay proyectos para mostrar. ¡Crea el primero!</p>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  </ng-template>
+</div>

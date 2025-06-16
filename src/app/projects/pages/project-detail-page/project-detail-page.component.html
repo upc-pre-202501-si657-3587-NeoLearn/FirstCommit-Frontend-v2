@@ -1,0 +1,65 @@
+<div class="detail-container">
+  <ng-container *ngIf="project$ | async as project; else loading">
+    <div *ngIf="project; else notFound">
+      <header class="detail-header">
+        <div>
+          <a routerLink="/projects" mat-icon-button aria-label="Volver a proyectos">
+            <mat-icon>arrow_back</mat-icon>
+          </a>
+          <h1>{{ project.name }}</h1>
+        </div>
+      </header>
+
+      <mat-card class="detail-card">
+        <mat-card-content>
+          <h2>Descripción</h2>
+          <p>{{ project.description }}</p>
+
+          <h2>Detalles</h2>
+          <div class="details-grid">
+            <div>
+              <mat-icon>label</mat-icon>
+              <span>Tipo:</span>
+              <strong>{{ project.projectType === 'GROUP' ? 'Grupal' : 'Open Source' }}</strong>
+            </div>
+            <div *ngIf="project.license">
+              <mat-icon>security</mat-icon>
+              <span>Licencia:</span>
+              <strong>{{ project.license }}</strong>
+            </div>
+            <div>
+              <mat-icon>person</mat-icon>
+              <span>Propietario ID:</span>
+              <strong>{{ project.ownerUserId }}</strong>
+            </div>
+            <div>
+              <mat-icon>event</mat-icon>
+              <span>Creado el:</span>
+              <strong>{{ project.createdAt | date:'medium' }}</strong>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="future-sections">
+        <h2>Próximamente: Tareas, Miembros y más...</h2>
+      </div>
+
+    </div>
+
+    <ng-template #notFound>
+      <div class="info-message">
+        <h2>Proyecto no encontrado</h2>
+        <p>No pudimos encontrar un proyecto con ese ID.</p>
+        <a routerLink="/projects" mat-flat-button color="primary">Volver a Proyectos</a>
+      </div>
+    </ng-template>
+
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="info-message">
+      <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+    </div>
+  </ng-template>
+</div>

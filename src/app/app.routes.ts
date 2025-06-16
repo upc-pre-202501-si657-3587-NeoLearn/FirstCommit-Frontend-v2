@@ -1,11 +1,11 @@
-import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
-
-import { MainLayout } from './firstcommit/layout/main-layout/main-layout';
-import { Components } from './firstcommit/roadmap/components/components'
-import { NotfoundComponent } from './firstcommit/public/notfound.component/notfound.component';
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'projects',
+    pathMatch: 'full'
+  },
   {
     path: 'home',
     loadComponent: () => import('./membership/home/home').then(m => m.default),
@@ -14,8 +14,12 @@ export const routes: Routes = [
     path: 'plans',
     loadComponent: () => import('./membership/plans/plans').then(m => m.default),
   },
-  // {
-  //   path: 'payment',
-  //   loadComponent: () => import('./membership/payment/payment').then(m => m.default)
-  // }
+  {
+    path: 'projects',
+    loadComponent: () => import('./projects/pages/projects-page/projects-page.component').then(m => m.ProjectsPageComponent)
+  },
+  {
+    path: 'projects/:id',
+    loadComponent: () => import('./projects/pages/project-detail-page/project-detail-page.component').then(m => m.ProjectDetailPageComponent)
+  }
 ];

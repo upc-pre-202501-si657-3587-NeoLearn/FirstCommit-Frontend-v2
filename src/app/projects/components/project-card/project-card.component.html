@@ -1,0 +1,20 @@
+<mat-card class="project-card">
+  <mat-card-header>
+    <mat-card-title>{{ project.name }}</mat-card-title>
+    <mat-card-subtitle>{{ project.projectType === 'GROUP' ? 'Proyecto Grupal' : 'Open Source' }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="project-description">{{ project.description }}</p>
+    <div class="card-footer-tags">
+      <mat-chip-listbox aria-label="Project Tags">
+        <mat-chip *ngIf="project.license" color="primary" selected>
+          <mat-icon>security</mat-icon>
+          {{ project.license }}
+        </mat-chip>
+      </mat-chip-listbox>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" [routerLink]="['/projects', project.id]">VER DETALLES</button>
+  </mat-card-actions>
+</mat-card>
