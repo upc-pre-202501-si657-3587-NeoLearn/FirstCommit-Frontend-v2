@@ -1,10 +1,9 @@
 import {RouterModule, Routes} from '@angular/router';
-import {RoadmapComponente} from './firstcommit/roadmap/components/roadmap-componente/roadmap-componente';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./membership/home/home').then(m => m.default),
+    loadComponent: () => import('./roadmap/components/roadmaps/roadmaps').then(m => m.Roadmaps) //import('./membership/home/home').then(m => m.default),
   },
   {
     path: 'home',
@@ -16,6 +15,10 @@ export const routes: Routes = [
   },
   {
     path: 'roadmap',
-    loadComponent: () => import('./firstcommit/roadmap/components/roadmap-componente/roadmap-componente').then(m => m.RoadmapComponente),
+    loadComponent: () => import('./roadmap/components/roadmaps/roadmaps').then(m => m.Roadmaps)
+  },
+  {
+    path: 'courses',
+    loadComponent: () => import('./roadmap/components/courses/courses').then(m => m.Courses)
   }
 ];

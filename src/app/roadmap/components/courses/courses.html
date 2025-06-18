@@ -1,0 +1,20 @@
+
+<h3>Cursos del módulo seleccionado:</h3>
+<div class="container" role="main">
+  <section *ngIf="selectedModuloId" class="cursos-container">
+    <mat-card *ngFor="let curso of getCursosDelModulo()" class="curso-card">
+      <img
+        mat-card-image
+        [src]="getYoutubeThumbnail(curso.imagen)"
+        [alt]="curso.nombre"
+        class="curso-img"
+        (click)="abrirVideo(curso.imagen)"
+        style="cursor:pointer"
+      />
+      <mat-card-content>
+        <h4>{{ curso.nombre }}</h4>
+        <p>{{ curso.descripcion }}</p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>

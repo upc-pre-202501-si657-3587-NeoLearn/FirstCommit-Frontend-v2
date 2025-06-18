@@ -9,15 +9,15 @@ import {Observable} from 'rxjs';
 })
 export class Roadmap {
 
-  private baseUrl = 'https://my-json-server.typicode.com/VelardeSoft/firstcommit';
+  private baseUrl = 'https://semana13-git-main-velardesofts-projects.vercel.app';
 
   constructor(private http: HttpClient) { }
 
-  mostrarModulos(): Observable<ModuloEntity[]> {
+  getModules(): Observable<ModuloEntity[]> {
     return this.http.get<ModuloEntity[]>(`${this.baseUrl}/modulos`);
   }
 
-  mostrarCursos(): Observable<CursoEntity[]> {
+  getCources(): Observable<CursoEntity[]> {
     return this.http.get<CursoEntity[]>(`${this.baseUrl}/cursos`);
   }
 }
