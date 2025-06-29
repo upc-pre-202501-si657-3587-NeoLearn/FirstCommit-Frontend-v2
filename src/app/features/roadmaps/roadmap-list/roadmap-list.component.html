@@ -1,0 +1,27 @@
+<div class="container">
+  <header class="page-header">
+    <h1>Roadmaps</h1>
+    <p>Structured learning paths for different software engineering specializations.</p>
+  </header>
+
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link
+       *ngFor="let category of categories"
+       (click)="activeLink = category"
+       [active]="activeLink == category"> {{category}} </a>
+  </nav>
+
+  <div class="roadmap-list" *ngIf="roadmaps$ | async as roadmaps">
+    <mat-card *ngFor="let roadmap of roadmaps" class="roadmap-card" [routerLink]="['/roadmaps', roadmap.id]">
+      <div class="roadmap-image">
+        <img [src]="roadmap.imageUrl" [alt]="roadmap.title">
+      </div>
+      <div class="roadmap-content">
+        <span>{{ roadmap.category }}</span>
+        <h2>{{ roadmap.title }}</h2>
+        <p>{{ roadmap.description }}</p>
+        <button mat-raised-button color="primary">View Roadmap</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

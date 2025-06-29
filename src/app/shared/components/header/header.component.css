@@ -1,0 +1,55 @@
+.main-header {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0 2rem;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  height: 24px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.navigation-links {
+  display: flex;
+  gap: 16px;
+}
+
+.navigation-links .mat-mdc-button {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.navigation-links .active-link {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}

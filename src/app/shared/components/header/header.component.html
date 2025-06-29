@@ -1,0 +1,28 @@
+<mat-toolbar class="main-header">
+  <div class="header-container">
+    <div class="logo-container" (click)="navigateTo('/courses')" style="cursor: pointer;">
+      <img src="assets/imagen/Logo.png" alt="FirstCommit Logo" class="logo-img">
+      <span class="logo-text">FirstCommit</span>
+    </div>
+    <div class="navigation-links" *ngIf="state === 'dashboard'">
+      <button mat-button routerLink="/courses" routerLinkActive="active-link">Courses</button>
+      <button mat-button routerLink="/roadmaps" routerLinkActive="active-link">Roadmaps</button>
+      <button mat-button routerLink="/projects" routerLinkActive="active-link">Projects</button>
+    </div>
+    <div class="action-buttons">
+      <ng-container *ngIf="state === 'public'">
+        <button mat-button routerLink="/login">Log In</button>
+        <button mat-raised-button color="primary" routerLink="/register">Sign Up</button>
+      </ng-container>
+      <ng-container *ngIf="state === 'dashboard'">
+        <button mat-button>Get Premium</button>
+        <button mat-icon-button>
+          <mat-icon>notifications_none</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <img src="assets/imagen/Logo.png" class="user-avatar" alt="User Avatar">
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</mat-toolbar>

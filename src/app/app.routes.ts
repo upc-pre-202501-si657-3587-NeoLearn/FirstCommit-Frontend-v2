@@ -1,21 +1,29 @@
-import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
+import { Routes } from '@angular/router';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { CourseListComponent } from './features/courses/course-list/course-list.component';
+import { CourseDetailComponent } from './features/courses/course-detail/course-detail.component';
+import { RoadmapListComponent } from './features/roadmaps/roadmap-list/roadmap-list.component';
+import { ProjectListComponent } from './features/projects/project-list/project-list.component';
+import { RegisterComponent } from './features/auth/register/register.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { RoadmapDetailComponent } from './features/roadmaps/roadmap-detail/roadmap-detail.component';
+import { ProjectDetailComponent } from './features/projects/project-detail/project-detail.component';
 
-import { MainLayout } from './firstcommit/layout/main-layout/main-layout';
-import { Components } from './firstcommit/roadmap/components/components'
-import { NotfoundComponent } from './firstcommit/public/notfound.component/notfound.component';
-
-export const routes: Routes = [
+export const appRoutes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./membership/home/home').then(m => m.default),
+    path: '',
+    component: DashboardComponent,
+    children: [
+      { path: '', redirectTo: 'courses', pathMatch: 'full' },
+      { path: 'courses', component: CourseListComponent },
+      { path: 'courses/:id', component: CourseDetailComponent },
+      { path: 'roadmaps', component: RoadmapListComponent },
+      { path: 'roadmaps/:id', component: RoadmapDetailComponent },
+      { path: 'projects', component: ProjectListComponent },
+      { path: 'projects/:id', component: ProjectDetailComponent }
+    ]
   },
-  {
-    path: 'plans',
-    loadComponent: () => import('./membership/plans/plans').then(m => m.default),
-  },
-  // {
-  //   path: 'payment',
-  //   loadComponent: () => import('./membership/payment/payment').then(m => m.default)
-  // }
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: 'courses' }
 ];

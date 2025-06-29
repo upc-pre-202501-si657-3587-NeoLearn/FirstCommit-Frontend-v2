@@ -1,9 +1,111 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+:root {
+  --primary-accent: #d05ce3;
+  --secondary-accent: #a365f7;
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --surface-color-light: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --border-color: #333333;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-  background-color: #171214;
-  color: #fff;
-  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  font-family: "Inter", "Roboto", "Helvetica Neue", sans-serif;
   margin: 0;
 }
-* {
-  font-family: 'open sans', sans-serif;
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+/* Angular Material Overrides */
+.mat-mdc-card {
+  background: var(--surface-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.mat-mdc-button.mat-primary {
+  --mdc-protected-button-container-color: var(--primary-accent);
+  --mdc-protected-button-label-text-color: #fff;
+  border-radius: 20px;
+  padding: 0 24px;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  background-color: var(--primary-accent);
+  color: #fff;
+}
+
+.mat-mdc-button.mat-stroked-primary {
+  --mdc-outlined-button-label-text-color: var(--text-primary);
+  --mdc-outlined-button-outline-color: var(--border-color);
+  border-radius: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: var(--surface-color-light) !important;
+}
+
+.mat-mdc-form-field-flex {
+  background-color: transparent !important;
+}
+
+.mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: var(--primary-accent);
+  --mat-tab-header-active-label-text-color: var(--primary-accent);
+  --mat-tab-header-inactive-label-text-color: var(--text-secondary);
+  --mat-tab-header-active-focus-label-text-color: var(--primary-accent);
+  --mat-tab-header-hover-label-text-color: var(--primary-accent);
+  --mat-tab-header-active-hover-label-text-color: var(--primary-accent);
+}
+
+.mat-paginator {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+
+.mat-table {
+  background-color: var(--surface-color);
+}
+
+.mat-header-row {
+  background-color: var(--surface-color-light);
+}
+
+.mat-row, .mat-header-row {
+  border-bottom-color: var(--border-color);
+}
+
+.mat-cell, .mat-header-cell {
+  color: var(--text-secondary);
+  border-bottom: none;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mat-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--primary-accent);
 }

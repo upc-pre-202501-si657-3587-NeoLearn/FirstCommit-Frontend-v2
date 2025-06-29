@@ -1,38 +1,149 @@
 {
-  "modulos": [
+  "courses": [
     {
       "id": 1,
-      "imagen": "https://example.com/img/modulo1.png",
-      "nombre": "Frontend Básico",
-      "descripcion": "Aprende los fundamentos del desarrollo web.",
-      "course_ids": [1, 2]
+      "title": "Introduction to Python",
+      "description": "Learn the basics of Python programming language.",
+      "category": "Programming",
+      "difficulty": "Beginner",
+      "duration": "4 Weeks",
+      "imageUrl": "assets/images/course-python.jpg",
+      "rating": 4.8,
+      "reviews": 1250,
+      "views": 25000,
+      "ratingDistribution": [
+        { "stars": 5, "percent": 70 },
+        { "stars": 4, "percent": 20 },
+        { "stars": 3, "percent": 5 },
+        { "stars": 2, "percent": 3 },
+        { "stars": 1, "percent": 2 }
+      ]
     },
     {
       "id": 2,
-      "imagen": "https://example.com/img/modulo2.png",
-      "nombre": "Backend Inicial",
-      "descripcion": "Introducción al desarrollo del lado del servidor.",
-      "course_ids": [3]
-    }
-  ],
-  "cursos": [
-    {
-      "id": 1,
-      "nombre": "HTML y CSS",
-      "imagen": "https://example.com/img/htmlcss.png",
-      "descripcion": "Curso completo de HTML y CSS desde cero."
-    },
-    {
-      "id": 2,
-      "nombre": "JavaScript Básico",
-      "imagen": "https://example.com/img/js.png",
-      "descripcion": "Aprende lógica de programación con JavaScript."
+      "title": "Advanced Algorithms",
+      "description": "Master complex algorithms and data structures.",
+      "category": "Algorithms",
+      "difficulty": "Advanced",
+      "duration": "8 Weeks",
+      "imageUrl": "assets/images/course-algorithms.jpg",
+      "rating": 4.9,
+      "reviews": 980
     },
     {
       "id": 3,
-      "nombre": "Node.js para principiantes",
-      "imagen": "https://example.com/img/node.png",
-      "descripcion": "Primeros pasos con Node.js y Express."
+      "title": "Web Development with React",
+      "description": "Build dynamic web applications using React.",
+      "category": "Web Development",
+      "difficulty": "Intermediate",
+      "duration": "6 Weeks",
+      "imageUrl": "assets/images/course-react.jpg",
+      "rating": 4.7,
+      "reviews": 2100
+    },
+    {
+      "id": 4,
+      "title": "Database Design",
+      "description": "Design and implement efficient databases.",
+      "category": "Databases",
+      "difficulty": "Intermediate",
+      "duration": "5 Weeks",
+      "imageUrl": "assets/images/course-database.jpg",
+      "rating": 4.6,
+      "reviews": 1500
+    },
+    {
+      "id": 5,
+      "title": "Mobile App Development",
+      "description": "Create mobile apps for iOS and Android.",
+      "category": "Mobile",
+      "difficulty": "Intermediate",
+      "duration": "10 Weeks",
+      "imageUrl": "assets/images/course-mobile.jpg",
+      "rating": 4.8,
+      "reviews": 1800
+    },
+    {
+      "id": 6,
+      "title": "Cloud Computing Fundamentals",
+      "description": "Understand the fundamentals of cloud computing.",
+      "category": "Cloud",
+      "difficulty": "Beginner",
+      "duration": "4 Weeks",
+      "imageUrl": "assets/images/course-cloud.jpg",
+      "rating": 4.7,
+      "reviews": 1300
+    }
+  ],
+  "roadmaps": [
+    {
+      "id": 1,
+      "category": "Web Development",
+      "title": "Frontend Roadmap",
+      "description": "Learn the fundamentals of web development and build interactive websites.",
+      "imageUrl": "assets/images/roadmap-frontend.jpg"
+    },
+    {
+      "id": 2,
+      "category": "Data Science",
+      "title": "Data Science Roadmap",
+      "description": "Master data analysis, machine learning, and data visualization techniques.",
+      "imageUrl": "assets/images/roadmap-datascience.jpg"
+    },
+    {
+      "id": 3,
+      "category": "Mobile Development",
+      "title": "Mobile Development Roadmap",
+      "description": "Build native and cross-platform mobile applications for iOS and Android.",
+      "imageUrl": "assets/images/roadmap-mobile.jpg"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "featured": true,
+      "title": "Project: AI-Powered Tutoring System",
+      "description": "Develop an AI tutor to personalize learning experiences.",
+      "imageUrl": "assets/images/project-ai.jpg",
+      "name": "AI Tutor",
+      "skillsRequired": "Python, Machine Learning",
+      "contributionGuidelines": "https://github.com/example/ai-tutor"
+    },
+    {
+      "id": 2,
+      "featured": true,
+      "title": "Project: Decentralized Social Network",
+      "description": "Build a social network with decentralized architecture.",
+      "imageUrl": "assets/images/project-social.jpg",
+      "name": "Decentralized Social Network",
+      "skillsRequired": "Blockchain, React",
+      "contributionGuidelines": "https://github.com/example/decentralized-social"
+    },
+    {
+      "id": 3,
+      "featured": true,
+      "title": "Project: Open Source E-commerce Platform",
+      "description": "Create a scalable e-commerce platform with open source tools.",
+      "imageUrl": "assets/images/project-ecommerce.jpg",
+      "name": "E-commerce Platform",
+      "skillsRequired": "Node.js, React, PostgreSQL",
+      "contributionGuidelines": "https://github.com/example/ecommerce-platform"
+    },
+    {
+      "id": 4,
+      "featured": false,
+      "name": "Mobile Health App",
+      "description": "A mobile app for tracking health metrics and providing insights.",
+      "skillsRequired": "React Native, Firebase",
+      "contributionGuidelines": "https://github.com/example/health-app"
+    },
+    {
+      "id": 5,
+      "featured": false,
+      "name": "Open Source CMS",
+      "description": "A content management system for creating and managing websites.",
+      "skillsRequired": "PHP, MySQL, JavaScript",
+      "contributionGuidelines": "https://github.com/example/open-cms"
     }
   ]
 }

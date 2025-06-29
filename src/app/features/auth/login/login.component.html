@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="login-header" (click)="router.navigate(['/'])">
+    <img src="assets/imagen/Logo.png" alt="FirstCommit Logo" class="logo-img">
+    <span class="logo-text">FirstCommit</span>
+  </div>
+
+  <div class="login-box">
+    <h1>Log in to your account</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Enter your email">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Enter your password">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="login-button">Log In</button>
+    </form>
+    <p class="register-link">
+      Don't have an account? <a routerLink="/register">Sign Up</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+  <header class="page-header">
+    <h1>Explore Courses</h1>
+    <p>Dive into our extensive catalog of courses designed to elevate your software engineering skills. Whether you're a beginner or an experienced developer, we have something for you.</p>
+  </header>
+
+  <div class="filters">
+    <mat-form-field>
+      <mat-label>Topic</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let topic of topics" [value]="topic">{{ topic }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Difficulty</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">{{ difficulty }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Duration</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let duration of durations" [value]="duration">{{ duration }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="course-grid" *ngIf="courses$ | async as courses">
+    <mat-card *ngFor="let course of courses" class="course-card" [routerLink]="['/courses', course.id]">
+      <img mat-card-image [src]="course.imageUrl" [alt]="course.title">
+      <mat-card-content>
+        <h2>{{ course.title }}</h2>
+        <p>{{ course.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-paginator [length]="(courses$ | async)?.length || 0"
+                 [pageSize]="6"
+                 [pageSizeOptions]="[6, 12, 24]">
+  </mat-paginator>
+</div>

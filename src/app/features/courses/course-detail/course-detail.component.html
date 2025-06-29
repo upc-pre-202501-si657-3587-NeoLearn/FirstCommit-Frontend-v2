@@ -1,0 +1,46 @@
+<div class="container" *ngIf="course$ | async as course">
+  <div class="course-hero">
+    <img [src]="course.imageUrl" [alt]="course.title" class="hero-image">
+  </div>
+
+  <div class="course-content">
+    <h1>{{ course.title }}</h1>
+    <p class="description">{{ course.description }}</p>
+
+    <div class="course-main-info">
+      <div class="rating-section">
+        <div class="rating-summary">
+          <span class="rating-value">{{ course.rating }}</span>
+          <div class="stars">
+            <mat-icon *ngFor="let i of [1,2,3,4,5]">{{ i <= course.rating ? 'star' : 'star_border' }}</mat-icon>
+          </div>
+          <span class="reviews-count">{{ course.reviews }} reviews</span>
+        </div>
+        <div class="rating-distribution" *ngIf="course.ratingDistribution">
+          <div *ngFor="let dist of course.ratingDistribution" class="dist-bar">
+            <span>{{ dist.stars }}</span>
+            <mat-progress-bar mode="determinate" [value]="dist.percent"></mat-progress-bar>
+          </div>
+        </div>
+      </div>
+      <div class="metadata-section">
+        <div class="meta-item" *ngIf="course.views">
+          <span class="meta-label">Views</span>
+          <span class="meta-value">{{ course.views | number }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-value">{{ course.difficulty }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Duration</span>
+          <span class="meta-value">{{ course.duration }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="enroll-action">
+      <button mat-raised-button color="primary" class="enroll-button">Enroll Now</button>
+    </div>
+  </div>
+</div>
