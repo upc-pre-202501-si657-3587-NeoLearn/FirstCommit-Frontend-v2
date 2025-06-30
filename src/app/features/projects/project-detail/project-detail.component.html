@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<div class="container" *ngIf="project$ | async as project">
+  <div class="project-header">
+    <a routerLink="/projects" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back to Projects</span>
+    </a>
+    <h1>{{ project.name }}</h1>
+    <p class="description">{{ project.description }}</p>
+  </div>
 
-</body>
-</html>
+  <mat-card class="project-details-card">
+    <mat-card-header>
+      <mat-card-title>Project Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <mat-icon>code</mat-icon>
+          <div class="detail-text">
+            <span class="label">Skills Required</span>
+            <span class="value">{{ project.skillsRequired }}</span>
+          </div>
+        </div>
+        <div class="detail-item">
+          <mat-icon>gavel</mat-icon>
+          <div class="detail-text">
+            <span class="label">License</span>
+            <span class="value">MIT</span>
+          </div>
+        </div>
+        <div class="detail-item">
+          <mat-icon>person_outline</mat-icon>
+          <div class="detail-text">
+            <span class="label">Owner</span>
+            <span class="value">FirstCommit Team</span>
+          </div>
+        </div>
+      </div>
+      <div class="guidelines-action">
+        <a mat-raised-button color="primary" [href]="project.contributionGuidelines" target="_blank">
+          <mat-icon>hub</mat-icon>
+          View Contribution Guidelines
+        </a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

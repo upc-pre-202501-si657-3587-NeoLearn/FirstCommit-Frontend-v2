@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<div class="container" *ngIf="roadmap$ | async as roadmap">
+  <div class="roadmap-header">
+    <a routerLink="/roadmaps" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back to Roadmaps</span>
+    </a>
+    <h1 class="title">{{ roadmap.title }}</h1>
+    <p class="description">{{ roadmap.description }}</p>
+  </div>
 
-</body>
-</html>
+  <div class="timeline">
+    <div *ngFor="let course of roadmap.courses; let i = index" class="timeline-item">
+      <div class="timeline-connector">
+        <div class="timeline-dot"></div>
+        <div class="timeline-line" *ngIf="i < roadmap.courses.length - 1"></div>
+      </div>
+      <mat-card class="course-card-timeline" [routerLink]="['/courses', course.id]">
+        <img mat-card-image [src]="course.imageUrl" [alt]="course.title">
+        <mat-card-content>
+          <h2>{{ course.title }}</h2>
+          <p>{{ course.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

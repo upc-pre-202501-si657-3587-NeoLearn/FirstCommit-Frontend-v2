@@ -15,4 +15,8 @@ export class RoadmapService {
   getRoadmaps(): Observable<Roadmap[]> {
     return this.http.get<Roadmap[]>(this.apiUrl);
   }
+
+  getRoadmapById(id: number): Observable<Roadmap> {
+    return this.http.get<Roadmap>(`${this.apiUrl}/${id}`);
+  }
 }

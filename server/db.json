@@ -62,17 +62,6 @@
       "imageUrl": "assets/images/course-mobile.jpg",
       "rating": 4.8,
       "reviews": 1800
-    },
-    {
-      "id": 6,
-      "title": "Cloud Computing Fundamentals",
-      "description": "Understand the fundamentals of cloud computing.",
-      "category": "Cloud",
-      "difficulty": "Beginner",
-      "duration": "4 Weeks",
-      "imageUrl": "assets/images/course-cloud.jpg",
-      "rating": 4.7,
-      "reviews": 1300
     }
   ],
   "roadmaps": [
@@ -81,21 +70,34 @@
       "category": "Web Development",
       "title": "Frontend Roadmap",
       "description": "Learn the fundamentals of web development and build interactive websites.",
-      "imageUrl": "assets/images/roadmap-frontend.jpg"
+      "imageUrl": "assets/images/roadmap-frontend.jpg",
+      "courses": [
+        { "id": 3, "title": "Web Development with React", "description": "Build dynamic web applications using React.", "imageUrl": "assets/images/course-react.jpg" },
+        { "id": 1, "title": "Introduction to Python", "description": "Learn the basics of Python programming language.", "imageUrl": "assets/images/course-python.jpg" }
+      ]
     },
     {
       "id": 2,
       "category": "Data Science",
       "title": "Data Science Roadmap",
       "description": "Master data analysis, machine learning, and data visualization techniques.",
-      "imageUrl": "assets/images/roadmap-datascience.jpg"
+      "imageUrl": "assets/images/roadmap-datascience.jpg",
+      "courses": [
+        { "id": 1, "title": "Introduction to Python", "description": "Learn the basics of Python programming language.", "imageUrl": "assets/images/course-python.jpg" },
+        { "id": 2, "title": "Advanced Algorithms", "description": "Master complex algorithms and data structures.", "imageUrl": "assets/images/course-algorithms.jpg" },
+        { "id": 4, "title": "Database Design", "description": "Design and implement efficient databases.", "imageUrl": "assets/images/course-database.jpg" }
+      ]
     },
     {
       "id": 3,
       "category": "Mobile Development",
       "title": "Mobile Development Roadmap",
       "description": "Build native and cross-platform mobile applications for iOS and Android.",
-      "imageUrl": "assets/images/roadmap-mobile.jpg"
+      "imageUrl": "assets/images/roadmap-mobile.jpg",
+      "courses": [
+        { "id": 5, "title": "Mobile App Development", "description": "Create mobile apps for iOS and Android.", "imageUrl": "assets/images/course-mobile.jpg" },
+        { "id": 3, "title": "Web Development with React", "description": "Build dynamic web applications using React.", "imageUrl": "assets/images/course-react.jpg" }
+      ]
     }
   ],
   "projects": [
