@@ -8,6 +8,9 @@ import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { RoadmapDetailComponent } from './features/roadmaps/roadmap-detail/roadmap-detail.component';
 import { ProjectDetailComponent } from './features/projects/project-detail/project-detail.component';
+import { MembershipPlansComponent } from './features/memberships/membership-plans/membership-plans.component';
+import { ProfileComponent } from './features/profile/profile.component';
+import { CourseFormComponent } from './features/admin/course-form/course-form.component';
 
 export const appRoutes: Routes = [
   {
@@ -16,11 +19,14 @@ export const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'courses', pathMatch: 'full' },
       { path: 'courses', component: CourseListComponent },
+      { path: 'courses/new', component: CourseFormComponent },
       { path: 'courses/:id', component: CourseDetailComponent },
       { path: 'roadmaps', component: RoadmapListComponent },
       { path: 'roadmaps/:id', component: RoadmapDetailComponent },
       { path: 'projects', component: ProjectListComponent },
-      { path: 'projects/:id', component: ProjectDetailComponent }
+      { path: 'projects/:id', component: ProjectDetailComponent },
+      { path: 'memberships', component: MembershipPlansComponent },
+      { path: 'profile', component: ProfileComponent }
     ]
   },
   { path: 'register', component: RegisterComponent },

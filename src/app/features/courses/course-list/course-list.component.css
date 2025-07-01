@@ -14,10 +14,23 @@
   color: var(--text-secondary);
 }
 
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
 .filters {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.admin-actions {
+  flex-shrink: 0;
 }
 
 .course-grid {

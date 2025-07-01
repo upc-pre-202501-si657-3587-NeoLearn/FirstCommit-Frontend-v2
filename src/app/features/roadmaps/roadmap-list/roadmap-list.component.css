@@ -16,12 +16,33 @@
 
 .mat-tab-nav-bar {
   margin-bottom: 3rem;
-}
-
-.mat-mdc-tab-link {
-  min-width: 120px;
   justify-content: center;
 }
+
+/* --- INICIO DE LA CORRECCIÓN --- */
+:host ::ng-deep .mat-mdc-tab-link {
+  min-width: 120px;
+  justify-content: center;
+  color: #a9a9a9 !important; /* Color gris claro y visible para pestañas inactivas */
+  opacity: 1 !important;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+:host ::ng-deep .mat-mdc-tab-link:hover {
+  color: #ffffff !important; /* El texto se vuelve blanco al pasar el mouse */
+}
+
+:host ::ng-deep .mat-mdc-tab-link.mdc-tab--active {
+  color: var(--primary-accent) !important; /* Color de acento para la pestaña activa */
+  font-weight: 600;
+}
+
+:host ::ng-deep .mat-mdc-tab-indicator-bar {
+  background-color: var(--primary-accent) !important;
+}
+/* --- FIN DE LA CORRECCIÓN --- */
+
 
 .roadmap-list {
   display: flex;
@@ -35,6 +56,8 @@
   padding: 1.5rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  background-color: var(--surface-color);
+  color: var(--text-primary);
 }
 
 .roadmap-card:hover {

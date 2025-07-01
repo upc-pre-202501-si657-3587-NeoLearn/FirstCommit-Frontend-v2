@@ -53,3 +53,71 @@
   width: 32px;
   border-radius: 50%;
 }
+
+/* Estilos para el panel de notificaciones */
+.notifications-panel {
+  max-width: 400px !important;
+  width: 400px !important;
+}
+
+.notifications-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.notifications-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.notifications-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.notification-item.unread {
+  background-color: rgba(208, 92, 227, 0.08);
+}
+
+.notification-icon {
+  color: var(--primary-accent);
+}
+
+.notification-content {
+  flex-grow: 1;
+}
+
+.notification-content p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.notification-content .title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.notification-content .description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0;
+}
+
+.notification-content .time {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.no-notifications {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+}

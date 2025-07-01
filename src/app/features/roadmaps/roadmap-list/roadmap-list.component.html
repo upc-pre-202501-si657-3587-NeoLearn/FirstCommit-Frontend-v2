@@ -7,11 +7,11 @@
   <nav mat-tab-nav-bar>
     <a mat-tab-link
        *ngFor="let category of categories"
-       (click)="activeLink = category"
+       (click)="applyFilter(category)"
        [active]="activeLink == category"> {{category}} </a>
   </nav>
 
-  <div class="roadmap-list" *ngIf="roadmaps$ | async as roadmaps">
+  <div class="roadmap-list" *ngIf="filteredRoadmaps$ | async as roadmaps">
     <mat-card *ngFor="let roadmap of roadmaps" class="roadmap-card" [routerLink]="['/roadmaps', roadmap.id]">
       <div class="roadmap-image">
         <img [src]="roadmap.imageUrl" [alt]="roadmap.title">

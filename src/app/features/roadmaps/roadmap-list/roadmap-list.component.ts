@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { Roadmap } from '../../../core/models/roadmap.model';
 import { RoadmapService } from '../../../core/services/roadmap.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, combineLatest } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -14,13 +15,30 @@ import { RouterModule } from '@angular/router';
   styleUrl: './roadmap-list.component.css'
 })
 export class RoadmapListComponent implements OnInit {
-  roadmaps$!: Observable<Roadmap[]>;
+  private allRoadmaps$ = new BehaviorSubject<Roadmap[]>([]);
+  filteredRoadmaps$!: Observable<Roadmap[]>;
+
   categories = ['All', 'Web Development', 'Data Science', 'Mobile Development'];
   activeLink = this.categories[0];
 
   constructor(private roadmapService: RoadmapService) {}
 
   ngOnInit(): void {
-    this.roadmaps$ = this.roadmapService.getRoadmaps();
+    this.roadmapService.getRoadmaps().subscribe(roadmaps => {
+      this.allRoadmaps$.next(roadmaps);
+    });
+    this.applyFilter();
+  }
+
+  applyFilter(category: string = 'All'): void {
+    this.activeLink = category;
+    this.filteredRoadmaps$ = this.allRoadmaps$.pipe(
+      map(roadmaps => {
+        if (category === 'All') {
+          return roadmaps;
+        }
+        return roadmaps.filter(roadmap => roadmap.category === category);
+      })
+    );
   }
 }

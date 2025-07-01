@@ -4,28 +4,30 @@
     <p>Dive into our extensive catalog of courses designed to elevate your software engineering skills. Whether you're a beginner or an experienced developer, we have something for you.</p>
   </header>
 
-  <div class="filters">
-    <mat-form-field>
-      <mat-label>Topic</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let topic of topics" [value]="topic">{{ topic }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Difficulty</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">{{ difficulty }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Duration</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let duration of durations" [value]="duration">{{ duration }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <div class="filters-container">
+    <div class="filters">
+      <mat-form-field>
+        <mat-label>Topic</mat-label>
+        <mat-select [value]="selectedTopic$.value" (selectionChange)="onTopicChange($event.value)">
+          <mat-option *ngFor="let topic of topics" [value]="topic">{{ topic }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Difficulty</mat-label>
+        <mat-select [value]="selectedDifficulty$.value" (selectionChange)="onDifficultyChange($event.value)">
+          <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">{{ difficulty }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="admin-actions">
+      <button mat-raised-button color="primary" routerLink="/courses/new">
+        <mat-icon>add</mat-icon>
+        Create New Course
+      </button>
+    </div>
   </div>
 
-  <div class="course-grid" *ngIf="courses$ | async as courses">
+  <div class="course-grid" *ngIf="filteredCourses$ | async as courses">
     <mat-card *ngFor="let course of courses" class="course-card" [routerLink]="['/courses', course.id]">
       <img mat-card-image [src]="course.imageUrl" [alt]="course.title">
       <mat-card-content>
@@ -35,7 +37,7 @@
     </mat-card>
   </div>
 
-  <mat-paginator [length]="(courses$ | async)?.length || 0"
+  <mat-paginator [length]="(filteredCourses$ | async)?.length || 0"
                  [pageSize]="6"
                  [pageSizeOptions]="[6, 12, 24]">
   </mat-paginator>

@@ -1,0 +1,53 @@
+<div class="container">
+  <header class="page-header">
+    <h1>Create New Course</h1>
+    <p>Fill out the form below to add a new course to the platform.</p>
+  </header>
+
+  <mat-card class="form-card">
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Course Title</mat-label>
+        <input matInput formControlName="title" placeholder="e.g., Advanced JavaScript">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="4" placeholder="A brief summary of the course..."></textarea>
+      </mat-form-field>
+
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Category / Topic</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let topic of topics" [value]="topic">{{ topic }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Difficulty</mat-label>
+          <mat-select formControlName="difficulty">
+            <mat-option *ngFor="let level of difficulties" [value]="level">{{ level }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Duration</mat-label>
+          <input matInput formControlName="duration" placeholder="e.g., 6 Weeks">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Image URL</mat-label>
+          <input matInput formControlName="imageUrl" placeholder="e.g., assets/images/new-course.jpg">
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-stroked-button type="button" routerLink="/courses">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">Create Course</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

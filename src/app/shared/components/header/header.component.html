@@ -15,11 +15,36 @@
         <button mat-raised-button color="primary" routerLink="/register">Sign Up</button>
       </ng-container>
       <ng-container *ngIf="state === 'dashboard'">
-        <button mat-button>Get Premium</button>
-        <button mat-icon-button>
-          <mat-icon>notifications_none</mat-icon>
+        <button mat-raised-button color="primary" routerLink="/memberships">Get Premium</button>
+
+        <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+          <mat-icon [matBadge]="unreadCount" [matBadgeHidden]="unreadCount === 0" matBadgeColor="warn">notifications_none</mat-icon>
         </button>
-        <button mat-icon-button>
+        <mat-menu #notificationsMenu="matMenu" class="notifications-panel">
+          <div class="notifications-header">
+            <h3>Notificaciones</h3>
+          </div>
+          <div class="notifications-list">
+            <ng-container *ngIf="notifications$ | async as notifications">
+              <div *ngFor="let notification of notifications" class="notification-item" [class.unread]="!notification.read">
+                <mat-icon class="notification-icon">{{ notification.icon }}</mat-icon>
+                <div class="notification-content">
+                  <p class="title">{{ notification.title }}</p>
+                  <p class="description">{{ notification.description }}</p>
+                  <p class="time">{{ notification.time }}</p>
+                </div>
+                <button *ngIf="!notification.read" mat-icon-button (click)="markAsRead(notification, $event)" matTooltip="Marcar como leída">
+                  <mat-icon>done</mat-icon>
+                </button>
+              </div>
+              <div *ngIf="notifications.length === 0" class="no-notifications">
+                No tienes notificaciones nuevas.
+              </div>
+            </ng-container>
+          </div>
+        </mat-menu>
+
+        <button mat-icon-button routerLink="/profile">
           <img src="assets/imagen/Logo.png" class="user-avatar" alt="User Avatar">
         </button>
       </ng-container>

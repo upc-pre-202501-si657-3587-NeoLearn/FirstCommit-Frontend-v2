@@ -1,0 +1,31 @@
+<div class="container">
+  <header class="page-header">
+    <h1>Planes de Membresía</h1>
+    <p>Elige el plan que mejor se adapte a tus necesidades de aprendizaje.</p>
+  </header>
+
+  <div class="plans-container" *ngIf="plans$ | async as plans">
+    <mat-card *ngFor="let plan of plans" class="plan-card" [class.featured]="plan.isFeatured">
+      <div class="plan-header">
+        <h2 class="plan-name">{{ plan.name }}</h2>
+        <div class="plan-price">
+          <span class="price">{{ plan.price }}</span>
+          <span class="period" *ngIf="plan.period">{{ plan.period }}</span>
+        </div>
+      </div>
+      <mat-card-content class="plan-features">
+        <ul>
+          <li *ngFor="let feature of plan.features">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions class="plan-actions">
+        <button mat-raised-button [color]="plan.isFeatured ? 'primary' : 'basic'" class="subscribe-button">
+          {{ plan.price === 'Gratuito' ? 'Empezar ahora' : 'Suscribirse' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

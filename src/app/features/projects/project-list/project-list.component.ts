@@ -3,20 +3,25 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { Project } from '../../../core/models/project.model';
 import { ProjectService } from '../../../core/services/project.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-project-list',
   standalone: true,
-  imports: [CommonModule, MaterialModule, RouterModule],
+  imports: [CommonModule, MaterialModule, RouterModule, FormsModule],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css'
 })
 export class ProjectListComponent implements OnInit {
   featuredProjects$!: Observable<Project[]>;
-  allProjects$!: Observable<Project[]>;
+
+  private allProjects$ = new BehaviorSubject<Project[]>([]);
+  filteredProjects$!: Observable<Project[]>;
+
+  private searchTerm$ = new BehaviorSubject<string>('');
 
   displayedColumns: string[] = ['name', 'description', 'skillsRequired', 'contributionGuidelines'];
 
@@ -24,11 +29,27 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit(): void {
     const projects$ = this.projectService.getProjects();
+
     this.featuredProjects$ = projects$.pipe(
-      map(projects => projects.filter(p => p.featured))
+      map(projects => projects.filter((p: Project) => p.featured))
     );
-    this.allProjects$ = projects$.pipe(
-      map(projects => projects)
+
+    projects$.subscribe(projs => this.allProjects$.next(projs));
+
+    this.filteredProjects$ = combineLatest([
+      this.allProjects$,
+      this.searchTerm$
+    ]).pipe(
+      map(([projects, term]) =>
+        projects.filter((project: Project) =>
+          project.name.toLowerCase().includes(term.toLowerCase())
+        )
+      )
     );
+  }
+
+  onSearch(event: Event): void {
+    const term = (event.target as HTMLInputElement).value;
+    this.searchTerm$.next(term);
   }
 }

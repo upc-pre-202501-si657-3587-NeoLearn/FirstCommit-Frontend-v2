@@ -147,5 +147,91 @@
       "skillsRequired": "PHP, MySQL, JavaScript",
       "contributionGuidelines": "https://github.com/example/open-cms"
     }
+  ],
+  "memberships": [
+    {
+      "id": 1,
+      "name": "Plan Esencial",
+      "price": "Gratuito",
+      "period": "",
+      "features": [
+        "Acceso limitado a cursos de fundamentos",
+        "Acceso limitado al foro",
+        "Visualización de roadmaps básicos",
+        "Sin acceso a proyectos grupales"
+      ],
+      "isFeatured": false
+    },
+    {
+      "id": 2,
+      "name": "Plan Profesional",
+      "price": "$9.99",
+      "period": "/mes",
+      "features": [
+        "Todo lo incluido en el Plan Esencial, más:",
+        "Acceso ilimitado a todos los cursos de fundamentos",
+        "Acceso completo al foro",
+        "Acceso a proyectos grupales iniciales",
+        "Soporte estándar",
+        "Certificados de finalización"
+      ],
+      "isFeatured": true
+    },
+    {
+      "id": 3,
+      "name": "Plan Premium",
+      "price": "$19.99",
+      "period": "/mes",
+      "features": [
+        "Todo lo incluido en el Plan Profesional, más:",
+        "Acceso ilimitado a todos los cursos de la plataforma",
+        "Acceso prioritario a nuevos cursos",
+        "Acceso ilimitado a todos los roadmaps",
+        "Acceso completo a todos los proyectos grupales",
+        "Soporte prioritario"
+      ],
+      "isFeatured": false
+    }
+  ],
+  "profile": {
+    "id": 1,
+    "fullName": "Néstor Velarde",
+    "email": "nestor.velarde@example.com",
+    "bio": "Software Engineering student at UPC. Passionate about web development and creating amazing user experiences. Currently focusing on Angular and Spring Boot.",
+    "avatarUrl": "assets/images/avatar.png"
+  },
+  "notifications": [
+    {
+      "id": 1,
+      "icon": "card_giftcard",
+      "title": "¡Tu plan Premium ha sido activado!",
+      "description": "Disfruta de acceso a todos los cursos y funcionalidades.",
+      "time": "Hace 5 min",
+      "read": false
+    },
+    {
+      "id": 2,
+      "icon": "school",
+      "title": "Nuevo curso disponible: Docker & Kubernetes",
+      "description": "Aprende a contenerizar y orquestar tus aplicaciones.",
+      "time": "Hace 2 horas",
+      "read": false
+    },
+    {
+      "id": 3,
+      "icon": "forum",
+      "title": "Gerald Serrano respondió en tu hilo",
+      "description": "En el foro de 'Advanced Algorithms'.",
+      "time": "Ayer",
+      "read": true
+    },
+    {
+      "id": 4,
+      "icon": "task_alt",
+      "title": "Completaste el roadmap de 'Frontend'",
+      "description": "¡Felicidades! Reclama tu certificado.",
+      "time": "Hace 2 días",
+      "read": true
+    }
   ]
 }
