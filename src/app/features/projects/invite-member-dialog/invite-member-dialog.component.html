@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Invite a New Member</h1>
+<div mat-dialog-content>
+  <p>Search for a user by their exact username to send an invitation.</p>
+  <form [formGroup]="searchForm" class="invite-form">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" (keyup)="search($event)" autocomplete="off">
+    </mat-form-field>
+
+    <div class="search-results">
+      <mat-spinner *ngIf="isLoading" diameter="30"></mat-spinner>
+      <mat-list *ngIf="searchResults$ | async as results">
+        <mat-list-item *ngFor="let user of results" (click)="selectUser(user)" class="result-item">
+          <div matListItemTitle>{{ user.nombreUsuario }}</div>
+          <div matListItemLine>{{ user.email }}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onInvite()" [disabled]="!selectedUser">Send Invitation</button>
+</div>
+

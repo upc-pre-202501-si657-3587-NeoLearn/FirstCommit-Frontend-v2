@@ -13,20 +13,15 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, MaterialModule, RouterModule, FormsModule],
   templateUrl: './course-list.component.html',
-  styleUrl: './course-list.component.css'
+  styleUrls: ['./course-list.component.css']
 })
 export class CourseListComponent implements OnInit {
   private allCourses$ = new BehaviorSubject<Course[]>([]);
-  filteredCourses$!: Observable<Course[]>;
-
-  topics = ['All', 'Programming', 'Algorithms', 'Web Development', 'Databases', 'Mobile', 'Cloud'];
-  difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
-
-  // --- INICIO DE LA CORRECCIÓN ---
-  // Se quita 'private' para que las propiedades sean públicas y accesibles desde el HTML.
-  selectedTopic$ = new BehaviorSubject<string>('All');
-  selectedDifficulty$ = new BehaviorSubject<string>('All');
-  // --- FIN DE LA CORRECCIÓN ---
+  public filteredCourses$!: Observable<Course[]>;
+  public topics = ['All', 'Programming', 'Algorithms', 'Web Development', 'Databases', 'Mobile', 'Cloud'];
+  public difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+  public selectedTopic$ = new BehaviorSubject<string>('All');
+  public selectedDifficulty$ = new BehaviorSubject<string>('All');
 
   constructor(private courseService: CourseService) {}
 
@@ -34,12 +29,7 @@ export class CourseListComponent implements OnInit {
     this.courseService.getCourses().subscribe(courses => {
       this.allCourses$.next(courses);
     });
-
-    this.filteredCourses$ = combineLatest([
-      this.allCourses$,
-      this.selectedTopic$,
-      this.selectedDifficulty$
-    ]).pipe(
+    this.filteredCourses$ = combineLatest([this.allCourses$, this.selectedTopic$, this.selectedDifficulty$]).pipe(
       map(([courses, topic, difficulty]) => {
         return courses.filter((course: Course) => {
           const topicMatch = topic === 'All' || course.category === topic;
@@ -50,11 +40,6 @@ export class CourseListComponent implements OnInit {
     );
   }
 
-  onTopicChange(topic: string): void {
-    this.selectedTopic$.next(topic);
-  }
-
-  onDifficultyChange(difficulty: string): void {
-    this.selectedDifficulty$.next(difficulty);
-  }
+  onTopicChange(topic: string): void { this.selectedTopic$.next(topic); }
+  onDifficultyChange(difficulty: string): void { this.selectedDifficulty$.next(difficulty); }
 }

@@ -22,7 +22,7 @@
         </ul>
       </mat-card-content>
       <mat-card-actions class="plan-actions">
-        <button mat-raised-button [color]="plan.isFeatured ? 'primary' : 'basic'" class="subscribe-button">
+        <button mat-raised-button [color]="plan.isFeatured ? 'primary' : 'basic'" class="subscribe-button" (click)="subscribe(plan.name)">
           {{ plan.price === 'Gratuito' ? 'Empezar ahora' : 'Suscribirse' }}
         </button>
       </mat-card-actions>

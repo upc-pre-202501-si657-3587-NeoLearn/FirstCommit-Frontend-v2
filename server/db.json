@@ -1,237 +1,139 @@
 {
   "courses": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Introduction to Python",
       "description": "Learn the basics of Python programming language.",
       "category": "Programming",
       "difficulty": "Beginner",
       "duration": "4 Weeks",
-      "imageUrl": "assets/images/course-python.jpg",
-      "rating": 4.8,
+      "imageUrl": "assets/imagen/project1.jpg",
+      "instructorId": "instructor-123",
+      "published": true,
+      "averageRating": 4.8,
       "reviews": 1250,
       "views": 25000,
       "ratingDistribution": [
-        { "stars": 5, "percent": 70 },
-        { "stars": 4, "percent": 20 },
-        { "stars": 3, "percent": 5 },
-        { "stars": 2, "percent": 3 },
-        { "stars": 1, "percent": 2 }
+        {
+          "stars": 5,
+          "percent": 70
+        },
+        {
+          "stars": 4,
+          "percent": 20
+        },
+        {
+          "stars": 3,
+          "percent": 5
+        },
+        {
+          "stars": 2,
+          "percent": 3
+        },
+        {
+          "stars": 1,
+          "percent": 2
+        }
       ]
-    },
-    {
-      "id": 2,
-      "title": "Advanced Algorithms",
-      "description": "Master complex algorithms and data structures.",
-      "category": "Algorithms",
-      "difficulty": "Advanced",
-      "duration": "8 Weeks",
-      "imageUrl": "assets/images/course-algorithms.jpg",
-      "rating": 4.9,
-      "reviews": 980
-    },
-    {
-      "id": 3,
-      "title": "Web Development with React",
-      "description": "Build dynamic web applications using React.",
-      "category": "Web Development",
-      "difficulty": "Intermediate",
-      "duration": "6 Weeks",
-      "imageUrl": "assets/images/course-react.jpg",
-      "rating": 4.7,
-      "reviews": 2100
-    },
-    {
-      "id": 4,
-      "title": "Database Design",
-      "description": "Design and implement efficient databases.",
-      "category": "Databases",
-      "difficulty": "Intermediate",
-      "duration": "5 Weeks",
-      "imageUrl": "assets/images/course-database.jpg",
-      "rating": 4.6,
-      "reviews": 1500
-    },
-    {
-      "id": 5,
-      "title": "Mobile App Development",
-      "description": "Create mobile apps for iOS and Android.",
-      "category": "Mobile",
-      "difficulty": "Intermediate",
-      "duration": "10 Weeks",
-      "imageUrl": "assets/images/course-mobile.jpg",
-      "rating": 4.8,
-      "reviews": 1800
     }
   ],
   "roadmaps": [
     {
-      "id": 1,
+      "id": "roadmap-frontend-1",
+      "name": "Frontend Roadmap",
+      "description": "Learn the fundamentals of web development.",
       "category": "Web Development",
-      "title": "Frontend Roadmap",
-      "description": "Learn the fundamentals of web development and build interactive websites.",
-      "imageUrl": "assets/images/roadmap-frontend.jpg",
-      "courses": [
-        { "id": 3, "title": "Web Development with React", "description": "Build dynamic web applications using React.", "imageUrl": "assets/images/course-react.jpg" },
-        { "id": 1, "title": "Introduction to Python", "description": "Learn the basics of Python programming language.", "imageUrl": "assets/images/course-python.jpg" }
-      ]
-    },
-    {
-      "id": 2,
-      "category": "Data Science",
-      "title": "Data Science Roadmap",
-      "description": "Master data analysis, machine learning, and data visualization techniques.",
-      "imageUrl": "assets/images/roadmap-datascience.jpg",
-      "courses": [
-        { "id": 1, "title": "Introduction to Python", "description": "Learn the basics of Python programming language.", "imageUrl": "assets/images/course-python.jpg" },
-        { "id": 2, "title": "Advanced Algorithms", "description": "Master complex algorithms and data structures.", "imageUrl": "assets/images/course-algorithms.jpg" },
-        { "id": 4, "title": "Database Design", "description": "Design and implement efficient databases.", "imageUrl": "assets/images/course-database.jpg" }
-      ]
-    },
-    {
-      "id": 3,
-      "category": "Mobile Development",
-      "title": "Mobile Development Roadmap",
-      "description": "Build native and cross-platform mobile applications for iOS and Android.",
-      "imageUrl": "assets/images/roadmap-mobile.jpg",
-      "courses": [
-        { "id": 5, "title": "Mobile App Development", "description": "Create mobile apps for iOS and Android.", "imageUrl": "assets/images/course-mobile.jpg" },
-        { "id": 3, "title": "Web Development with React", "description": "Build dynamic web applications using React.", "imageUrl": "assets/images/course-react.jpg" }
-      ]
+      "imageUrl": "assets/imagen/project1.jpg",
+      "courses": []
     }
   ],
   "projects": [
     {
-      "id": 1,
-      "featured": true,
-      "title": "Project: AI-Powered Tutoring System",
-      "description": "Develop an AI tutor to personalize learning experiences.",
-      "imageUrl": "assets/images/project-ai.jpg",
-      "name": "AI Tutor",
-      "skillsRequired": "Python, Machine Learning",
-      "contributionGuidelines": "https://github.com/example/ai-tutor"
-    },
-    {
-      "id": 2,
-      "featured": true,
-      "title": "Project: Decentralized Social Network",
-      "description": "Build a social network with decentralized architecture.",
-      "imageUrl": "assets/images/project-social.jpg",
-      "name": "Decentralized Social Network",
-      "skillsRequired": "Blockchain, React",
-      "contributionGuidelines": "https://github.com/example/decentralized-social"
-    },
-    {
-      "id": 3,
-      "featured": true,
-      "title": "Project: Open Source E-commerce Platform",
-      "description": "Create a scalable e-commerce platform with open source tools.",
-      "imageUrl": "assets/images/project-ecommerce.jpg",
-      "name": "E-commerce Platform",
-      "skillsRequired": "Node.js, React, PostgreSQL",
-      "contributionGuidelines": "https://github.com/example/ecommerce-platform"
-    },
-    {
-      "id": 4,
-      "featured": false,
-      "name": "Mobile Health App",
-      "description": "A mobile app for tracking health metrics and providing insights.",
-      "skillsRequired": "React Native, Firebase",
-      "contributionGuidelines": "https://github.com/example/health-app"
-    },
-    {
-      "id": 5,
-      "featured": false,
-      "name": "Open Source CMS",
-      "description": "A content management system for creating and managing websites.",
-      "skillsRequired": "PHP, MySQL, JavaScript",
-      "contributionGuidelines": "https://github.com/example/open-cms"
+      "id": "1",
+      "nombre": "FirstCommit Platform",
+      "descripcionGeneral": "Core development of the NeoLearn educational platform.",
+      "urlRepositorio": "https://github.com/example/neolearn",
+      "usernameCreador": "nestor.velarde",
+      "fechaCreacion": "2025-07-05T10:00:00Z",
+      "esPredefinido": true,
+      "estado": "IN_PROGRESS",
+      "imageUrl": "assets/imagen/project1.jpg"
     }
   ],
   "memberships": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Plan Esencial",
       "price": "Gratuito",
       "period": "",
       "features": [
-        "Acceso limitado a cursos de fundamentos",
-        "Acceso limitado al foro",
-        "Visualización de roadmaps básicos",
-        "Sin acceso a proyectos grupales"
+        "Acceso limitado a cursos",
+        "Acceso limitado al foro"
       ],
       "isFeatured": false
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Plan Profesional",
       "price": "$9.99",
       "period": "/mes",
       "features": [
-        "Todo lo incluido en el Plan Esencial, más:",
-        "Acceso ilimitado a todos los cursos de fundamentos",
-        "Acceso completo al foro",
-        "Acceso a proyectos grupales iniciales",
-        "Soporte estándar",
-        "Certificados de finalización"
+        "Todo lo del Plan Esencial",
+        "Acceso a todos los cursos"
       ],
       "isFeatured": true
-    },
-    {
-      "id": 3,
-      "name": "Plan Premium",
-      "price": "$19.99",
-      "period": "/mes",
-      "features": [
-        "Todo lo incluido en el Plan Profesional, más:",
-        "Acceso ilimitado a todos los cursos de la plataforma",
-        "Acceso prioritario a nuevos cursos",
-        "Acceso ilimitado a todos los roadmaps",
-        "Acceso completo a todos los proyectos grupales",
-        "Soporte prioritario"
-      ],
-      "isFeatured": false
     }
   ],
   "profile": {
     "id": 1,
+    "userId": 1,
     "fullName": "Néstor Velarde",
     "email": "nestor.velarde@example.com",
-    "bio": "Software Engineering student at UPC. Passionate about web development and creating amazing user experiences. Currently focusing on Angular and Spring Boot.",
-    "avatarUrl": "assets/images/avatar.png"
+    "phone": "+51 987654321",
+    "bio": "Software Engineering student at UPC.",
+    "avatarUrl": "assets/imagen/Logo.png"
   },
-  "notifications": [
+  "members": [
     {
-      "id": 1,
-      "icon": "card_giftcard",
-      "title": "¡Tu plan Premium ha sido activado!",
-      "description": "Disfruta de acceso a todos los cursos y funcionalidades.",
-      "time": "Hace 5 min",
-      "read": false
+      "id": "1",
+      "idProyecto": 1,
+      "idUsuario": 1,
+      "rol": "ADMINISTRATOR",
+      "fechaUnion": "2025-07-05T10:00:00Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "idProyecto": 1,
+      "nombre": "Configurar el API Gateway",
+      "descripcion": "Definir todas las rutas para los microservicios.",
+      "idUsuarioAsignado": 1,
+      "fechaCreacion": "2025-07-05T11:00:00Z",
+      "fechaVencimiento": "2025-07-12T23:59:59Z",
+      "estado": "COMPLETED"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "nombreUsuario": "nestor.velarde",
+      "email": "nestor.velarde@example.com"
     },
     {
-      "id": 2,
-      "icon": "school",
-      "title": "Nuevo curso disponible: Docker & Kubernetes",
-      "description": "Aprende a contenerizar y orquestar tus aplicaciones.",
-      "time": "Hace 2 horas",
-      "read": false
-    },
+      "id": "2",
+      "nombreUsuario": "dev.user",
+      "email": "dev@example.com"
+    }
+  ],
+  "invitations": [
     {
-      "id": 3,
-      "icon": "forum",
-      "title": "Gerald Serrano respondió en tu hilo",
-      "description": "En el foro de 'Advanced Algorithms'.",
-      "time": "Ayer",
-      "read": true
-    },
-    {
-      "id": 4,
-      "icon": "task_alt",
-      "title": "Completaste el roadmap de 'Frontend'",
-      "description": "¡Felicidades! Reclama tu certificado.",
-      "time": "Hace 2 días",
-      "read": true
+      "id": "1",
+      "idProyecto": 1,
+      "idUsuarioInvitado": 1,
+      "estado": "PENDING",
+      "idUsuarioInvitador": 2,
+      "fechaEnvio": "2025-07-05T12:00:00Z"
     }
   ]
 }

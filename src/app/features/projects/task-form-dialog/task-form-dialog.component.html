@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Edit Task' : 'Create a New Task' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="taskForm" class="task-form">
+    <mat-form-field>
+      <mat-label>Task Name</mat-label>
+      <input matInput formControlName="nombre" placeholder="e.g., Design the login page">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="descripcion" placeholder="Add a more detailed description..."></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assign to</mat-label>
+      <mat-select formControlName="idUsuarioAsignado">
+        <mat-option *ngFor="let member of members" [value]="member.idUsuario">
+          User ID: {{ member.idUsuario }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Due Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fechaVencimiento">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!taskForm.valid">
+    {{ isEditMode ? 'Save Changes' : 'Save Task' }}
+  </button>
+</div>

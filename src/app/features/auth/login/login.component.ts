@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,17 +15,23 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, protected router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    public router: Router, // <-- Hecho público
+    private authService: AuthService
+  ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('Form Submitted', this.loginForm.value);
-      this.router.navigate(['/courses']);
+      this.authService.login(this.loginForm.value).subscribe({
+        next: () => this.router.navigate(['/courses']),
+        error: (err) => console.error('Login failed', err)
+      });
     }
   }
 }

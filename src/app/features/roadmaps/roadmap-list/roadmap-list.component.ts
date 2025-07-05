@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { Roadmap } from '../../../core/models/roadmap.model';
 import { RoadmapService } from '../../../core/services/roadmap.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, combineLatest } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -27,10 +27,10 @@ export class RoadmapListComponent implements OnInit {
     this.roadmapService.getRoadmaps().subscribe(roadmaps => {
       this.allRoadmaps$.next(roadmaps);
     });
-    this.applyFilter();
+    this.applyFilter('All');
   }
 
-  applyFilter(category: string = 'All'): void {
+  applyFilter(category: string): void {
     this.activeLink = category;
     this.filteredRoadmaps$ = this.allRoadmaps$.pipe(
       map(roadmaps => {

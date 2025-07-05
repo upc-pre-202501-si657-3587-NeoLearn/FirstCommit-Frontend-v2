@@ -21,32 +21,27 @@
           <mat-icon [matBadge]="unreadCount" [matBadgeHidden]="unreadCount === 0" matBadgeColor="warn">notifications_none</mat-icon>
         </button>
         <mat-menu #notificationsMenu="matMenu" class="notifications-panel">
-          <div class="notifications-header">
-            <h3>Notificaciones</h3>
-          </div>
-          <div class="notifications-list">
-            <ng-container *ngIf="notifications$ | async as notifications">
-              <div *ngFor="let notification of notifications" class="notification-item" [class.unread]="!notification.read">
-                <mat-icon class="notification-icon">{{ notification.icon }}</mat-icon>
-                <div class="notification-content">
-                  <p class="title">{{ notification.title }}</p>
-                  <p class="description">{{ notification.description }}</p>
-                  <p class="time">{{ notification.time }}</p>
-                </div>
-                <button *ngIf="!notification.read" mat-icon-button (click)="markAsRead(notification, $event)" matTooltip="Marcar como leída">
-                  <mat-icon>done</mat-icon>
-                </button>
-              </div>
-              <div *ngIf="notifications.length === 0" class="no-notifications">
-                No tienes notificaciones nuevas.
-              </div>
-            </ng-container>
-          </div>
+          <!-- ... contenido de notificaciones ... -->
         </mat-menu>
 
-        <button mat-icon-button routerLink="/profile">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
           <img src="assets/imagen/Logo.png" class="user-avatar" alt="User Avatar">
         </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item routerLink="/profile">
+            <mat-icon>account_circle</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item routerLink="/invitations">
+            <mat-icon>mail_outline</mat-icon>
+            <span>Invitations</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Log Out</span>
+          </button>
+        </mat-menu>
       </ng-container>
     </div>
   </div>

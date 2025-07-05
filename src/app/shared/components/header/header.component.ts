@@ -7,23 +7,26 @@ import { Notification } from '../../../core/models/notification.model';
 import { NotificationService } from '../../../core/services/notification.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
+import { AuthService } from '../../../core/services/auth.service';
+import {MatDivider} from '@angular/material/divider'; // Importar AuthService
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, MaterialModule, RouterModule, MatMenuModule, MatBadgeModule],
+  imports: [CommonModule, MaterialModule, RouterModule, MatMenuModule, MatBadgeModule, MatDivider],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
   @Input() state: 'public' | 'dashboard' = 'public';
 
-  notifications$!: Observable<Notification[]>;
-  unreadCount = 0;
+  public notifications$!: Observable<Notification[]>;
+  public unreadCount = 0;
 
   constructor(
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService // Inyectar AuthService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +46,9 @@ export class HeaderComponent implements OnInit {
     event.stopPropagation();
     notification.read = true;
     this.unreadCount = this.unreadCount > 0 ? this.unreadCount - 1 : 0;
-    // Aquí iría una llamada a un servicio para persistir el cambio
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

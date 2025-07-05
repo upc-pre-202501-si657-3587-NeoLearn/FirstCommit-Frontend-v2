@@ -1,0 +1,38 @@
+<div class="container">
+  <header class="page-header">
+    <h1>My Invitations</h1>
+    <p>Review and respond to project invitations.</p>
+  </header>
+
+  <div *ngIf="invitations$ | async as invitations; else loading">
+    <div *ngIf="invitations.length > 0; else noInvitations">
+      <mat-card *ngFor="let invitation of invitations" class="invitation-card">
+        <mat-card-header>
+          <mat-card-title>Invitation to Project #{{ invitation.idProyecto }}</mat-card-title>
+          <mat-card-subtitle>Sent on {{ invitation.fechaEnvio | date:'medium' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>You have been invited to join a project by User #{{ invitation.idUsuarioInvitador }}.</p>
+        </mat-card-content>
+        <mat-card-actions align="end" *ngIf="invitation.estado === 'PENDING'">
+          <!-- CORRECCIÓN: Se pasa el objeto 'invitation' completo -->
+          <button mat-button color="warn" (click)="respond(invitation, 'REJECTED')">Decline</button>
+          <button mat-raised-button color="primary" (click)="respond(invitation, 'ACCEPTED')">Accept</button>
+        </mat-card-actions>
+        <mat-card-footer *ngIf="invitation.estado !== 'PENDING'">
+          <p class="status-footer">Status: {{ invitation.estado | titlecase }}</p>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+    <ng-template #noInvitations>
+      <div class="empty-state">
+        <mat-icon>inbox</mat-icon>
+        <p>You have no pending invitations.</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-spinner"><mat-spinner diameter="50"></mat-spinner></div>
+  </ng-template>
+</div>

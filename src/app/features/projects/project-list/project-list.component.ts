@@ -17,13 +17,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProjectListComponent implements OnInit {
   featuredProjects$!: Observable<Project[]>;
-
-  private allProjects$ = new BehaviorSubject<Project[]>([]);
-  filteredProjects$!: Observable<Project[]>;
-
+  allProjects$!: Observable<Project[]>;
   private searchTerm$ = new BehaviorSubject<string>('');
 
-  displayedColumns: string[] = ['name', 'description', 'skillsRequired', 'contributionGuidelines'];
+  displayedColumns: string[] = ['nombre', 'descripcionGeneral', 'urlRepositorio'];
 
   constructor(private projectService: ProjectService) {}
 
@@ -31,18 +28,13 @@ export class ProjectListComponent implements OnInit {
     const projects$ = this.projectService.getProjects();
 
     this.featuredProjects$ = projects$.pipe(
-      map(projects => projects.filter((p: Project) => p.featured))
+      map(projects => projects.filter((p: Project) => p.esPredefinido))
     );
 
-    projects$.subscribe(projs => this.allProjects$.next(projs));
-
-    this.filteredProjects$ = combineLatest([
-      this.allProjects$,
-      this.searchTerm$
-    ]).pipe(
+    this.allProjects$ = combineLatest([projects$, this.searchTerm$]).pipe(
       map(([projects, term]) =>
-        projects.filter((project: Project) =>
-          project.name.toLowerCase().includes(term.toLowerCase())
+        projects.filter(project =>
+          project.nombre.toLowerCase().includes(term.toLowerCase())
         )
       )
     );

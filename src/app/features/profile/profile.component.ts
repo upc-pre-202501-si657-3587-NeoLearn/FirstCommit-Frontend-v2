@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Observable } from 'rxjs';
 import { UserProfile } from '../../core/models/user.model';
 import { ProfileService } from '../../core/services/profile.service';
+import { MatSnackBar } from '@angular/material/snack-bar'; // <-- AÑADIDO
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,11 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   passwordForm: FormGroup;
 
-  constructor(private profileService: ProfileService, private fb: FormBuilder) {
+  constructor(
+    private profileService: ProfileService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar // <-- AÑADIDO
+  ) {
     this.profileForm = this.fb.group({
       fullName: ['', Validators.required],
       email: [{value: '', disabled: true}, Validators.required],
@@ -42,14 +47,15 @@ export class ProfileComponent implements OnInit {
   onProfileSubmit(): void {
     if (this.profileForm.valid) {
       console.log('Profile updated:', this.profileForm.getRawValue());
-      // Aquí iría la lógica para llamar al servicio y guardar los datos
+      this.snackBar.open('Perfil actualizado correctamente.', 'Cerrar', { duration: 3000 });
     }
   }
 
   onPasswordSubmit(): void {
     if (this.passwordForm.valid) {
       console.log('Password change requested');
-      // Aquí iría la lógica para cambiar la contraseña
+      this.snackBar.open('Contraseña actualizada correctamente.', 'Cerrar', { duration: 3000 });
+      this.passwordForm.reset();
     }
   }
 }

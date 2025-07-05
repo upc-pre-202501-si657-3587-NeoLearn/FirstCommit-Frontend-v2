@@ -14,11 +14,11 @@
   <div class="roadmap-list" *ngIf="filteredRoadmaps$ | async as roadmaps">
     <mat-card *ngFor="let roadmap of roadmaps" class="roadmap-card" [routerLink]="['/roadmaps', roadmap.id]">
       <div class="roadmap-image">
-        <img [src]="roadmap.imageUrl" [alt]="roadmap.title">
+        <img [src]="roadmap.imageUrl" [alt]="roadmap.name">
       </div>
       <div class="roadmap-content">
         <span>{{ roadmap.category }}</span>
-        <h2>{{ roadmap.title }}</h2>
+        <h2>{{ roadmap.name }}</h2>
         <p>{{ roadmap.description }}</p>
         <button mat-raised-button color="primary">View Roadmap</button>
       </div>

@@ -11,11 +11,14 @@ import { ProjectDetailComponent } from './features/projects/project-detail/proje
 import { MembershipPlansComponent } from './features/memberships/membership-plans/membership-plans.component';
 import { ProfileComponent } from './features/profile/profile.component';
 import { CourseFormComponent } from './features/admin/course-form/course-form.component';
+import { authGuard } from './core/guards/auth.guard';
+import { InvitationsComponent } from './features/invitations/invitations.component'; // Importar nuevo componente
 
 export const appRoutes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'courses', pathMatch: 'full' },
       { path: 'courses', component: CourseListComponent },
@@ -26,10 +29,11 @@ export const appRoutes: Routes = [
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/:id', component: ProjectDetailComponent },
       { path: 'memberships', component: MembershipPlansComponent },
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'invitations', component: InvitationsComponent } // NUEVA RUTA
     ]
   },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'courses' }
+  { path: '**', redirectTo: 'login' }
 ];

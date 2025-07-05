@@ -1,10 +1,10 @@
-import { Course } from './course.model';
+import {Course} from './course.model';
 
 export interface Roadmap {
-  id: number;
-  category: string;
-  title: string;
+  id: string;
+  name: string;
   description: string;
-  imageUrl: string;
-  courses: Course[];
+  category: string; // Se añade para el filtro
+  imageUrl: string; // Se añade para la imagen
+  courses: Partial<Course>[];
 }
