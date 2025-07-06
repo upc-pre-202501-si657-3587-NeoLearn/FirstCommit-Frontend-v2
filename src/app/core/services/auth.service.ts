@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of, tap, switchMap, throwError } from 'rxj
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environments';
 import { MembershipService } from './membership.service';
+import { User } from '../models/user.model';
 
 export interface SignInResource {
   username: string;
@@ -25,7 +26,6 @@ export class AuthService {
   private membershipService = inject(MembershipService);
 
   private usersUrl = `${environment.apiUrl}/users`;
-
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
   private hasToken(): boolean {
@@ -45,31 +45,37 @@ export class AuthService {
   getCurrentUserId(): number | null {
     if (typeof localStorage === 'undefined') return null;
     const userInfo = localStorage.getItem('user_info');
-    if (!userInfo) return null;
-    return JSON.parse(userInfo).id;
+    return userInfo ? JSON.parse(userInfo).id : null;
   }
 
   getCurrentUsername(): string | null {
     if (typeof localStorage === 'undefined') return null;
     const userInfo = localStorage.getItem('user_info');
-    if (!userInfo) return null;
-    return JSON.parse(userInfo).username;
+    return userInfo ? JSON.parse(userInfo).username : null;
+  }
+
+  hasRole(role: string): boolean {
+    if (typeof localStorage === 'undefined') return false;
+    const userInfo = localStorage.getItem('user_info');
+    if (!userInfo) return false;
+    const roles = JSON.parse(userInfo).roles as string[];
+    return roles?.includes(role) ?? false;
   }
 
   login(credentials: SignInResource): Observable<AuthenticatedUserResource> {
-    return this.http.get<any[]>(`${this.usersUrl}?email=${credentials.username}`).pipe(
+    return this.http.get<User[]>(`${this.usersUrl}?email=${credentials.username}`).pipe(
       switchMap(users => {
         if (users.length > 0) {
           const user = users[0];
           const fakeResponse: AuthenticatedUserResource = {
             id: user.id,
             username: user.nombreUsuario,
-            token: 'fake-jwt-token-for-dev-purpose-' + user.id
+            token: 'fake-jwt-token-for-' + user.id
           };
           return of(fakeResponse).pipe(
             tap(response => {
               localStorage.setItem('auth_token', response.token);
-              localStorage.setItem('user_info', JSON.stringify({ id: response.id, username: response.username }));
+              localStorage.setItem('user_info', JSON.stringify({ id: user.id, username: user.nombreUsuario, roles: user.roles }));
               this.loggedIn.next(true);
             })
           );
@@ -83,7 +89,8 @@ export class AuthService {
     const newUser = {
       id: Date.now(),
       nombreUsuario: signUpData.fullName,
-      email: signUpData.username
+      email: signUpData.username,
+      roles: ["ROLE_USER"]
     };
     return this.http.post<any>(this.usersUrl, newUser).pipe(
       switchMap(createdUser => {

@@ -24,7 +24,7 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
-      username: ['', [Validators.required, Validators.email]], // 'username' es el email
+      username: ['', [Validators.required, Validators.email]], // 'username' es la clave para el email
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -36,7 +36,7 @@ export class RegisterComponent {
           this.snackBar.open('Registration successful! Please log in.', 'Close', { duration: 3000 });
           this.router.navigate(['/login']);
         },
-        error: (err) => {
+        error: (err: any) => {
           this.snackBar.open(`Registration failed: ${err.message}`, 'Close', { duration: 5000 });
         }
       });

@@ -8,9 +8,9 @@ export interface UserProfile {
   avatarUrl: string;
 }
 
-// NUEVA INTERFAZ PARA BÚSQUEDA DE USUARIOS
 export interface User {
   id: number;
   nombreUsuario: string;
   email: string;
+  roles: string[];
 }

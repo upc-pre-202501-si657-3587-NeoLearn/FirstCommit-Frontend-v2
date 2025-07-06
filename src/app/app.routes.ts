@@ -14,6 +14,7 @@ import { ProfileComponent } from './features/profile/profile.component';
 import { CourseFormComponent } from './features/admin/course-form/course-form.component';
 import { authGuard } from './core/guards/auth.guard';
 import { InvitationsComponent } from './features/invitations/invitations.component';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const appRoutes: Routes = [
   {
@@ -23,7 +24,7 @@ export const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'courses', pathMatch: 'full' },
       { path: 'courses', component: CourseListComponent },
-      { path: 'courses/new', component: CourseFormComponent },
+      { path: 'courses/new', component: CourseFormComponent, canActivate: [adminGuard] },
       { path: 'courses/:id', component: CourseDetailComponent },
       { path: 'courses/:id/lesson', component: LessonViewComponent },
       { path: 'roadmaps', component: RoadmapListComponent },

@@ -7,6 +7,7 @@ import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-course-list',
@@ -22,10 +23,16 @@ export class CourseListComponent implements OnInit {
   public difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
   public selectedTopic$ = new BehaviorSubject<string>('All');
   public selectedDifficulty$ = new BehaviorSubject<string>('All');
+  public isAdmin = false; // <-- NUEVA PROPIEDAD
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private authService: AuthService // <-- INYECTAR AUTHSERVICE
+  ) {}
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.hasRole('ROLE_ADMIN'); // <-- VERIFICAR ROL
+
     this.courseService.getCourses().subscribe(courses => {
       this.allCourses$.next(courses);
     });
