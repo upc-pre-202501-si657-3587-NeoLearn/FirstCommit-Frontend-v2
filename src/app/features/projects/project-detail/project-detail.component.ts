@@ -115,7 +115,7 @@ export class ProjectDetailComponent implements OnInit {
       if (!result) return;
       const operation$ = task
         ? this.projectService.updateTask(task.id, result)
-        : this.projectService.createTask({ ...result, projectId: this.projectId, estado: 'PENDING' });
+        : this.projectService.createTask(this.projectId, { ...result, estado: 'PENDING' });
 
       operation$.subscribe(() => {
         this.snackBar.open(task ? 'Task updated!' : 'Task created!', 'Close', { duration: 3000 });
@@ -127,8 +127,8 @@ export class ProjectDetailComponent implements OnInit {
   openInviteMemberDialog(): void {
     const dialogRef = this.dialog.open(InviteMemberDialogComponent, { width: '500px' });
     dialogRef.afterClosed().subscribe(userIdToInvite => {
-      if (userIdToInvite && this.currentUserId) {
-        this.projectService.inviteMember(this.projectId, userIdToInvite, this.currentUserId).subscribe({
+      if (userIdToInvite) {
+        this.projectService.inviteMember(this.projectId, userIdToInvite).subscribe({
           next: () => this.snackBar.open('Invitation sent!', 'Close', { duration: 3000 }),
           error: (err) => this.snackBar.open(`Error: ${err.message}`, 'Close', { duration: 5000 })
         });
@@ -138,7 +138,7 @@ export class ProjectDetailComponent implements OnInit {
 
   removeMember(member: ProjectMember): void {
     if (confirm(`Are you sure you want to remove user ${member.userId}?`)) {
-      this.projectService.removeMember(member.id).subscribe(() => {
+      this.projectService.removeMember(this.projectId, member.userId).subscribe(() => {
         this.snackBar.open('Member removed.', 'Close', { duration: 3000 });
         this.loadProjectData();
       });
@@ -147,14 +147,8 @@ export class ProjectDetailComponent implements OnInit {
 
   onSendMessage(): void {
     if (this.messageForm.invalid) return;
-    const message: Partial<Message> = {
-      projectId: this.projectId,
-      userId: this.currentUserId ?? 0,
-      username: this.authService.getCurrentUsername() ?? 'User',
-      content: this.messageForm.value.content,
-      timestamp: new Date().toISOString()
-    };
-    this.projectService.sendMessage(message).subscribe(() => {
+    const content = this.messageForm.value.content;
+    this.projectService.sendMessage(this.projectId, content).subscribe(() => {
       this.messageForm.reset();
       this.loadProjectData();
     });
@@ -164,8 +158,7 @@ export class ProjectDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(ResourceFormDialogComponent, { width: '500px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const newResource = { ...result, projectId: this.projectId };
-        this.projectService.addResource(newResource).subscribe(() => {
+        this.projectService.addResource(this.projectId, result).subscribe(() => {
           this.snackBar.open('Resource added!', 'Close', { duration: 3000 });
           this.loadProjectData();
         });

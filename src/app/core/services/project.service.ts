@@ -64,6 +64,14 @@ export class ProjectService {
     return this.http.post<Message>(`${this.apiUrl}/projects/${projectId}/messages`, { contenido: content });
   }
 
+  getProjectRequirements(projectId: number): Observable<Requirement[]> {
+    return this.http.get<Requirement[]>(`${this.apiUrl}/projects/${projectId}/requirements`);
+  }
+
+  getProjectTechnologies(projectId: number): Observable<Technology[]> {
+    return this.http.get<Technology[]>(`${this.apiUrl}/projects/${projectId}/technologies`);
+  }
+
   getProjectResources(projectId: number): Observable<Resource[]> {
     return this.http.get<Resource[]>(`${this.apiUrl}/projects/${projectId}/resources`);
   }
