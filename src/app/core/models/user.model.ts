@@ -14,3 +14,20 @@ export interface User {
   email: string;
   roles: string[];
 }
+
+export interface SignInResource {
+  username: string;
+  password: string;
+}
+
+export interface SignUpResource {
+  fullName: string;
+  username: string;
+  password: string;
+}
+
+export interface AuthenticatedUserResource {
+  id: number;
+  username: string;
+  token: string;
+}

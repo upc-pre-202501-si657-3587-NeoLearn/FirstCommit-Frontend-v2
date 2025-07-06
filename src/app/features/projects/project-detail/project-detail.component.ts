@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Project, ProjectMember, Task, Message, Requirement, Technology } from '../../../core/models/project.model';
+import { Project, ProjectMember, Task, Message, Requirement, Technology, Resource } from '../../../core/models/project.model';
 import { ProjectService } from '../../../core/services/project.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../shared/material/material.module';
@@ -12,12 +12,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../../core/services/auth.service';
 import { TaskFormDialogComponent } from '../task-form-dialog/task-form-dialog.component';
 import { InviteMemberDialogComponent } from '../invite-member-dialog/invite-member-dialog.component';
-import {MatChip, MatChipListbox} from '@angular/material/chips';
+import { ProjectFormDialogComponent } from '../project-form-dialog/project-form-dialog.component';
+import { ResourceFormDialogComponent } from '../resource-form-dialog/resource-form-dialog.component';
 
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [CommonModule, MaterialModule, RouterModule, ReactiveFormsModule, MatChipListbox, MatChip],
+  imports: [CommonModule, MaterialModule, RouterModule, ReactiveFormsModule],
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css']
 })
@@ -28,16 +29,16 @@ export class ProjectDetailComponent implements OnInit {
   public messages: Message[] = [];
   public requirements: Requirement[] = [];
   public technologies: Technology[] = [];
+  public resources: Resource[] = [];
   public isLoading = true;
 
   public taskColumns: string[] = ['nombre', 'idUsuarioAsignado', 'fechaVencimiento', 'estado', 'actions'];
   public taskStatuses: string[] = ['PENDING', 'IN_PROGRESS', 'COMPLETED'];
 
   public messageForm: FormGroup;
-  public requirementForm: FormGroup;
-  public technologyForm: FormGroup;
 
   private projectId!: number;
+  private currentUserId: number | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,8 +49,7 @@ export class ProjectDetailComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.messageForm = this.fb.group({ content: ['', Validators.required] });
-    this.requirementForm = this.fb.group({ descripcion: ['', Validators.required], tipo: ['FUNCIONAL', Validators.required] });
-    this.technologyForm = this.fb.group({ nombre: ['', Validators.required] });
+    this.currentUserId = this.authService.getCurrentUserId();
   }
 
   ngOnInit(): void {
@@ -67,6 +67,7 @@ export class ProjectDetailComponent implements OnInit {
     const messages$ = this.projectService.getProjectMessages(this.projectId).pipe(catchError(() => of([])));
     const requirements$ = this.projectService.getProjectRequirements(this.projectId).pipe(catchError(() => of([])));
     const technologies$ = this.projectService.getProjectTechnologies(this.projectId).pipe(catchError(() => of([])));
+    const resources$ = this.projectService.getProjectResources(this.projectId).pipe(catchError(() => of([])));
 
     forkJoin({
       project: projectDetails$,
@@ -74,7 +75,8 @@ export class ProjectDetailComponent implements OnInit {
       tasks: tasks$,
       messages: messages$,
       requirements: requirements$,
-      technologies: technologies$
+      technologies: technologies$,
+      resources: resources$
     }).subscribe(result => {
       this.project = result.project;
       this.members = result.members;
@@ -82,7 +84,24 @@ export class ProjectDetailComponent implements OnInit {
       this.messages = result.messages;
       this.requirements = result.requirements;
       this.technologies = result.technologies;
+      this.resources = result.resources;
       this.isLoading = false;
+    });
+  }
+
+  openEditProjectDialog(): void {
+    const dialogRef = this.dialog.open(ProjectFormDialogComponent, {
+      width: '600px',
+      data: { project: this.project }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && this.project) {
+        this.projectService.updateProject(this.project.id, result).subscribe(() => {
+          this.snackBar.open('Project updated successfully!', 'Close', { duration: 3000 });
+          this.loadProjectData();
+        });
+      }
     });
   }
 
@@ -94,14 +113,12 @@ export class ProjectDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
-
       const operation$ = task
-        ? this.projectService.updateTask(task!.id, result)
-        : this.projectService.createTask({ ...result, projectId: this.projectId });
+        ? this.projectService.updateTask(task.id, result)
+        : this.projectService.createTask({ ...result, projectId: this.projectId, estado: 'PENDING' });
 
       operation$.subscribe(() => {
-        const message = task ? 'Task updated successfully!' : 'Task created successfully!';
-        this.snackBar.open(message, 'Close', { duration: 3000 });
+        this.snackBar.open(task ? 'Task updated!' : 'Task created!', 'Close', { duration: 3000 });
         this.loadProjectData();
       });
     });
@@ -110,56 +127,49 @@ export class ProjectDetailComponent implements OnInit {
   openInviteMemberDialog(): void {
     const dialogRef = this.dialog.open(InviteMemberDialogComponent, { width: '500px' });
     dialogRef.afterClosed().subscribe(userIdToInvite => {
-      if (userIdToInvite) {
-        this.projectService.inviteMember(this.projectId, userIdToInvite).subscribe({
-          next: () => {
-            this.snackBar.open('Invitation sent successfully!', 'Close', { duration: 3000 });
-          },
-          error: (err) => { this.snackBar.open(`Error: ${err.message}`, 'Close', { duration: 5000 }); }
+      if (userIdToInvite && this.currentUserId) {
+        this.projectService.inviteMember(this.projectId, userIdToInvite, this.currentUserId).subscribe({
+          next: () => this.snackBar.open('Invitation sent!', 'Close', { duration: 3000 }),
+          error: (err) => this.snackBar.open(`Error: ${err.message}`, 'Close', { duration: 5000 })
         });
       }
     });
   }
 
-  onStatusChange(task: Task, newStatus: string): void {
-    if (task.estado === newStatus) return;
-    this.projectService.updateTaskStatus(task, newStatus).subscribe({
-      next: () => {
-        this.snackBar.open(`Task status updated to ${newStatus.replace('_', ' ')}`, 'Close', { duration: 3000 });
+  removeMember(member: ProjectMember): void {
+    if (confirm(`Are you sure you want to remove user ${member.userId}?`)) {
+      this.projectService.removeMember(member.id).subscribe(() => {
+        this.snackBar.open('Member removed.', 'Close', { duration: 3000 });
         this.loadProjectData();
-      },
-      error: () => {
-        this.snackBar.open('Failed to update task status.', 'Close', { duration: 3000 });
-        this.loadProjectData();
-      }
-    });
+      });
+    }
   }
 
   onSendMessage(): void {
     if (this.messageForm.invalid) return;
-    const content = this.messageForm.value.content;
-    const userId = this.authService.getCurrentUserId() ?? 0;
-    const username = this.authService.getCurrentUsername() ?? "User";
-
-    this.projectService.sendMessage(this.projectId, content, userId, username).subscribe(() => {
+    const message: Partial<Message> = {
+      projectId: this.projectId,
+      userId: this.currentUserId ?? 0,
+      username: this.authService.getCurrentUsername() ?? 'User',
+      content: this.messageForm.value.content,
+      timestamp: new Date().toISOString()
+    };
+    this.projectService.sendMessage(message).subscribe(() => {
       this.messageForm.reset();
       this.loadProjectData();
     });
   }
 
-  onAddRequirement(): void {
-    if (this.requirementForm.invalid) return;
-    this.projectService.addRequirement(this.projectId, this.requirementForm.value).subscribe(() => {
-      this.requirementForm.reset({ tipo: 'FUNCIONAL' });
-      this.loadProjectData();
-    });
-  }
-
-  onAddTechnology(): void {
-    if (this.technologyForm.invalid) return;
-    this.projectService.addTechnology(this.projectId, this.technologyForm.value).subscribe(() => {
-      this.technologyForm.reset();
-      this.loadProjectData();
+  openResourceDialog(): void {
+    const dialogRef = this.dialog.open(ResourceFormDialogComponent, { width: '500px' });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const newResource = { ...result, projectId: this.projectId };
+        this.projectService.addResource(newResource).subscribe(() => {
+          this.snackBar.open('Resource added!', 'Close', { duration: 3000 });
+          this.loadProjectData();
+        });
+      }
     });
   }
 }

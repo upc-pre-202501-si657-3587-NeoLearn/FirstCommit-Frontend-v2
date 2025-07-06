@@ -8,7 +8,7 @@
     <div *ngIf="invitations.length > 0; else noInvitations">
       <mat-card *ngFor="let invitation of invitations" class="invitation-card">
         <mat-card-header>
-          <mat-card-title>Invitation to Project #{{ invitation.idProyecto }}</mat-card-title>
+          <mat-card-title>Invitation to Project #{{ invitation.projectId }}</mat-card-title>
           <mat-card-subtitle>Sent on {{ invitation.fechaEnvio | date:'medium' }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>

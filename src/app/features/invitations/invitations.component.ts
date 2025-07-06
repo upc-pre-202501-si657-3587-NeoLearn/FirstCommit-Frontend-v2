@@ -39,7 +39,7 @@ export class InvitationsComponent implements OnInit {
   }
 
   respond(invitation: Invitation, response: 'ACCEPTED' | 'REJECTED'): void {
-    this.projectService.respondToInvitation(invitation, response).subscribe({
+    this.projectService.respondToInvitation(invitation.id, response).subscribe({
       next: () => {
         this.snackBar.open(`Invitation ${response.toLowerCase()}!`, 'Close', { duration: 3000 });
         this.loadInvitations();

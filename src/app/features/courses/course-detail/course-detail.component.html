@@ -10,11 +10,20 @@
     <div class="course-main-info">
       <div class="rating-section">
         <div class="rating-summary">
-          <span class="rating-value">{{ course.averageRating }}</span>
+          <span class="rating-value">{{ course.averageRating | number:'1.1-1' }}</span>
           <div class="stars">
             <mat-icon *ngFor="let i of [1,2,3,4,5]">{{ i <= course.averageRating ? 'star' : 'star_border' }}</mat-icon>
           </div>
           <span class="reviews-count" *ngIf="course.reviews">{{ course.reviews }} reviews</span>
+        </div>
+
+        <div class="user-rating-section">
+          <h3>Rate this course</h3>
+          <div class="rating-stars">
+            <button mat-icon-button *ngFor="let i of [1,2,3,4,5]" (click)="rateCourse(i)" [class.selected]="i <= userRating">
+              <mat-icon>{{ i <= userRating ? 'star' : 'star_outline' }}</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
       <div class="metadata-section">
@@ -34,7 +43,7 @@
     </div>
 
     <div class="enroll-action">
-      <button mat-raised-button color="primary" class="enroll-button" [routerLink]="['/courses', course.id, 'lesson']">
+      <button mat-raised-button color="primary" class="enroll-button" (click)="enroll(course)">
         Start Learning
       </button>
     </div>

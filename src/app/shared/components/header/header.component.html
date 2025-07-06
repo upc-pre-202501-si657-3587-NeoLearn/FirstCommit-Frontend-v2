@@ -10,18 +10,27 @@
       <button mat-button routerLink="/projects" routerLinkActive="active-link">Projects</button>
     </div>
     <div class="action-buttons">
-      <ng-container *ngIf="state === 'public'">
-        <button mat-button routerLink="/login">Log In</button>
-        <button mat-raised-button color="primary" routerLink="/register">Sign Up</button>
-      </ng-container>
-      <ng-container *ngIf="state === 'dashboard'">
+      <ng-container *ngIf="authService.isLoggedIn() | async; else publicButtons">
         <button mat-raised-button color="primary" routerLink="/memberships">Get Premium</button>
 
         <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
           <mat-icon [matBadge]="unreadCount" [matBadgeHidden]="unreadCount === 0" matBadgeColor="warn">notifications_none</mat-icon>
         </button>
         <mat-menu #notificationsMenu="matMenu" class="notifications-panel">
-          <!-- ... contenido de notificaciones ... -->
+          <div class="notifications-header"><h3>Notifications</h3></div>
+          <div class="notifications-list">
+            <div *ngFor="let notification of (notifications$ | async)" class="notification-item" [class.unread]="!notification.read" (click)="markAsRead(notification, $event)">
+              <mat-icon class="notification-icon">{{ notification.icon }}</mat-icon>
+              <div class="notification-content">
+                <p class="title">{{ notification.title }}</p>
+                <p class="description">{{ notification.description }}</p>
+                <p class="time">{{ notification.time }}</p>
+              </div>
+            </div>
+            <div *ngIf="(notifications$ | async)?.length === 0" class="no-notifications">
+              You have no new notifications.
+            </div>
+          </div>
         </mat-menu>
 
         <button mat-icon-button [matMenuTriggerFor]="userMenu">
@@ -36,6 +45,17 @@
             <mat-icon>mail_outline</mat-icon>
             <span>Invitations</span>
           </button>
+          <ng-container *ngIf="isAdmin">
+            <mat-divider></mat-divider>
+            <button mat-menu-item routerLink="/admin/courses">
+              <mat-icon>admin_panel_settings</mat-icon>
+              <span>Manage Courses</span>
+            </button>
+            <button mat-menu-item routerLink="/admin/plans">
+              <mat-icon>price_check</mat-icon>
+              <span>Manage Plans</span>
+            </button>
+          </ng-container>
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="logout()">
             <mat-icon>logout</mat-icon>
@@ -43,6 +63,10 @@
           </button>
         </mat-menu>
       </ng-container>
+      <ng-template #publicButtons>
+        <button mat-button routerLink="/login">Log In</button>
+        <button mat-raised-button color="primary" routerLink="/register">Sign Up</button>
+      </ng-template>
     </div>
   </div>
 </mat-toolbar>

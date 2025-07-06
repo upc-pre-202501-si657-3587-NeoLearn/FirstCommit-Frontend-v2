@@ -8,7 +8,7 @@ import { NotificationService } from '../../../core/services/notification.service
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AuthService } from '../../../core/services/auth.service';
-import {MatDivider} from '@angular/material/divider'; // Importar AuthService
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'app-header',
@@ -22,14 +22,19 @@ export class HeaderComponent implements OnInit {
 
   public notifications$!: Observable<Notification[]>;
   public unreadCount = 0;
+  public isAdmin = false;
 
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private authService: AuthService // Inyectar AuthService
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.authService.isLoggedIn().subscribe(() => {
+      this.isAdmin = this.authService.hasRole('ROLE_ADMIN');
+    });
+
     if (this.state === 'dashboard') {
       this.notifications$ = this.notificationService.getNotifications();
       this.notifications$.subscribe(notifications => {

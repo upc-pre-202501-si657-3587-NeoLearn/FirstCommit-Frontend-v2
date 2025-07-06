@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Project, ProjectMember, Task, Invitation, Message, Requirement, Technology } from '../models/project.model';
+import { Project, ProjectMember, Task, Invitation, Message, Requirement, Technology, Resource } from '../models/project.model';
 import { environment } from '../../../environments/environments';
 
 @Injectable({
@@ -20,8 +20,16 @@ export class ProjectService {
     return this.http.get<Project>(`${this.apiUrl}/projects/${id}`);
   }
 
+  updateProject(id: number, data: Partial<Project>): Observable<Project> {
+    return this.http.patch<Project>(`${this.apiUrl}/projects/${id}`, data);
+  }
+
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
     return this.http.get<ProjectMember[]>(`${this.apiUrl}/members?projectId=${projectId}`);
+  }
+
+  removeMember(memberId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/members/${memberId}`);
   }
 
   getProjectTasks(projectId: number): Observable<Task[]> {
@@ -29,20 +37,21 @@ export class ProjectService {
   }
 
   createTask(taskData: Partial<Task>): Observable<Task> {
-    const fullTask = { ...taskData, id: Date.now(), fechaCreacion: new Date().toISOString() };
-    return this.http.post<Task>(`${this.apiUrl}/tasks`, fullTask);
+    return this.http.post<Task>(`${this.apiUrl}/tasks`, taskData);
   }
 
   updateTask(taskId: number, taskData: Partial<Task>): Observable<Task> {
     return this.http.patch<Task>(`${this.apiUrl}/tasks/${taskId}`, taskData);
   }
 
-  updateTaskStatus(task: Task, newStatus: string): Observable<Task> {
-    return this.http.patch<Task>(`${this.apiUrl}/tasks/${task.id}`, { estado: newStatus });
-  }
-
-  inviteMember(projectId: number, userId: number): Observable<Invitation> {
-    const body = { id: Date.now(), projectId, idUsuarioInvitado: userId, idUsuarioInvitador: 1, estado: 'PENDING', fechaEnvio: new Date().toISOString() };
+  inviteMember(projectId: number, userId: number, inviterId: number): Observable<Invitation> {
+    const body: Partial<Invitation> = {
+      projectId,
+      idUsuarioInvitado: userId,
+      idUsuarioInvitador: inviterId,
+      estado: 'PENDING',
+      fechaEnvio: new Date().toISOString()
+    };
     return this.http.post<Invitation>(`${this.apiUrl}/invitations`, body);
   }
 
@@ -50,35 +59,35 @@ export class ProjectService {
     return this.http.get<Invitation[]>(`${this.apiUrl}/invitations?idUsuarioInvitado=${userId}`);
   }
 
-  respondToInvitation(invitation: Invitation, response: 'ACCEPTED' | 'REJECTED'): Observable<Invitation> {
-    const updatedInvitation = { ...invitation, estado: response };
-    return this.http.put<Invitation>(`${this.apiUrl}/invitations/${invitation.id}`, updatedInvitation);
+  respondToInvitation(invitationId: number, response: 'ACCEPTED' | 'REJECTED'): Observable<Invitation> {
+    return this.http.patch<Invitation>(`${this.apiUrl}/invitations/${invitationId}`, { estado: response });
   }
 
   getProjectMessages(projectId: number): Observable<Message[]> {
     return this.http.get<Message[]>(`${this.apiUrl}/messages?projectId=${projectId}`);
   }
 
-  sendMessage(projectId: number, content: string, userId: number, username: string): Observable<Message> {
-    const newMessage = { id: Date.now(), projectId, userId, username, content, timestamp: new Date().toISOString() };
-    return this.http.post<Message>(`${this.apiUrl}/messages`, newMessage);
+  sendMessage(message: Partial<Message>): Observable<Message> {
+    return this.http.post<Message>(`${this.apiUrl}/messages`, message);
   }
 
   getProjectRequirements(projectId: number): Observable<Requirement[]> {
     return this.http.get<Requirement[]>(`${this.apiUrl}/requirements?projectId=${projectId}`);
   }
 
-  addRequirement(projectId: number, requirement: { descripcion: string, tipo: string }): Observable<Requirement> {
-    const newRequirement = { ...requirement, id: Date.now(), projectId };
-    return this.http.post<Requirement>(`${this.apiUrl}/requirements`, newRequirement);
+  addRequirement(requirement: Partial<Requirement>): Observable<Requirement> {
+    return this.http.post<Requirement>(`${this.apiUrl}/requirements`, requirement);
   }
 
   getProjectTechnologies(projectId: number): Observable<Technology[]> {
     return this.http.get<Technology[]>(`${this.apiUrl}/technologies?projectId=${projectId}`);
   }
 
-  addTechnology(projectId: number, technology: { nombre: string }): Observable<Technology> {
-    const newTechnology = { ...technology, id: Date.now(), projectId };
-    return this.http.post<Technology>(`${this.apiUrl}/technologies`, newTechnology);
+  getProjectResources(projectId: number): Observable<Resource[]> {
+    return this.http.get<Resource[]>(`${this.apiUrl}/resources?projectId=${projectId}`);
+  }
+
+  addResource(resource: Partial<Resource>): Observable<Resource> {
+    return this.http.post<Resource>(`${this.apiUrl}/resources`, resource);
   }
 }

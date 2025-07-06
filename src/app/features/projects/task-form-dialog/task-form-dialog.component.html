@@ -12,8 +12,8 @@
     <mat-form-field>
       <mat-label>Assign to</mat-label>
       <mat-select formControlName="idUsuarioAsignado">
-        <mat-option *ngFor="let member of members" [value]="member.idUsuario">
-          User ID: {{ member.idUsuario }}
+        <mat-option *ngFor="let member of members" [value]="member.userId">
+          User ID: {{ member.userId }}
         </mat-option>
       </mat-select>
     </mat-form-field>

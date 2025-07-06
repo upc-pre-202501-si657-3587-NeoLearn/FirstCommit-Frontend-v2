@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Add New Resource</h1>
+<div mat-dialog-content>
+  <form [formGroup]="resourceForm" style="display: flex; flex-direction: column; gap: 1rem;">
+    <mat-form-field>
+      <mat-label>Resource Name</mat-label>
+      <input matInput formControlName="nombre" placeholder="e.g., Figma Mockups">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>URL</mat-label>
+      <input matInput formControlName="url" placeholder="https://www.figma.com/...">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option value="LINK">Link</mat-option>
+        <mat-option value="FILE">File</mat-option>
+        <mat-option value="DOCUMENT">Document</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!resourceForm.valid">Add Resource</button>
+</div>

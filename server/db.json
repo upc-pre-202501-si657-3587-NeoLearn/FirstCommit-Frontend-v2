@@ -7,7 +7,7 @@
       "category": "Programming",
       "instructorId": "instructor-123",
       "published": true,
-      "averageRating": 4.8,
+      "averageRating": 5,
       "imageUrl": "assets/imagen/course-python.jpg",
       "difficulty": "Beginner",
       "duration": "4 Weeks",
@@ -26,7 +26,7 @@
       "category": "Web Development",
       "instructorId": "instructor-456",
       "published": true,
-      "averageRating": 4.9,
+      "averageRating": 5,
       "imageUrl": "assets/imagen/course-web.jpg",
       "difficulty": "Advanced",
       "duration": "8 Weeks",
@@ -122,12 +122,6 @@
   ],
   "members": [
     {
-      "id": "1",
-      "projectId": 1,
-      "userId": 1,
-      "rol": "ADMINISTRATOR"
-    },
-    {
       "id": "2",
       "projectId": 1,
       "userId": 2,
@@ -175,7 +169,7 @@
       "email": "dev.user@example.com"
     },
     {
-      "id": 1751780265158,
+      "id": "1751780265158",
       "nombreUsuario": "Mathias",
       "email": "mathias@gmail.com",
       "roles": [

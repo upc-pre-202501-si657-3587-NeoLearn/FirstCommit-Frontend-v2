@@ -15,6 +15,8 @@ import { CourseFormComponent } from './features/admin/course-form/course-form.co
 import { authGuard } from './core/guards/auth.guard';
 import { InvitationsComponent } from './features/invitations/invitations.component';
 import { adminGuard } from './core/guards/admin.guard';
+import { CourseManagementComponent } from './features/admin/course-management/course-management.component';
+import { PlanManagementComponent } from './features/admin/plan-management/plan-management.component';
 
 export const appRoutes: Routes = [
   {
@@ -33,7 +35,17 @@ export const appRoutes: Routes = [
       { path: 'projects/:id', component: ProjectDetailComponent },
       { path: 'memberships', component: MembershipPlansComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'invitations', component: InvitationsComponent }
+      { path: 'invitations', component: InvitationsComponent },
+      {
+        path: 'admin/courses',
+        component: CourseManagementComponent,
+        canActivate: [adminGuard]
+      },
+      {
+        path: 'admin/plans',
+        component: PlanManagementComponent,
+        canActivate: [adminGuard]
+      }
     ]
   },
   { path: 'register', component: RegisterComponent },

@@ -59,3 +59,11 @@ export interface Technology {
   projectId: number;
   nombre: string;
 }
+
+export interface Resource {
+  id: number;
+  projectId: number;
+  nombre: string;
+  url: string;
+  tipo: 'LINK' | 'FILE' | 'DOCUMENT';
+}

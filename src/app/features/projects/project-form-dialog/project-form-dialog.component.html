@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Edit Project Details</h1>
+<div mat-dialog-content>
+  <form [formGroup]="projectForm" style="display: flex; flex-direction: column; gap: 1rem;">
+    <mat-form-field>
+      <mat-label>Project Name</mat-label>
+      <input matInput formControlName="nombre">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="descripcionGeneral" rows="4"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Repository URL</mat-label>
+      <input matInput formControlName="urlRepositorio">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!projectForm.valid">Save Changes</button>
+</div>
