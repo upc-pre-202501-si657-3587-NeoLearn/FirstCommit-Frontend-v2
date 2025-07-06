@@ -17,6 +17,7 @@ import { InvitationsComponent } from './features/invitations/invitations.compone
 import { adminGuard } from './core/guards/admin.guard';
 import { CourseManagementComponent } from './features/admin/course-management/course-management.component';
 import { PlanManagementComponent } from './features/admin/plan-management/plan-management.component';
+import { MyCoursesComponent } from './features/courses/my-courses/my-courses.component';
 
 export const appRoutes: Routes = [
   {
@@ -29,6 +30,7 @@ export const appRoutes: Routes = [
       { path: 'courses/new', component: CourseFormComponent, canActivate: [adminGuard] },
       { path: 'courses/:id', component: CourseDetailComponent },
       { path: 'courses/:id/lesson', component: LessonViewComponent },
+      { path: 'my-courses', component: MyCoursesComponent },
       { path: 'roadmaps', component: RoadmapListComponent },
       { path: 'roadmaps/:id', component: RoadmapDetailComponent },
       { path: 'projects', component: ProjectListComponent },

@@ -3,17 +3,14 @@
   max-width: 700px;
   margin: 0 auto 4rem auto;
 }
-
 .page-header h1 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
 }
-
 .page-header p {
   font-size: 1.2rem;
   color: var(--text-secondary);
 }
-
 .plans-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -21,61 +18,66 @@
   justify-content: center;
   align-items: stretch;
 }
-
 .plan-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 2rem;
   border: 2px solid var(--border-color);
   transition: all 0.3s ease;
-  /* --- INICIO DE LA CORRECCIÓN --- */
   background-color: var(--surface-color);
   color: var(--text-primary);
-  /* --- FIN DE LA CORRECCIÓN --- */
 }
-
 .plan-card.featured {
   border-color: var(--primary-accent);
   transform: scale(1.05);
   box-shadow: 0 10px 30px rgba(208, 92, 227, 0.1);
 }
-
+.plan-card.current-plan {
+  border-color: var(--secondary-accent);
+  box-shadow: 0 0 20px rgba(163, 101, 247, 0.2);
+}
+.current-plan-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--secondary-accent);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
 .plan-header {
   text-align: center;
   margin-bottom: 2rem;
 }
-
 .plan-name {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
 }
-
 .plan-price {
   margin-top: 1rem;
 }
-
 .plan-price .price {
   font-size: 3rem;
   font-weight: 700;
 }
-
 .plan-price .period {
   font-size: 1rem;
   color: var(--text-secondary);
   margin-left: 0.5rem;
 }
-
 .plan-features {
   flex-grow: 1;
 }
-
 .plan-features ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .plan-features li {
   display: flex;
   align-items: center;
@@ -83,27 +85,28 @@
   margin-bottom: 1rem;
   font-size: 1rem;
 }
-
 .plan-features mat-icon {
   color: var(--primary-accent);
   font-size: 20px;
   height: 20px;
   width: 20px;
 }
-
 .plan-actions {
   padding: 0;
   margin-top: 2rem;
 }
-
 .subscribe-button {
   width: 100%;
   height: 50px;
   font-size: 1rem;
   font-weight: 600;
 }
-
 .plan-card:not(.featured) .subscribe-button {
   background-color: var(--surface-color-light);
   color: var(--text-primary);
+}
+.subscribe-button:disabled {
+  background-color: var(--secondary-accent) !important;
+  color: #fff !important;
+  cursor: default;
 }

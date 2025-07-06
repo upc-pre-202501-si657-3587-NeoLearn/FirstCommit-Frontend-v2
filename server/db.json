@@ -246,6 +246,15 @@
       "phone": "",
       "bio": "",
       "avatarUrl": "assets/imagen/Logo.png"
+    },
+    {
+      "id": "6add",
+      "userId": 1751832381127,
+      "fullName": "juan",
+      "email": "juan@gmail.com",
+      "phone": "",
+      "bio": "",
+      "avatarUrl": "assets/imagen/Logo.png"
     }
   ],
   "notifications": [
@@ -329,6 +338,14 @@
       "id": "2",
       "nombreUsuario": "Dev User",
       "email": "user@neolearn.com",
+      "roles": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 1751832381127,
+      "nombreUsuario": "juan",
+      "email": "juan@gmail.com",
       "roles": [
         "ROLE_USER"
       ]

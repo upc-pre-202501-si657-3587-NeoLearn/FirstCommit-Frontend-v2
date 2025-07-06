@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { Course } from '../../../core/models/course.model';
 import { CourseService } from '../../../core/services/course.service';
@@ -21,6 +21,7 @@ export class CourseDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private courseService: CourseService,
     private snackBar: MatSnackBar
   ) {}
@@ -39,12 +40,16 @@ export class CourseDetailComponent implements OnInit {
   }
 
   enroll(course: Course): void {
-    this.courseService.enrollInCourse(course.id!).subscribe({
+    if (!course.id) return;
+    this.courseService.enrollInCourse(course.id).subscribe({
       next: () => {
-        this.snackBar.open(`¡Te has inscrito en ${course.title} correctamente!`, 'Cerrar', {
-          duration: 3000,
+        const snackBarRef = this.snackBar.open(`¡Te has inscrito en ${course.title}!`, 'Empezar a aprender', {
+          duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
+        });
+        snackBarRef.onAction().subscribe(() => {
+          this.router.navigate(['/courses', course.id, 'lesson']);
         });
       },
       error: (err) => {

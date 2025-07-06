@@ -1,0 +1,32 @@
+<div class="container">
+  <header class="page-header">
+    <h1>My Learning</h1>
+    <p>Continue your learning journey and master new skills.</p>
+  </header>
+
+  <div class="course-grid" *ngIf="enrolledCourses$ | async as courses; else loading">
+    <div *ngIf="courses.length > 0; else noCourses">
+      <mat-card *ngFor="let course of courses" class="course-card">
+        <img mat-card-image [src]="course.imageUrl" [alt]="course.title">
+        <mat-card-content>
+          <h2>{{ course.title }}</h2>
+          <p>{{ course.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [routerLink]="['/courses', course.id, 'lesson']">Continue Learning</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <ng-template #noCourses>
+      <div class="empty-state">
+        <mat-icon>school</mat-icon>
+        <h2>You are not enrolled in any courses yet.</h2>
+        <p>Explore our catalog to find your next learning opportunity.</p>
+        <button mat-raised-button color="primary" routerLink="/courses">Explore Courses</button>
+      </div>
+    </ng-template>
+  </div>
+  <ng-template #loading>
+    <div class="loading-spinner"><mat-spinner diameter="50"></mat-spinner></div>
+  </ng-template>
+</div>

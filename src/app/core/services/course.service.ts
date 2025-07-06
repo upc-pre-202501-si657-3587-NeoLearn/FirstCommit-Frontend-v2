@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 import { Course, CourseDetails } from '../models/course.model';
 import { environment } from '../../../environments/environments';
 import { AuthService } from './auth.service';
@@ -10,11 +10,18 @@ import { AuthService } from './auth.service';
 })
 export class CourseService {
   private apiUrl = `${environment.apiUrl}/courses`;
+  private enrolledCourses: Set<number> = new Set();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getCourses(forAdmin: boolean = false): Observable<Course[]> {
     return this.http.get<Course[]>(this.apiUrl);
+  }
+
+  getEnrolledCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.apiUrl).pipe(
+      map(courses => courses.filter(course => this.enrolledCourses.has(course.id!)))
+    );
   }
 
   getCourseById(id: number): Observable<Course> {
@@ -38,7 +45,8 @@ export class CourseService {
   }
 
   enrollInCourse(courseId: number): Observable<any> {
-    console.log(`Simulating enrollment for course ${courseId} for user ${this.authService.getCurrentUserId()}`);
+    console.log(`Enrolling user ${this.authService.getCurrentUserId()} in course ${courseId}`);
+    this.enrolledCourses.add(courseId);
     return of({ success: true });
   }
 
