@@ -49,6 +49,13 @@ export class AuthService {
     return JSON.parse(userInfo).id;
   }
 
+  getCurrentUsername(): string | null {
+    if (typeof localStorage === 'undefined') return null;
+    const userInfo = localStorage.getItem('user_info');
+    if (!userInfo) return null;
+    return JSON.parse(userInfo).username;
+  }
+
   login(credentials: SignInResource): Observable<AuthenticatedUserResource> {
     return this.http.get<any[]>(`${this.usersUrl}?email=${credentials.username}`).pipe(
       switchMap(users => {

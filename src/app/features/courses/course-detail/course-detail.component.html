@@ -16,12 +16,6 @@
           </div>
           <span class="reviews-count" *ngIf="course.reviews">{{ course.reviews }} reviews</span>
         </div>
-        <div class="rating-distribution" *ngIf="course.ratingDistribution">
-          <div *ngFor="let dist of course.ratingDistribution" class="dist-bar">
-            <span>{{ dist.stars }}</span>
-            <mat-progress-bar mode="determinate" [value]="dist.percent"></mat-progress-bar>
-          </div>
-        </div>
       </div>
       <div class="metadata-section">
         <div class="meta-item" *ngIf="course.views">
@@ -40,7 +34,9 @@
     </div>
 
     <div class="enroll-action">
-      <button mat-raised-button color="primary" class="enroll-button" (click)="enroll(course.title)">Enroll Now</button>
+      <button mat-raised-button color="primary" class="enroll-button" [routerLink]="['/courses', course.id, 'lesson']">
+        Start Learning
+      </button>
     </div>
   </div>
 </div>

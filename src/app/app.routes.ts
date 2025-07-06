@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { CourseListComponent } from './features/courses/course-list/course-list.component';
 import { CourseDetailComponent } from './features/courses/course-detail/course-detail.component';
+import { LessonViewComponent } from './features/courses/lesson-view/lesson-view.component';
 import { RoadmapListComponent } from './features/roadmaps/roadmap-list/roadmap-list.component';
 import { ProjectListComponent } from './features/projects/project-list/project-list.component';
 import { RegisterComponent } from './features/auth/register/register.component';
@@ -12,7 +13,7 @@ import { MembershipPlansComponent } from './features/memberships/membership-plan
 import { ProfileComponent } from './features/profile/profile.component';
 import { CourseFormComponent } from './features/admin/course-form/course-form.component';
 import { authGuard } from './core/guards/auth.guard';
-import { InvitationsComponent } from './features/invitations/invitations.component'; // Importar nuevo componente
+import { InvitationsComponent } from './features/invitations/invitations.component';
 
 export const appRoutes: Routes = [
   {
@@ -24,13 +25,14 @@ export const appRoutes: Routes = [
       { path: 'courses', component: CourseListComponent },
       { path: 'courses/new', component: CourseFormComponent },
       { path: 'courses/:id', component: CourseDetailComponent },
+      { path: 'courses/:id/lesson', component: LessonViewComponent },
       { path: 'roadmaps', component: RoadmapListComponent },
       { path: 'roadmaps/:id', component: RoadmapDetailComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/:id', component: ProjectDetailComponent },
       { path: 'memberships', component: MembershipPlansComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'invitations', component: InvitationsComponent } // NUEVA RUTA
+      { path: 'invitations', component: InvitationsComponent }
     ]
   },
   { path: 'register', component: RegisterComponent },

@@ -11,31 +11,51 @@ export interface Project {
 }
 
 export interface ProjectMember {
-  idProyecto: number;
-  idUsuario: number;
+  idUsuario: any;
+  id: number;
+  projectId: number;
+  userId: number;
   rol: 'ADMINISTRATOR' | 'MEMBER';
-  fechaUnion: string;
-  username?: string;
-  avatarUrl?: string;
 }
 
 export interface Task {
   id: number;
-  idProyecto: number;
+  projectId: number;
   nombre: string;
   descripcion: string;
   idUsuarioAsignado: number;
-  fechaCreacion: string;
   fechaVencimiento: string;
   estado: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';
 }
 
-// NUEVA INTERFAZ PARA LAS INVITACIONES
 export interface Invitation {
+  idProyecto: string;
   id: number;
-  idProyecto: number;
+  projectId: number;
   idUsuarioInvitado: number;
   idUsuarioInvitador: number;
   estado: 'PENDING' | 'ACCEPTED' | 'REJECTED';
   fechaEnvio: string;
+}
+
+export interface Message {
+  id: number;
+  projectId: number;
+  userId: number;
+  username: string;
+  content: string;
+  timestamp: string;
+}
+
+export interface Requirement {
+  id: number;
+  projectId: number;
+  descripcion: string;
+  tipo: 'FUNCIONAL' | 'NO_FUNCIONAL';
+}
+
+export interface Technology {
+  id: number;
+  projectId: number;
+  nombre: string;
 }

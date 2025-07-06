@@ -36,7 +36,7 @@
                 <mat-list *ngIf="members.length > 0; else noMembers">
                   <mat-list-item *ngFor="let member of members">
                     <mat-icon matListItemIcon>person</mat-icon>
-                    <div matListItemTitle>User ID: {{ member.idUsuario }}</div>
+                    <div matListItemTitle>User ID: {{ member.userId }}</div>
                     <div matListItemLine>Role: {{ member.rol | titlecase }}</div>
                   </mat-list-item>
                 </mat-list>
@@ -83,6 +83,59 @@
             </mat-card>
           </div>
         </mat-tab>
+
+        <mat-tab label="Chat">
+          <div class="tab-content chat-container">
+            <div class="message-list">
+              <div *ngFor="let message of messages" class="message-item">
+                <strong>{{ message.username }}:</strong>
+                <p>{{ message.content }}</p>
+                <span class="timestamp">{{ message.timestamp | date:'short' }}</span>
+              </div>
+            </div>
+            <form class="message-form" [formGroup]="messageForm" (ngSubmit)="onSendMessage()">
+              <mat-form-field appearance="outline">
+                <mat-label>Send a message</mat-label>
+                <input matInput formControlName="content" autocomplete="off">
+              </mat-form-field>
+              <button mat-icon-button color="primary" type="submit" [disabled]="messageForm.invalid">
+                <mat-icon>send</mat-icon>
+              </button>
+            </form>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Requirements">
+          <div class="tab-content">
+            <mat-card>
+              <mat-card-header><mat-card-title>Project Requirements</mat-card-title></mat-card-header>
+              <mat-card-content>
+                <form [formGroup]="requirementForm" (ngSubmit)="onAddRequirement()" class="inline-form">
+                  <mat-form-field><mat-label>Description</mat-label><input matInput formControlName="descripcion"></mat-form-field>
+                  <mat-form-field><mat-label>Type</mat-label><mat-select formControlName="tipo"><mat-option value="FUNCIONAL">Functional</mat-option><mat-option value="NO_FUNCIONAL">Non-Functional</mat-option></mat-select></mat-form-field>
+                  <button mat-stroked-button color="primary" type="submit" [disabled]="requirementForm.invalid">Add</button>
+                </form>
+                <mat-list><mat-list-item *ngFor="let req of requirements"><mat-icon matListItemIcon>check_box</mat-icon><div matListItemTitle>{{req.descripcion}}</div><div matListItemLine>{{req.tipo}}</div></mat-list-item></mat-list>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Technologies">
+          <div class="tab-content">
+            <mat-card>
+              <mat-card-header><mat-card-title>Technology Stack</mat-card-title></mat-card-header>
+              <mat-card-content>
+                <form [formGroup]="technologyForm" (ngSubmit)="onAddTechnology()" class="inline-form">
+                  <mat-form-field><mat-label>Technology Name</mat-label><input matInput formControlName="nombre"></mat-form-field>
+                  <button mat-stroked-button color="primary" type="submit" [disabled]="technologyForm.invalid">Add</button>
+                </form>
+                <div class="chip-list"><mat-chip-listbox><mat-chip *ngFor="let tech of technologies">{{tech.nombre}}</mat-chip></mat-chip-listbox></div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-tab>
+
       </mat-tab-group>
     </div>
   </div>

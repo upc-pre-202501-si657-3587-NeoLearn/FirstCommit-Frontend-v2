@@ -1,0 +1,49 @@
+.lesson-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.back-link {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.lesson-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.lesson-header p {
+  color: var(--text-secondary);
+}
+.lesson-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.content-section {
+  padding: 1.5rem;
+}
+.quiz-question {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.code-editor {
+  background-color: #0d0d0d;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+.code-editor pre {
+  margin: 0;
+}
+.code-editor code {
+  font-family: 'Courier New', Courier, monospace;
+  color: #cda8ff;
+}

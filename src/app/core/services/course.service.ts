@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Course } from '../models/course.model';
+import { Observable, of } from 'rxjs';
+import { Course, CourseDetails } from '../models/course.model';
 import { environment } from '../../../environments/environments';
 
 @Injectable({
@@ -20,9 +20,17 @@ export class CourseService {
     return this.http.get<Course>(`${this.apiUrl}/${id}`);
   }
 
+  getCourseDetails(id: number): Observable<CourseDetails> {
+    return this.http.get<CourseDetails>(`${this.apiUrl}/${id}`);
+  }
+
   createCourse(course: Course): Observable<Course> {
-    // Para json-server, no es necesario enviar todos los campos.
     const newCourse = { ...course, id: Date.now() };
     return this.http.post<Course>(this.apiUrl, newCourse);
+  }
+
+  completeContent(courseId: number, contentId: string): Observable<any> {
+    console.log(`Simulating completion for course ${courseId}, content ${contentId}`);
+    return of({ success: true });
   }
 }

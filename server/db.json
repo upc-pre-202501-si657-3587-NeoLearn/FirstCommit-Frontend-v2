@@ -3,30 +3,59 @@
     {
       "id": 1,
       "title": "Introduction to Python",
-      "description": "Learn the basics of Python programming language, from variables to functions.",
+      "description": "Learn the basics of Python programming language, from variables to functions and object-oriented concepts.",
       "category": "Programming",
       "instructorId": "instructor-123",
       "published": true,
       "averageRating": 4.8,
-      "imageUrl": "assets/imagen/project1.jpg",
+      "imageUrl": "assets/imagen/course-python.jpg",
       "difficulty": "Beginner",
       "duration": "4 Weeks",
       "views": 25123,
-      "reviews": 1250
+      "reviews": 1250,
+      "content": {
+        "theory": "Python is a high-level, interpreted programming language known for its clear syntax and readability. It supports multiple programming paradigms, including structured, object-oriented, and functional programming. This lesson covers the fundamental concepts such as variables, data types (integers, floats, strings, booleans), and basic operators.",
+        "quiz": "What is the data type of the result of `5 / 2` in Python 3?",
+        "coding": "def greet(name):\n  print(f'Hello, {name}!')\n\ngreet('FirstCommit User')"
+      }
     },
     {
       "id": 2,
       "title": "Advanced Web Development",
-      "description": "Master modern web technologies like React, Node.js, and GraphQL.",
+      "description": "Master modern web technologies like React, Node.js, and GraphQL to build high-performance applications.",
       "category": "Web Development",
       "instructorId": "instructor-456",
       "published": true,
       "averageRating": 4.9,
-      "imageUrl": "assets/imagen/project2.jpg",
+      "imageUrl": "assets/imagen/course-web.jpg",
       "difficulty": "Advanced",
       "duration": "8 Weeks",
       "views": 45890,
-      "reviews": 2340
+      "reviews": 2340,
+      "content": {
+        "theory": "The MERN stack is a popular JavaScript stack for building full-stack web applications. It consists of MongoDB (a NoSQL database), Express.js (a back-end web application framework), React (a front-end library for building user interfaces), and Node.js (a JavaScript runtime environment).",
+        "quiz": "Which part of the MERN stack is responsible for handling server-side logic?",
+        "coding": "const http = require('http');\n\nconst server = http.createServer((req, res) => {\n  res.statusCode = 200;\n  res.setHeader('Content-Type', 'text/plain');\n  res.end('Hello, World!\\n');\n});\n\nserver.listen(3000, '127.0.0.1', () => {\n  console.log('Server running');\n});"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Data Science with Pandas",
+      "description": "Explore and analyze data efficiently using the powerful Pandas library in Python.",
+      "category": "Data Science",
+      "instructorId": "instructor-789",
+      "published": true,
+      "averageRating": 4.7,
+      "imageUrl": "assets/imagen/course-data.jpg",
+      "difficulty": "Intermediate",
+      "duration": "6 Weeks",
+      "views": 18543,
+      "reviews": 980,
+      "content": {
+        "theory": "Pandas is a software library written for the Python programming language for data manipulation and analysis. In particular, it offers data structures and operations for manipulating numerical tables and time series.",
+        "quiz": "Which pandas function is used to read a CSV file?",
+        "coding": "import pandas as pd\n\ndata = {'Name': ['Mathias', 'Néstor'], 'Age': [20, 21]}\ndf = pd.DataFrame(data)\nprint(df)"
+      }
     }
   ],
   "roadmaps": [
@@ -35,10 +64,20 @@
       "name": "Frontend Developer Path",
       "description": "The complete path to becoming a skilled Frontend Developer, covering HTML, CSS, JavaScript, and modern frameworks.",
       "category": "Web Development",
-      "imageUrl": "assets/imagen/project2.jpg",
+      "imageUrl": "assets/imagen/roadmap-frontend.jpg",
       "courses": [
-        { "id": 1, "title": "Introduction to Python", "description": "Learn the basics of Python", "imageUrl": "assets/imagen/project1.jpg" },
-        { "id": 2, "title": "Advanced Web Development", "description": "Master modern web tech", "imageUrl": "assets/imagen/project2.jpg" }
+        { "id": 2, "title": "Advanced Web Development", "description": "Master modern web tech", "imageUrl": "assets/imagen/course-web.jpg" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Data Scientist Path",
+      "description": "From Python basics to advanced machine learning models, this path will guide you to become a data scientist.",
+      "category": "Data Science",
+      "imageUrl": "assets/imagen/roadmap-data.jpg",
+      "courses": [
+        { "id": 1, "title": "Introduction to Python", "description": "Learn the basics of Python", "imageUrl": "assets/imagen/course-python.jpg" },
+        { "id": 3, "title": "Data Science with Pandas", "description": "Explore and analyze data", "imageUrl": "assets/imagen/course-data.jpg" }
       ]
     }
   ],
@@ -53,6 +92,17 @@
       "esPredefinido": true,
       "estado": "IN_PROGRESS",
       "imageUrl": "assets/imagen/project1.jpg"
+    },
+    {
+      "id": 2,
+      "nombre": "AI Tutoring System",
+      "descripcionGeneral": "An intelligent tutoring system to provide personalized feedback on coding exercises.",
+      "urlRepositorio": "https://github.com/example/ai-tutor",
+      "usernameCreador": "dev.user",
+      "fechaCreacion": "2025-06-20T15:30:00Z",
+      "esPredefinido": false,
+      "estado": "PENDING",
+      "imageUrl": "assets/imagen/project2.jpg"
     }
   ],
   "members": [
@@ -60,24 +110,40 @@
     { "id": 2, "projectId": 1, "userId": 2, "rol": "MEMBER" }
   ],
   "tasks": [
-    { "id": 1, "projectId": 1, "nombre": "Configurar el API Gateway", "descripcion": "Definir rutas", "idUsuarioAsignado": 1, "fechaVencimiento": "2025-07-12T23:59:59Z", "estado": "COMPLETED" },
-    { "id": 2, "projectId": 1, "nombre": "Diseñar la interfaz de usuario", "descripcion": "Crear mockups en Figma", "idUsuarioAsignado": 2, "fechaVencimiento": "2025-07-15T23:59:59Z", "estado": "IN_PROGRESS" }
+    { "id": 1, "projectId": 1, "nombre": "Configurar el API Gateway", "descripcion": "Definir rutas para todos los microservicios.", "idUsuarioAsignado": 1, "fechaVencimiento": "2025-07-12T23:59:59Z", "estado": "COMPLETED" },
+    { "id": 2, "projectId": 1, "nombre": "Diseñar la interfaz de usuario del chat", "descripcion": "Crear mockups en Figma para la nueva pestaña de chat.", "idUsuarioAsignado": 2, "fechaVencimiento": "2025-07-15T23:59:59Z", "estado": "IN_PROGRESS" },
+    { "id": 3, "projectId": 1, "nombre": "Implementar endpoint de requerimientos", "descripcion": "Añadir el GET y POST para la entidad Requirement.", "idUsuarioAsignado": 1, "fechaVencimiento": "2025-07-18T23:59:59Z", "estado": "PENDING" }
   ],
   "users": [
-    { "id": 1, "nombreUsuario": "nestor.velarde", "email": "nestor.velarde@example.com" },
-    { "id": 2, "nombreUsuario": "dev.user", "email": "dev.user@example.com" }
+    { "id": 1, "nombreUsuario": "Néstor Velarde", "email": "nestor.velarde@example.com" },
+    { "id": 2, "nombreUsuario": "Dev User", "email": "dev.user@example.com" }
   ],
   "invitations": [
     { "id": 1, "projectId": 1, "idUsuarioInvitado": 2, "idUsuarioInvitador": 1, "estado": "PENDING", "fechaEnvio": "2025-07-05T12:00:00Z" }
   ],
   "memberships": [
-    { "id": 1, "name": "Plan Esencial", "price": "Gratuito", "period": "", "features": ["Acceso limitado a cursos", "Acceso limitado al foro"], "isFeatured": false },
-    { "id": 2, "name": "Plan Profesional", "price": "$9.99", "period": "/mes", "features": ["Todo lo del Plan Esencial", "Acceso a todos los cursos"], "isFeatured": true }
+    { "id": 1, "name": "Plan Esencial", "price": "Gratuito", "period": "", "features": ["Acceso limitado a cursos", "Acceso limitado al foro", "Participar en 1 proyecto"], "isFeatured": false },
+    { "id": 2, "name": "Plan Profesional", "price": "$9.99", "period": "/mes", "features": ["Todo lo del Plan Esencial", "Acceso a todos los cursos", "Crear hasta 5 proyectos", "Soporte estándar"], "isFeatured": true },
+    { "id": 3, "name": "Plan Premium", "price": "$19.99", "period": "/mes", "features": ["Todo lo del Plan Profesional", "Proyectos grupales ilimitados", "Acceso anticipado a cursos", "Soporte prioritario"], "isFeatured": false }
   ],
   "profiles": [
-    { "id": 1, "userId": 1, "fullName": "Néstor Velarde", "email": "nestor.velarde@example.com", "phone": "+51 987654321", "bio": "Software Engineering student at UPC.", "avatarUrl": "assets/imagen/Logo.png" }
+    { "id": 1, "userId": 1, "fullName": "Néstor Velarde", "email": "nestor.velarde@example.com", "phone": "+51 987654321", "bio": "Software Engineering student at UPC. Passionate about backend development and system architecture.", "avatarUrl": "assets/imagen/Logo.png" }
   ],
   "notifications": [
-    { "id": 1, "icon": "assignment", "title": "New Task Assigned", "description": "You have been assigned a new task in 'FirstCommit Platform'.", "time": "2 hours ago", "read": false }
+    { "id": 1, "icon": "assignment", "title": "New Task Assigned", "description": "You have been assigned a new task in 'FirstCommit Platform'.", "time": "2 hours ago", "read": false },
+    { "id": 2, "icon": "chat", "title": "New Message", "description": "Dev User sent a message in 'FirstCommit Platform'.", "time": "3 hours ago", "read": true }
+  ],
+  "messages": [
+    { "id": 1, "projectId": 1, "userId": 1, "username": "nestor.velarde", "content": "Welcome to the project! Let's get started on the main features.", "timestamp": "2025-07-05T14:00:00Z" },
+    { "id": 2, "projectId": 1, "userId": 2, "username": "dev.user", "content": "Sounds great! I'll start with the auth module.", "timestamp": "2025-07-05T14:05:00Z" }
+  ],
+  "requirements": [
+    { "id": 1, "projectId": 1, "descripcion": "User authentication with JWT", "tipo": "FUNCIONAL" },
+    { "id": 2, "projectId": 1, "descripcion": "The system must handle 1000 concurrent users", "tipo": "NO_FUNCIONAL" }
+  ],
+  "technologies": [
+    { "id": 1, "projectId": 1, "nombre": "Angular" },
+    { "id": 2, "projectId": 1, "nombre": "Spring Boot" },
+    { "id": 3, "projectId": 1, "nombre": "MySQL" }
   ]
 }

@@ -6,11 +6,17 @@ export interface Course {
   instructorId: string;
   published: boolean;
   averageRating: number;
-  // Propiedades añadidas para que coincidan con el HTML y la data de prueba
   imageUrl?: string;
   difficulty?: string;
   duration?: string;
   views?: number;
   reviews?: number;
-  ratingDistribution?: { stars: number; percent: number }[];
+}
+
+export interface CourseDetails extends Course {
+  content: {
+    theory: string;
+    quiz: string;
+    coding: string;
+  };
 }
