@@ -21,6 +21,8 @@ export class CourseService {
   }
 
   createCourse(course: Course): Observable<Course> {
-    return this.http.post<Course>(this.apiUrl, course);
+    // Para json-server, no es necesario enviar todos los campos.
+    const newCourse = { ...course, id: Date.now() };
+    return this.http.post<Course>(this.apiUrl, newCourse);
   }
 }

@@ -4,8 +4,9 @@ import { MaterialModule } from '../../shared/material/material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UserProfile } from '../../core/models/user.model';
-import { ProfileService } from '../../core/services/profile.service';
-import { MatSnackBar } from '@angular/material/snack-bar'; // <-- AÑADIDO
+import { MembershipService } from '../../core/services/membership.service'; // <-- IMPORT CORREGIDO
+import { AuthService } from '../../core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -20,11 +21,13 @@ export class ProfileComponent implements OnInit {
   passwordForm: FormGroup;
 
   constructor(
-    private profileService: ProfileService,
+    private membershipService: MembershipService, // <-- SERVICIO CORREGIDO
+    private authService: AuthService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar // <-- AÑADIDO
+    private snackBar: MatSnackBar
   ) {
     this.profileForm = this.fb.group({
+      id: [null],
       fullName: ['', Validators.required],
       email: [{value: '', disabled: true}, Validators.required],
       bio: ['']
@@ -38,23 +41,32 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profile$ = this.profileService.getProfile();
-    this.profile$.subscribe(user => {
-      this.profileForm.patchValue(user);
-    });
+    const currentUserId = this.authService.getCurrentUserId();
+    if (currentUserId) {
+      this.profile$ = this.membershipService.getProfileByUserId(currentUserId);
+      this.profile$.subscribe(user => {
+        if (user) {
+          this.profileForm.patchValue(user);
+        }
+      });
+    }
   }
 
   onProfileSubmit(): void {
     if (this.profileForm.valid) {
-      console.log('Profile updated:', this.profileForm.getRawValue());
-      this.snackBar.open('Perfil actualizado correctamente.', 'Cerrar', { duration: 3000 });
+      const profileData = this.profileForm.getRawValue();
+      this.membershipService.updateProfile(profileData.id, profileData).subscribe({
+        next: () => this.snackBar.open('Profile updated successfully!', 'Close', { duration: 3000 }),
+        error: (err) => this.snackBar.open(`Error updating profile: ${err.message}`, 'Close', { duration: 5000 })
+      });
     }
   }
 
   onPasswordSubmit(): void {
     if (this.passwordForm.valid) {
+      // Aquí iría la llamada al servicio para cambiar la contraseña
       console.log('Password change requested');
-      this.snackBar.open('Contraseña actualizada correctamente.', 'Cerrar', { duration: 3000 });
+      this.snackBar.open('Password updated successfully!', 'Close', { duration: 3000 });
       this.passwordForm.reset();
     }
   }

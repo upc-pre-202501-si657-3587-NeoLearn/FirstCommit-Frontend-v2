@@ -4,7 +4,7 @@ import { MaterialModule } from '../../../shared/material/material.module';
 import { Project } from '../../../core/models/project.model';
 import { ProjectService } from '../../../core/services/project.service';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -31,9 +31,12 @@ export class ProjectListComponent implements OnInit {
       map(projects => projects.filter((p: Project) => p.esPredefinido))
     );
 
-    this.allProjects$ = combineLatest([projects$, this.searchTerm$]).pipe(
-      map(([projects, term]) =>
-        projects.filter(project =>
+    this.allProjects$ = combineLatest([
+      projects$,
+      this.searchTerm$.pipe(startWith(''))
+    ]).pipe(
+      map(([projects, term]: [Project[], string]) =>
+        projects.filter((project: Project) =>
           project.nombre.toLowerCase().includes(term.toLowerCase())
         )
       )

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -14,18 +16,30 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, protected router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    protected router: Router,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Form Submitted', this.registerForm.value);
-      this.router.navigate(['/courses']);
+      this.authService.register(this.registerForm.value).subscribe({
+        next: () => {
+          this.snackBar.open('Registration successful! Please log in.', 'Close', { duration: 3000 });
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          this.snackBar.open(`Registration failed: ${err.message}`, 'Close', { duration: 5000 });
+        }
+      });
     }
   }
 }

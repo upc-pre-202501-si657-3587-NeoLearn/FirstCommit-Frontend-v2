@@ -1,57 +1,52 @@
 {
   "courses": [
     {
-      "id": "1",
+      "id": 1,
       "title": "Introduction to Python",
-      "description": "Learn the basics of Python programming language.",
+      "description": "Learn the basics of Python programming language, from variables to functions.",
       "category": "Programming",
-      "difficulty": "Beginner",
-      "duration": "4 Weeks",
-      "imageUrl": "assets/imagen/project1.jpg",
       "instructorId": "instructor-123",
       "published": true,
       "averageRating": 4.8,
-      "reviews": 1250,
-      "views": 25000,
-      "ratingDistribution": [
-        {
-          "stars": 5,
-          "percent": 70
-        },
-        {
-          "stars": 4,
-          "percent": 20
-        },
-        {
-          "stars": 3,
-          "percent": 5
-        },
-        {
-          "stars": 2,
-          "percent": 3
-        },
-        {
-          "stars": 1,
-          "percent": 2
-        }
-      ]
+      "imageUrl": "assets/imagen/project1.jpg",
+      "difficulty": "Beginner",
+      "duration": "4 Weeks",
+      "views": 25123,
+      "reviews": 1250
+    },
+    {
+      "id": 2,
+      "title": "Advanced Web Development",
+      "description": "Master modern web technologies like React, Node.js, and GraphQL.",
+      "category": "Web Development",
+      "instructorId": "instructor-456",
+      "published": true,
+      "averageRating": 4.9,
+      "imageUrl": "assets/imagen/project2.jpg",
+      "difficulty": "Advanced",
+      "duration": "8 Weeks",
+      "views": 45890,
+      "reviews": 2340
     }
   ],
   "roadmaps": [
     {
-      "id": "roadmap-frontend-1",
-      "name": "Frontend Roadmap",
-      "description": "Learn the fundamentals of web development.",
+      "id": 1,
+      "name": "Frontend Developer Path",
+      "description": "The complete path to becoming a skilled Frontend Developer, covering HTML, CSS, JavaScript, and modern frameworks.",
       "category": "Web Development",
-      "imageUrl": "assets/imagen/project1.jpg",
-      "courses": []
+      "imageUrl": "assets/imagen/project2.jpg",
+      "courses": [
+        { "id": 1, "title": "Introduction to Python", "description": "Learn the basics of Python", "imageUrl": "assets/imagen/project1.jpg" },
+        { "id": 2, "title": "Advanced Web Development", "description": "Master modern web tech", "imageUrl": "assets/imagen/project2.jpg" }
+      ]
     }
   ],
   "projects": [
     {
-      "id": "1",
+      "id": 1,
       "nombre": "FirstCommit Platform",
-      "descripcionGeneral": "Core development of the NeoLearn educational platform.",
+      "descripcionGeneral": "Core development of the NeoLearn educational platform, focusing on user experience and scalability.",
       "urlRepositorio": "https://github.com/example/neolearn",
       "usernameCreador": "nestor.velarde",
       "fechaCreacion": "2025-07-05T10:00:00Z",
@@ -60,80 +55,29 @@
       "imageUrl": "assets/imagen/project1.jpg"
     }
   ],
-  "memberships": [
-    {
-      "id": "1",
-      "name": "Plan Esencial",
-      "price": "Gratuito",
-      "period": "",
-      "features": [
-        "Acceso limitado a cursos",
-        "Acceso limitado al foro"
-      ],
-      "isFeatured": false
-    },
-    {
-      "id": "2",
-      "name": "Plan Profesional",
-      "price": "$9.99",
-      "period": "/mes",
-      "features": [
-        "Todo lo del Plan Esencial",
-        "Acceso a todos los cursos"
-      ],
-      "isFeatured": true
-    }
-  ],
-  "profile": {
-    "id": 1,
-    "userId": 1,
-    "fullName": "Néstor Velarde",
-    "email": "nestor.velarde@example.com",
-    "phone": "+51 987654321",
-    "bio": "Software Engineering student at UPC.",
-    "avatarUrl": "assets/imagen/Logo.png"
-  },
   "members": [
-    {
-      "id": "1",
-      "idProyecto": 1,
-      "idUsuario": 1,
-      "rol": "ADMINISTRATOR",
-      "fechaUnion": "2025-07-05T10:00:00Z"
-    }
+    { "id": 1, "projectId": 1, "userId": 1, "rol": "ADMINISTRATOR" },
+    { "id": 2, "projectId": 1, "userId": 2, "rol": "MEMBER" }
   ],
   "tasks": [
-    {
-      "id": "1",
-      "idProyecto": 1,
-      "nombre": "Configurar el API Gateway",
-      "descripcion": "Definir todas las rutas para los microservicios.",
-      "idUsuarioAsignado": 1,
-      "fechaCreacion": "2025-07-05T11:00:00Z",
-      "fechaVencimiento": "2025-07-12T23:59:59Z",
-      "estado": "COMPLETED"
-    }
+    { "id": 1, "projectId": 1, "nombre": "Configurar el API Gateway", "descripcion": "Definir rutas", "idUsuarioAsignado": 1, "fechaVencimiento": "2025-07-12T23:59:59Z", "estado": "COMPLETED" },
+    { "id": 2, "projectId": 1, "nombre": "Diseñar la interfaz de usuario", "descripcion": "Crear mockups en Figma", "idUsuarioAsignado": 2, "fechaVencimiento": "2025-07-15T23:59:59Z", "estado": "IN_PROGRESS" }
   ],
   "users": [
-    {
-      "id": "1",
-      "nombreUsuario": "nestor.velarde",
-      "email": "nestor.velarde@example.com"
-    },
-    {
-      "id": "2",
-      "nombreUsuario": "dev.user",
-      "email": "dev@example.com"
-    }
+    { "id": 1, "nombreUsuario": "nestor.velarde", "email": "nestor.velarde@example.com" },
+    { "id": 2, "nombreUsuario": "dev.user", "email": "dev.user@example.com" }
   ],
   "invitations": [
-    {
-      "id": "1",
-      "idProyecto": 1,
-      "idUsuarioInvitado": 1,
-      "estado": "PENDING",
-      "idUsuarioInvitador": 2,
-      "fechaEnvio": "2025-07-05T12:00:00Z"
-    }
+    { "id": 1, "projectId": 1, "idUsuarioInvitado": 2, "idUsuarioInvitador": 1, "estado": "PENDING", "fechaEnvio": "2025-07-05T12:00:00Z" }
+  ],
+  "memberships": [
+    { "id": 1, "name": "Plan Esencial", "price": "Gratuito", "period": "", "features": ["Acceso limitado a cursos", "Acceso limitado al foro"], "isFeatured": false },
+    { "id": 2, "name": "Plan Profesional", "price": "$9.99", "period": "/mes", "features": ["Todo lo del Plan Esencial", "Acceso a todos los cursos"], "isFeatured": true }
+  ],
+  "profiles": [
+    { "id": 1, "userId": 1, "fullName": "Néstor Velarde", "email": "nestor.velarde@example.com", "phone": "+51 987654321", "bio": "Software Engineering student at UPC.", "avatarUrl": "assets/imagen/Logo.png" }
+  ],
+  "notifications": [
+    { "id": 1, "icon": "assignment", "title": "New Task Assigned", "description": "You have been assigned a new task in 'FirstCommit Platform'.", "time": "2 hours ago", "read": false }
   ]
 }

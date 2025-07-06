@@ -12,9 +12,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  // NOTA: El backend actual solo permite buscar por username exacto.
-  // Una mejora futura sería un endpoint de búsqueda más flexible.
   searchUserByUsername(username: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/username/${username}`);
+  }
+
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 }

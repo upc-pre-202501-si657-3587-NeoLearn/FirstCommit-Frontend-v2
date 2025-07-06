@@ -17,7 +17,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    public router: Router, // <-- Hecho público
+    public router: Router,
     private authService: AuthService
   ) {
     this.loginForm = this.fb.group({

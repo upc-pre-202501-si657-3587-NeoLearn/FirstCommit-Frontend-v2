@@ -7,6 +7,7 @@ import { Invitation } from '../../core/models/project.model';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-invitations',
@@ -17,10 +18,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class InvitationsComponent implements OnInit {
   public invitations$!: Observable<Invitation[]>;
-  private readonly currentUserId = 1;
 
   constructor(
     private projectService: ProjectService,
+    private authService: AuthService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -29,11 +30,13 @@ export class InvitationsComponent implements OnInit {
   }
 
   loadInvitations(): void {
-    this.invitations$ = this.projectService.getUserInvitations(this.currentUserId).pipe(
-      catchError(() => of([]))
-    );
+    const currentUserId = this.authService.getCurrentUserId();
+    if (currentUserId) {
+      this.invitations$ = this.projectService.getUserInvitations(currentUserId).pipe(
+        catchError(() => of([]))
+      );
+    }
   }
-
 
   respond(invitation: Invitation, response: 'ACCEPTED' | 'REJECTED'): void {
     this.projectService.respondToInvitation(invitation, response).subscribe({

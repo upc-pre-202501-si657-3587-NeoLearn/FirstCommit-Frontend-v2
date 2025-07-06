@@ -67,9 +67,10 @@ export class ProjectDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
+
       const operation$ = this.isEditMode(task)
-        ? this.projectService.updateTask(task!.id, { ...task, ...result })
-        : this.projectService.createTask({ ...result, idProyecto: this.projectId });
+        ? this.projectService.updateTask(task!.id, result)
+        : this.projectService.createTask({ ...result, projectId: this.projectId });
 
       operation$.subscribe(() => {
         const message = this.isEditMode(task) ? 'Task updated successfully!' : 'Task created successfully!';
