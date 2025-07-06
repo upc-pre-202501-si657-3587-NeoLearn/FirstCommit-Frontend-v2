@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environments';
 import { MembershipService } from './membership.service';
 import { SignUpResource, User, UserProfile, AuthenticatedUserResource, SignInResource } from '../models/user.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,9 @@ import { SignUpResource, User, UserProfile, AuthenticatedUserResource, SignInRes
 export class AuthService {
   private router = inject(Router);
   private http = inject(HttpClient);
-  private injector = inject(Injector); // Usamos Injector para romper el ciclo
+  private injector = inject(Injector);
 
-  private usersUrl = `${environment.apiUrl}/user`;
-  private profilesUrl = `${environment.apiUrl}/profiles`;
+  private authUrl = `${environment.apiUrl}/authentication`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
   private hasToken(): boolean {
@@ -32,86 +32,64 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
+  private decodeToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
+  }
+
   getCurrentUserId(): number | null {
-    if (typeof window === 'undefined') return null;
-    const userInfo = localStorage.getItem('user_info');
-    return userInfo ? JSON.parse(userInfo).id : null;
+    const token = this.getToken();
+    if (!token) return null;
+    const decoded = this.decodeToken(token);
+    return decoded ? Number(decoded.sub) : null;
   }
 
   getCurrentUsername(): string | null {
-    if (typeof window === 'undefined') return null;
-    const userInfo = localStorage.getItem('user_info');
-    return userInfo ? JSON.parse(userInfo).username : null;
+    const token = this.getToken();
+    if (!token) return null;
+    const decoded = this.decodeToken(token);
+    return decoded ? decoded.name : null;
   }
 
   hasRole(role: string): boolean {
-    if (typeof window === 'undefined') return false;
-    const userInfo = localStorage.getItem('user_info');
-    if (!userInfo) return false;
-    const roles = JSON.parse(userInfo).roles as string[];
-    return roles?.includes(role) ?? false;
+    const token = this.getToken();
+    if (!token) return false;
+    const decoded = this.decodeToken(token);
+    const roles = decoded ? (decoded.roles as string[]) : [];
+    return roles.includes(role);
   }
 
   login(credentials: SignInResource): Observable<AuthenticatedUserResource> {
-    return this.http.get<User[]>(`${this.usersUrl}?email=${credentials.username}`).pipe(
-      switchMap(users => {
-        if (users.length > 0) {
-          const user = users[0];
-          const fakeResponse: AuthenticatedUserResource = {
-            id: user.id,
-            username: user.nombreUsuario,
-            token: 'fake-jwt-token-for-' + user.id
-          };
-
-          localStorage.setItem('auth_token', fakeResponse.token);
-          const userInfo = {
-            id: user.id,
-            username: user.nombreUsuario,
-            roles: user.roles
-          };
-          localStorage.setItem('user_info', JSON.stringify(userInfo));
-          this.loggedIn.next(true);
-
-          return of(fakeResponse);
-        }
-        return throwError(() => new Error('User not found or password incorrect'));
+    return this.http.post<AuthenticatedUserResource>(`${this.authUrl}/sign-in`, credentials).pipe(
+      tap(response => {
+        localStorage.setItem('auth_token', response.token);
+        this.loggedIn.next(true);
+        const membershipService = this.injector.get(MembershipService);
+        membershipService.fetchCurrentUserPlan();
       })
     );
   }
 
-  register(signUpData: SignUpResource): Observable<UserProfile> {
-    const newUser: Omit<User, 'id'> & { id: number } = {
-      id: Date.now(),
-      nombreUsuario: signUpData.fullName,
-      email: signUpData.username,
-      roles: ["ROLE_USER"]
+  register(signUpData: SignUpResource): Observable<any> {
+    const backendSignUpResource = {
+      username: signUpData.username,
+      password: signUpData.password,
+      roles: ['ROLE_USER']
     };
-
-    return this.http.post<User>(this.usersUrl, newUser).pipe(
-      switchMap(createdUser => {
-        const membershipService = this.injector.get(MembershipService); // Obtención tardía
-        const newProfile: Partial<UserProfile> = {
-          userId: createdUser.id,
-          fullName: createdUser.nombreUsuario,
-          email: createdUser.email,
-          phone: '',
-          bio: '',
-          avatarUrl: 'assets/imagen/Logo.png'
-        };
-        return membershipService.createProfile(newProfile);
-      })
-    );
+    return this.http.post(`${this.authUrl}/sign-up`, backendSignUpResource);
   }
 
   changePassword(passwordData: any): Observable<any> {
-    console.log('Simulating password change with data:', passwordData);
-    return of({ success: true, message: 'Password changed successfully' });
+    console.log('Password change would call a real backend endpoint');
+    return of({ success: true });
   }
 
   logout(): void {
     if (typeof window === 'undefined') return;
     localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_info');
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }

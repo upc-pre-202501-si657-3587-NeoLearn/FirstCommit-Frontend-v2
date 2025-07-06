@@ -11,7 +11,6 @@ export interface Project {
 }
 
 export interface ProjectMember {
-  idUsuario: any;
   id: number;
   projectId: number;
   userId: number;
@@ -29,7 +28,6 @@ export interface Task {
 }
 
 export interface Invitation {
-  idProyecto: string;
   id: number;
   projectId: number;
   idUsuarioInvitado: number;

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: '/api/v1' // Usamos el proxy de nuevo
+  apiUrl: 'http://localhost:8080/api/v1' // URL base del API Gateway
 };

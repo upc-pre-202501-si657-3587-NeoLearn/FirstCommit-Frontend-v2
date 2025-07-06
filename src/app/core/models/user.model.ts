@@ -16,13 +16,13 @@ export interface User {
 }
 
 export interface SignInResource {
-  username: string;
+  username: string; // Corresponde al email
   password: string;
 }
 
 export interface SignUpResource {
   fullName: string;
-  username: string;
+  username: string; // Corresponde al email
   password: string;
 }
 

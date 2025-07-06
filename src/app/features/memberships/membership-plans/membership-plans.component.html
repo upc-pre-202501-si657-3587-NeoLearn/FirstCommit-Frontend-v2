@@ -5,33 +5,35 @@
   </header>
 
   <div class="plans-container" *ngIf="plans$ | async as plans">
-    <mat-card *ngFor="let plan of plans" class="plan-card" [class.featured]="plan.isFeatured" [class.current-plan]="plan.id === ((currentUserPlan$ | async)?.id)">
-      <div *ngIf="plan.id === ((currentUserPlan$ | async)?.id)" class="current-plan-badge">Plan Actual</div>
-      <div class="plan-header">
-        <h2 class="plan-name">{{ plan.name }}</h2>
-        <div class="plan-price">
-          <span class="price">{{ plan.price }}</span>
-          <span class="period" *ngIf="plan.period">{{ plan.period }}</span>
+    <ng-container *ngIf="currentUserPlan$ | async as currentUserPlan">
+      <mat-card *ngFor="let plan of plans" class="plan-card" [class.featured]="plan.isFeatured" [class.current-plan]="plan.id === currentUserPlan?.id">
+        <div *ngIf="plan.id === currentUserPlan?.id" class="current-plan-badge">Plan Actual</div>
+        <div class="plan-header">
+          <h2 class="plan-name">{{ plan.name }}</h2>
+          <div class="plan-price">
+            <span class="price">{{ plan.price }}</span>
+            <span class="period" *ngIf="plan.period">{{ plan.period }}</span>
+          </div>
         </div>
-      </div>
-      <mat-card-content class="plan-features">
-        <ul>
-          <li *ngFor="let feature of plan.features">
-            <mat-icon>check_circle</mat-icon>
-            <span>{{ feature }}</span>
-          </li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions class="plan-actions">
-        <button mat-raised-button [color]="plan.isFeatured ? 'primary' : 'basic'" class="subscribe-button" (click)="subscribe(plan)" [disabled]="plan.id === ((currentUserPlan$ | async)?.id)">
-          <ng-container *ngIf="plan.id === ((currentUserPlan$ | async)?.id); else notCurrentPlan">
-            Plan Actual
-          </ng-container>
-          <ng-template #notCurrentPlan>
-            {{ plan.price === 'Gratuito' ? 'Empezar ahora' : 'Suscribirse' }}
-          </ng-template>
-        </button>
-      </mat-card-actions>
-    </mat-card>
+        <mat-card-content class="plan-features">
+          <ul>
+            <li *ngFor="let feature of plan.features">
+              <mat-icon>check_circle</mat-icon>
+              <span>{{ feature }}</span>
+            </li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions class="plan-actions">
+          <button mat-raised-button [color]="plan.isFeatured ? 'primary' : 'basic'" class="subscribe-button" (click)="subscribe(plan)" [disabled]="plan.id === currentUserPlan?.id">
+            <ng-container *ngIf="plan.id === currentUserPlan?.id; else notCurrentPlan">
+              Plan Actual
+            </ng-container>
+            <ng-template #notCurrentPlan>
+              {{ plan.price === 'Gratuito' ? 'Empezar ahora' : 'Suscribirse' }}
+            </ng-template>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Course, CourseDetails } from '../models/course.model';
 import { environment } from '../../../environments/environments';
 import { AuthService } from './auth.service';
@@ -9,61 +9,48 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class CourseService {
-  private apiUrl = `${environment.apiUrl}/courses`;
-  private enrolledCourses: Set<number> = new Set();
+  private apiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getCourses(forAdmin: boolean = false): Observable<Course[]> {
-    return this.http.get<Course[]>(this.apiUrl);
+    const url = forAdmin ? `${this.apiUrl}/admins/courses` : `${this.apiUrl}/courses`;
+    return this.http.get<Course[]>(url);
   }
 
   getEnrolledCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(this.apiUrl).pipe(
-      map(courses => courses.filter(course => this.enrolledCourses.has(course.id!)))
-    );
+    return this.http.get<Course[]>(`${this.apiUrl}/users/courses/enrolled`);
   }
 
   getCourseById(id: number): Observable<Course> {
-    return this.http.get<Course>(`${this.apiUrl}/${id}`);
+    return this.http.get<Course>(`${this.apiUrl}/courses/${id}`);
   }
 
   getCourseDetails(id: number): Observable<CourseDetails> {
-    return this.http.get<CourseDetails>(`${this.apiUrl}/${id}`);
+    return this.http.get<CourseDetails>(`${this.apiUrl}/courses/${id}`);
   }
 
-  createCourse(course: Omit<Course, 'id' | 'published' | 'averageRating' | 'instructorId'>): Observable<Course> {
-    const newCourse: Omit<Course, 'id'> = {
-      ...course,
-      instructorId: this.authService.getCurrentUserId()?.toString() || 'admin',
-      published: false,
-      averageRating: 0,
-      reviews: 0,
-      views: 0
-    };
-    return this.http.post<Course>(this.apiUrl, newCourse);
+  createCourse(course: any): Observable<Course> {
+    return this.http.post<Course>(`${this.apiUrl}/admins/courses`, course);
   }
 
   enrollInCourse(courseId: number): Observable<any> {
-    console.log(`Enrolling user ${this.authService.getCurrentUserId()} in course ${courseId}`);
-    this.enrolledCourses.add(courseId);
-    return of({ success: true });
+    return this.http.post(`${this.apiUrl}/users/courses/${courseId}/enroll`, {});
   }
 
-  rateCourse(courseId: number, rating: number): Observable<Course> {
-    return this.http.patch<Course>(`${this.apiUrl}/${courseId}`, { averageRating: rating });
+  rateCourse(courseId: number, rating: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/courses/${courseId}/rating`, { rating });
   }
 
-  publishCourse(courseId: number): Observable<Course> {
-    return this.http.patch<Course>(`${this.apiUrl}/${courseId}`, { published: true });
+  publishCourse(courseId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/admins/courses/${courseId}/publish`, {});
   }
 
   deleteCourse(courseId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${courseId}`);
+    return this.http.delete(`${this.apiUrl}/admins/courses/${courseId}`);
   }
 
   completeContent(courseId: number, contentId: string): Observable<any> {
-    console.log(`Simulating completion for course ${courseId}, content ${contentId}`);
-    return of({ success: true });
+    return this.http.post(`${this.apiUrl}/users/courses/${courseId}/content/${contentId}/complete`, {});
   }
 }

@@ -13,14 +13,11 @@ export class MembershipService {
   private http = inject(HttpClient);
   private injector = inject(Injector);
 
-  private plansUrl = `${environment.apiUrl}/memberships`;
-  private profilesUrl = `${environment.apiUrl}/profiles`;
-  private subscriptionsUrl = `${environment.apiUrl}/subscriptions`;
-
+  private apiUrl = `${environment.apiUrl}`;
   private currentUserPlan$ = new BehaviorSubject<MembershipPlan | null>(null);
 
   getMembershipPlans(): Observable<MembershipPlan[]> {
-    return this.http.get<MembershipPlan[]>(this.plansUrl);
+    return this.http.get<MembershipPlan[]>(`${this.apiUrl}/plans`);
   }
 
   getCurrentUserPlan(): Observable<MembershipPlan | null> {
@@ -35,12 +32,10 @@ export class MembershipService {
       return;
     }
 
-    // Simulación: Buscamos la última suscripción del usuario
-    this.http.get<any[]>(`${this.subscriptionsUrl}?userId=${userId}&_sort=id&_order=desc&_limit=1`).pipe(
-      switchMap(subscriptions => {
-        if (subscriptions.length > 0) {
-          const planId = subscriptions[0].planId;
-          return this.http.get<MembershipPlan>(`${this.plansUrl}/${planId}`);
+    this.http.get<any>(`${this.apiUrl}/subscriptions/user/${userId}/active`).pipe(
+      switchMap(subscription => {
+        if (subscription && subscription.planId) {
+          return this.http.get<MembershipPlan>(`${this.apiUrl}/plans/${subscription.planId}`);
         }
         return of(null);
       })
@@ -50,17 +45,15 @@ export class MembershipService {
   }
 
   getProfileByUserId(userId: number): Observable<UserProfile> {
-    return this.http.get<UserProfile[]>(`${this.profilesUrl}?userId=${userId}`).pipe(
-      map(profiles => profiles[0])
-    );
+    return this.http.get<UserProfile>(`${this.apiUrl}/profiles/user/${userId}`);
   }
 
   updateProfile(profileId: number, profileData: Partial<UserProfile>): Observable<UserProfile> {
-    return this.http.patch<UserProfile>(`${this.profilesUrl}/${profileId}`, profileData);
+    return this.http.put<UserProfile>(`${this.apiUrl}/profiles/${profileId}`, profileData);
   }
 
   createProfile(profileData: Partial<UserProfile>): Observable<UserProfile> {
-    return this.http.post<UserProfile>(this.profilesUrl, profileData);
+    return this.http.post<UserProfile>(`${this.apiUrl}/profiles`, profileData);
   }
 
   subscribeToPlan(plan: MembershipPlan): Observable<any> {
@@ -71,10 +64,9 @@ export class MembershipService {
     const subscription = {
       planId: plan.id,
       userId,
-      status: 'ACTIVE',
-      startDate: new Date().toISOString()
+      status: 'ACTIVE'
     };
-    return this.http.post(this.subscriptionsUrl, subscription).pipe(
+    return this.http.post(`${this.apiUrl}/subscriptions`, subscription).pipe(
       tap(() => this.currentUserPlan$.next(plan))
     );
   }
