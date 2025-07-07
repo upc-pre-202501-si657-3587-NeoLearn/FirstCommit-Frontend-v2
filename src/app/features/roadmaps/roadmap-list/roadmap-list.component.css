@@ -3,86 +3,40 @@
   max-width: 700px;
   margin: 0 auto 3rem auto;
 }
-
-.page-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.page-header p {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-}
-
 .mat-tab-nav-bar {
   margin-bottom: 3rem;
   justify-content: center;
 }
-
-/* --- INICIO DE LA CORRECCIÓN --- */
-:host ::ng-deep .mat-mdc-tab-link {
-  min-width: 120px;
-  justify-content: center;
-  color: #a9a9a9 !important; /* Color gris claro y visible para pestañas inactivas */
-  opacity: 1 !important;
-  font-weight: 500;
-  transition: color 0.2s ease-in-out;
-}
-
-:host ::ng-deep .mat-mdc-tab-link:hover {
-  color: #ffffff !important; /* El texto se vuelve blanco al pasar el mouse */
-}
-
-:host ::ng-deep .mat-mdc-tab-link.mdc-tab--active {
-  color: var(--primary-accent) !important; /* Color de acento para la pestaña activa */
-  font-weight: 600;
-}
-
-:host ::ng-deep .mat-mdc-tab-indicator-bar {
-  background-color: var(--primary-accent) !important;
-}
-/* --- FIN DE LA CORRECCIÓN --- */
-
-
 .roadmap-list {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-
 .roadmap-card {
   display: flex;
   gap: 2rem;
   padding: 1.5rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
   background-color: var(--surface-color);
   color: var(--text-primary);
 }
-
-.roadmap-card:hover {
-  background-color: var(--surface-color-light);
-}
-
 .roadmap-image {
   width: 300px;
   height: 170px;
   border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
+  background-color: var(--surface-color-light);
 }
-
 .roadmap-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .roadmap-content {
   display: flex;
   flex-direction: column;
 }
-
 .roadmap-content span {
   color: var(--primary-accent);
   font-weight: 600;
@@ -90,19 +44,16 @@
   text-transform: uppercase;
   font-size: 0.8rem;
 }
-
 .roadmap-content h2 {
   font-size: 1.5rem;
   margin: 0 0 1rem 0;
 }
-
 .roadmap-content p {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 1.5rem;
   flex-grow: 1;
 }
-
 .roadmap-content .mat-mdc-raised-button {
   align-self: flex-start;
 }

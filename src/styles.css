@@ -1,14 +1,21 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary-accent: #d05ce3;
+  --primary-accent: #c861e0;
   --secondary-accent: #a365f7;
   --background-color: #121212;
   --surface-color: #1e1e1e;
   --surface-color-light: #2a2a2a;
-  --text-primary: #ffffff;
-  --text-secondary: #b3b3b3;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
   --border-color: #333333;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 html, body {
@@ -18,19 +25,40 @@ html, body {
 body {
   background-color: var(--background-color);
   color: var(--text-primary);
-  font-family: "Inter", "Roboto", "Helvetica Neue", sans-serif;
+  font-family: var(--font-family);
   margin: 0;
 }
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 3rem 2rem;
 }
 
-h1, h2, h3 {
-  font-weight: 600;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--text-primary);
 }
+
+.page-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem auto;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* === INICIO: CORRECCIONES VISUALES GLOBALES === */
 
 /* Angular Material Overrides */
 .mat-mdc-card {
@@ -38,16 +66,21 @@ h1, h2, h3 {
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.mat-mdc-button.mat-primary {
+.mat-mdc-card:hover:not(.plan-card) {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.mat-mdc-button.mat-primary, .mat-mdc-raised-button.mat-primary {
   --mdc-protected-button-container-color: var(--primary-accent);
   --mdc-protected-button-label-text-color: #fff;
   border-radius: 20px;
   padding: 0 24px;
-}
-
-.mat-mdc-raised-button.mat-primary {
+  font-weight: 600;
   background-color: var(--primary-accent);
   color: #fff;
 }
@@ -56,56 +89,112 @@ h1, h2, h3 {
   --mdc-outlined-button-label-text-color: var(--text-primary);
   --mdc-outlined-button-outline-color: var(--border-color);
   border-radius: 20px;
+  font-weight: 600;
 }
 
-.mat-form-field {
-  width: 100%;
+/* Corrección para Formularios y Selects */
+.mat-mdc-form-field {
+  --mdc-filled-text-field-container-color: var(--surface-color-light);
+  --mat-form-field-focus-label-color: var(--primary-accent);
+  --mat-form-field-focus-caret-color: var(--primary-accent);
+  --mat-form-field-focus-outline-color: var(--primary-accent);
+  --mat-form-field-label-color: var(--text-secondary);
+  --mat-form-field-input-text-color: var(--text-primary);
+  --mat-form-field-input-text-placeholder-color: var(--text-secondary);
 }
 
-.mat-mdc-text-field-wrapper {
-  background-color: var(--surface-color-light) !important;
+.mat-mdc-select-panel {
+  background: var(--surface-color-light) !important;
 }
 
-.mat-mdc-form-field-flex {
-  background-color: transparent !important;
+.mat-mdc-option {
+  color: var(--text-primary) !important;
 }
 
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: var(--primary-accent) !important;
+}
+
+/* Corrección para Pestañas (Tabs) */
 .mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
   --mdc-tab-indicator-active-indicator-color: var(--primary-accent);
-  --mat-tab-header-active-label-text-color: var(--primary-accent);
+  --mat-tab-header-active-label-text-color: var(--text-primary);
   --mat-tab-header-inactive-label-text-color: var(--text-secondary);
-  --mat-tab-header-active-focus-label-text-color: var(--primary-accent);
-  --mat-tab-header-hover-label-text-color: var(--primary-accent);
-  --mat-tab-header-active-hover-label-text-color: var(--primary-accent);
+  --mat-tab-header-active-focus-label-text-color: var(--text-primary);
+  --mat-tab-header-hover-label-text-color: var(--text-primary);
+  --mat-tab-header-active-hover-label-text-color: var(--text-primary);
+  font-weight: 600;
 }
 
+.mat-mdc-tab-nav-bar {
+  border-bottom: 2px solid var(--border-color);
+}
+
+.mat-mdc-tab-link {
+  min-width: 120px !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+  transition: color 0.2s ease-in-out;
+}
+
+.mat-mdc-tab-link:not(.mdc-tab--active) {
+  color: var(--text-secondary) !important;
+}
+
+.mat-mdc-tab-link.mdc-tab--active {
+  color: var(--primary-accent) !important;
+}
+
+/* Corrección para otros componentes */
 .mat-paginator {
   background-color: transparent;
   color: var(--text-secondary);
 }
 
-.mat-table {
-  background-color: var(--surface-color);
+.mat-mdc-table {
+  background-color: transparent;
 }
 
-.mat-header-row {
+.mat-mdc-header-row {
   background-color: var(--surface-color-light);
 }
 
-.mat-row, .mat-header-row {
+.mat-mdc-row, .mat-mdc-header-row {
   border-bottom-color: var(--border-color);
 }
 
-.mat-cell, .mat-header-cell {
+.mat-mdc-cell, .mat-mdc-header-cell {
   color: var(--text-secondary);
   border-bottom: none;
 }
 
-.mat-header-cell {
+.mat-mdc-header-cell {
   font-weight: 600;
   color: var(--text-primary);
 }
 
-.mat-progress-bar {
-  --mdc-linear-progress-active-indicator-color: var(--primary-accent);
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--surface-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: 12px !important;
 }
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: var(--surface-color-light);
+  --mat-mdc-snack-bar-button-color: var(--primary-accent);
+  --mdc-snackbar-supporting-text-color: var(--text-primary);
+}
+
+.mat-mdc-menu-panel {
+  background-color: var(--surface-color) !important;
+}
+
+.mat-mdc-menu-item {
+  color: var(--text-primary) !important;
+}
+
+.mat-mdc-menu-item .mat-icon {
+  color: var(--text-secondary) !important;
+}
+/* === FIN: CORRECCIONES VISUALES GLOBALES === */
